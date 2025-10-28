@@ -15,7 +15,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import "./ourservices.css"; // keep custom CSS if needed
+import "./ourservices.css";
 
 const services = [
   {
@@ -77,11 +77,11 @@ const services = [
 export default function OurServices() {
   return (
     <section className="relative w-full bg-gradient-to-br from-[#EFF6FF] via-[#E0F2FF] to-[#FDF6E3] py-16 px-6 md:px-12 lg:px-20 overflow-hidden">
-      {/* Background Floating Shapes */}
+      {/* Background Shapes - fewer for performance */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute w-72 h-72 bg-[#3B82F6]/10 rounded-full top-10 left-20 animate-bounce-slow blur-2xl"></div>
-        <div className="absolute w-96 h-96 bg-[#F97316]/10 rounded-full bottom-10 right-20 animate-bounce-slow blur-3xl"></div>
-        {[...Array(15)].map((_, i) => (
+        <div className="absolute w-64 h-64 bg-[#3B82F6]/10 rounded-full top-16 left-12 animate-pulse blur-2xl"></div>
+        <div className="absolute w-80 h-80 bg-[#F97316]/10 rounded-full bottom-12 right-16 animate-pulse blur-3xl"></div>
+        {[...Array(8)].map((_, i) => (
           <div
             key={i}
             className="absolute w-2 h-2 bg-white/30 rounded-full animate-float"
@@ -94,7 +94,7 @@ export default function OurServices() {
         ))}
       </div>
 
-      {/* Top Section */}
+      {/* Header */}
       <div className="text-center max-w-3xl mx-auto mb-12 relative z-10">
         <h3 className="text-[#F97316] font-semibold text-lg">Our Services</h3>
         <h2 className="text-[#1E3A8A] text-3xl md:text-4xl font-bold mt-2">
@@ -117,32 +117,32 @@ export default function OurServices() {
             prevEl: ".prev-btn",
           }}
           autoplay={{ delay: 3500, disableOnInteraction: false }}
-          spaceBetween={30}
           loop={true}
-          speed={1000}
+          speed={800}
           slidesPerView={1}
+          spaceBetween={20}
           breakpoints={{
-            640: { slidesPerView: 1.3 },
-            768: { slidesPerView: 2.3 },
-            1024: { slidesPerView: 3.3 },
+            640: { slidesPerView: 1.2, spaceBetween: 20 },
+            768: { slidesPerView: 2, spaceBetween: 25 },
+            1024: { slidesPerView: 3, spaceBetween: 30 },
           }}
           className="pb-12"
         >
           {services.map((service, index) => (
             <SwiperSlide key={index}>
-              <div className="bg-white rounded-3xl shadow-2xl p-8 text-center flex flex-col items-center gap-5 transform transition-transform duration-500 hover:-translate-y-3 hover:shadow-3xl hover:scale-105">
+              <div className="bg-white rounded-3xl shadow-lg p-6 md:p-8 text-center flex flex-col items-center gap-5 transform transition-all duration-500 hover:-translate-y-2 hover:scale-105 hover:shadow-xl">
                 {/* Icon */}
-                <div className="w-20 h-20 flex items-center justify-center rounded-full bg-gradient-to-tr from-[#3B82F6] to-[#F97316] text-white text-3xl shadow-md transition-transform duration-300 hover:scale-110">
+                <div className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center rounded-full bg-gradient-to-tr from-[#3B82F6] to-[#F97316] text-white text-2xl md:text-3xl shadow-md">
                   {service.icon}
                 </div>
                 {/* Title */}
-                <h3 className="text-[#1E3A8A] text-lg font-semibold">{service.title}</h3>
+                <h3 className="text-[#1E3A8A] text-base md:text-lg font-semibold">{service.title}</h3>
                 {/* Description */}
-                <p className="text-[#6B7280] text-sm">{service.desc}</p>
+                <p className="text-[#6B7280] text-sm md:text-base">{service.desc}</p>
                 {/* Button */}
                 <a
                   href={service.link}
-                  className="mt-4 inline-block px-5 py-2 rounded-lg text-white font-semibold bg-gradient-to-r from-[#F97316] to-[#FB923C] hover:from-[#e66b10] hover:to-[#fca248] transition-all duration-300 shadow hover:shadow-lg"
+                  className="mt-2 inline-block px-4 py-2 md:px-5 md:py-2 rounded-lg text-white font-semibold bg-gradient-to-r from-[#F97316] to-[#FB923C] hover:from-[#e66b10] hover:to-[#fca248] transition-all duration-300 shadow"
                 >
                   Learn More
                 </a>
@@ -152,10 +152,16 @@ export default function OurServices() {
         </Swiper>
 
         {/* Navigation Buttons */}
-        <button className="prev-btn absolute top-1/2 -left-6 transform -translate-y-1/2 bg-white shadow-md w-12 h-12 flex items-center justify-center rounded-full hover:bg-[#F97316] hover:text-white transition z-10 text-xl">
+        <button
+          aria-label="Previous"
+          className="prev-btn absolute top-1/2 -left-5 md:-left-6 transform -translate-y-1/2 bg-white shadow-md w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full hover:bg-[#F97316] hover:text-white transition z-10 text-lg md:text-xl"
+        >
           &#8592;
         </button>
-        <button className="next-btn absolute top-1/2 -right-6 transform -translate-y-1/2 bg-white shadow-md w-12 h-12 flex items-center justify-center rounded-full hover:bg-[#F97316] hover:text-white transition z-10 text-xl">
+        <button
+          aria-label="Next"
+          className="next-btn absolute top-1/2 -right-5 md:-right-6 transform -translate-y-1/2 bg-white shadow-md w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full hover:bg-[#F97316] hover:text-white transition z-10 text-lg md:text-xl"
+        >
           &#8594;
         </button>
       </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import HeroImg1 from "../assets/hero-img/1.png";
 import HeroImg2 from "../assets/hero-img/2.png";
@@ -16,27 +16,39 @@ const slides = [
 
 export default function Hero() {
   const [current, setCurrent] = useState(0);
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(100);
+
+  const requestRef = useRef(null);
+  const startTimeRef = useRef(null);
+  const duration = 10000; // 10 seconds per slide
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress((p) => {
-        if (p >= 100) {
-          setCurrent((prev) => (prev + 1) % slides.length);
-          return 0;
-        }
-        return p + 1;
-      });
-    }, 50);
-    return () => clearInterval(interval);
-  }, []);
+    const animate = (time) => {
+      if (!startTimeRef.current) startTimeRef.current = time;
+      const elapsed = time - startTimeRef.current;
+
+      const percentage = 100 - (elapsed / duration) * 100;
+      setProgress(Math.max(percentage, 0));
+
+      if (elapsed >= duration) {
+        setCurrent((prev) => (prev + 1) % slides.length);
+        startTimeRef.current = time; // reset timer for next slide
+      }
+
+      requestRef.current = requestAnimationFrame(animate);
+    };
+
+    requestRef.current = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(requestRef.current);
+  }, [current]);
 
   return (
     <section className="relative w-full overflow-hidden">
       {/* Background Layers */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         {/* Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#EFF6FF] via-[#E0E7FF] to-[#FDF6E3]"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#EFF6FF] via-[#E0E7FF] to-[#FDF6E3]" />
 
         {/* Floating Shapes */}
         <motion.div
@@ -49,20 +61,6 @@ export default function Hero() {
           transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
           className="absolute w-96 h-96 bg-[#3B82F6]/20 rounded-full bottom-0 right-20 blur-3xl"
         />
-
-        {/* Floating Particles */}
-        {[...Array(25)].map((_, i) => (
-          <motion.div
-            key={i}
-            animate={{ y: [0, Math.random() * 20, 0], x: [0, Math.random() * 20, 0] }}
-            transition={{ duration: 8 + Math.random() * 5, repeat: Infinity, ease: "easeInOut", delay: Math.random() * 5 }}
-            className="absolute w-2 h-2 bg-white/30 rounded-full"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-            }}
-          />
-        ))}
 
         {/* Bottom Wave */}
         <motion.svg
@@ -119,6 +117,7 @@ export default function Hero() {
                 key={slides[current].img}
                 src={slides[current].img}
                 alt="Slide"
+                loading="lazy"
                 className="rounded-2xl object-contain shadow-2xl"
                 initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
                 animate={{ opacity: 1, scale: 1, rotate: 0 }}
@@ -134,29 +133,31 @@ export default function Hero() {
           {slides.map((_, i) => {
             const radius = 12;
             const circumference = 2 * Math.PI * radius;
+            const offset = circumference - (progress / 100) * circumference;
 
             return (
               <div
                 key={i}
                 onClick={() => {
                   setCurrent(i);
-                  setProgress(0);
+                  setProgress(100);
+                  startTimeRef.current = null; // reset timer immediately
                 }}
                 className="relative w-8 h-8 cursor-pointer group"
               >
-                {/* Inactive Circle */}
+                {/* Base Circle */}
                 <svg className="absolute inset-0 w-full h-full rotate-[-90deg]">
                   <circle
                     cx="16"
                     cy="16"
                     r={radius}
-                    stroke={current === i ? "#F97316" : "#9CA3AF"}
+                    stroke="#9CA3AF"
                     strokeWidth="3"
                     fill="none"
                   />
                 </svg>
 
-                {/* Active Progress */}
+                {/* Active Circle with Timer */}
                 {current === i && (
                   <svg className="absolute inset-0 w-full h-full rotate-[-90deg]">
                     <circle
@@ -167,15 +168,14 @@ export default function Hero() {
                       strokeWidth="3"
                       fill="none"
                       strokeDasharray={circumference}
-                      strokeDashoffset={
-                        circumference - (progress / 100) * circumference
-                      }
-                      style={{ transition: "stroke-dashoffset 0.05s linear" }}
+                      strokeDashoffset={offset}
+                      strokeLinecap="round"
+                      className="transition-none"
                     />
                   </svg>
                 )}
 
-                {/* Hover Effect */}
+                {/* Hover Highlight */}
                 <div className="absolute inset-0 rounded-full bg-[#F97316] opacity-20 scale-0 group-hover:scale-110 transition-transform duration-300"></div>
               </div>
             );

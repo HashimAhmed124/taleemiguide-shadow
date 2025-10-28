@@ -5,8 +5,8 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const navLinks = [
-    { name: "Home", href: "#" },
-    { name: "Services", href: "#" },
+    { name: "Home", href: "../App.jsx" },
+    { name: "Services", href: "../pages/about.jsx" },
     { name: "About", href: "#" },
   ];
 
