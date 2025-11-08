@@ -7,11 +7,11 @@ import HeroImg4 from "../assets/hero-img/4.png";
 import HeroImg5 from "../assets/hero-img/5.png";
 
 const slides = [
-  { title: "Struggling with your educational career?", desc: "TaleemiGuide saves your time.", img: HeroImg1, link: "#" },
-  { title: "Lost in specializations?", desc: "TaleemiGuide matches passion with profession.", img: HeroImg2, link: "#" },
-  { title: "Need admissions or scholarships?", desc: "TaleemiGuide guides you step by step.", img: HeroImg3, link: "#" },
-  { title: "Looking for mentors?", desc: "TaleemiGuide connects you with experts.", img: HeroImg4, link: "#" },
-  { title: "Shifting careers?", desc: "TaleemiGuide provides practical solutions.", img: HeroImg5, link: "#" },
+  { title: "Struggling with your Educational Career?", desc: "TaleemiGuide saves your time.", img: HeroImg1, link: "#" },
+  { title: "Lost in Specializations?", desc: "TaleemiGuide matches passion with profession.", img: HeroImg2, link: "#" },
+  { title: "Need Admissions or Scholarships?", desc: "TaleemiGuide guides you step by step.", img: HeroImg3, link: "#" },
+  { title: "Looking for Mentors?", desc: "TaleemiGuide connects you with experts.", img: HeroImg4, link: "#" },
+  { title: "Shifting Careers?", desc: "TaleemiGuide provides practical solutions.", img: HeroImg5, link: "#" },
 ];
 
 export default function Hero() {

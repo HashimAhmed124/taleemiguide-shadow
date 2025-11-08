@@ -9,6 +9,10 @@ import {
   FaChalkboard,
   FaCalendarCheck,
   FaBullhorn,
+  // ADDED NEW ICONS
+  FaUniversity,
+  FaCodeBranch,
+  FaPencilRuler,
 } from "react-icons/fa";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -19,51 +23,58 @@ import "./ourservices.css";
 
 const services = [
   {
-    icon: <FaUserGraduate size={32} />,
+    // CORRECTED: From FaUserGraduate to FaBookOpen (Study/Learning)
+    icon: <FaBookOpen size={32} />, 
     title: "Class 10 Guidance",
-    desc: "Helping students of Grade 10 make the right subject and career decisions.",
+    desc: "Future Begins Here — Choose the Right Path After Class 10 with Confidence.",
     link: "#",
   },
   {
-    icon: <FaChalkboardTeacher size={32} />,
+    // CORRECTED: From FaChalkboardTeacher to FaUniversity (Higher Ed Focus)
+    icon: <FaUniversity size={32} />, 
     title: "Class 12 Guidance",
-    desc: "Support for Grade 12 students in choosing streams, careers, and next steps.",
+    desc: "Decide Smart — The Right Choice After Class 12 Defines Success.",
     link: "#",
   },
   {
-    icon: <FaBriefcase size={32} />,
-    title: "University Graduate Support",
-    desc: "Guidance for graduates seeking career growth, higher studies, or jobs.",
+    // CORRECTED: From FaBriefcase to FaUserGraduate (Identifies the audience)
+    icon: <FaUserGraduate size={32} />,
+    title: "University Graduates",
+    desc: "Your Academic Partner — Simplifying the Complexities of Higher Education.",
     link: "#",
   },
   {
-    icon: <FaBookOpen size={32} />,
+    // FaBookOpen was previously here, swapping it with FaChalkboardTeacher (Personalized teaching/advice)
+    icon: <FaChalkboardTeacher size={32} />, 
     title: "Taleemi Advice",
-    desc: "Personalized educational guidance tailored to your academic journey.",
+    desc: "A Quick-Response Service Providing Fast-Track Educational Solutions — Like 1122 for Students.",
     link: "#",
   },
   {
-    icon: <FaClipboardList size={32} />,
+    // CORRECTED: From FaClipboardList to FaCodeBranch (Path/Stream selection)
+    icon: <FaCodeBranch size={32} />,
     title: "Subject Classification",
-    desc: "Understand subject groups and how they align with career choices.",
+    desc: "Find Your Place in the World of Knowledge — Simplified Subject Classification.",
     link: "#",
   },
   {
-    icon: <FaLaptop size={32} />,
+    // CORRECTED: From FaLaptop to FaPencilRuler (Testing/Evaluation)
+    icon: <FaPencilRuler size={32} />, 
     title: "Career Assessment Test",
-    desc: "Evaluate your skills and passions to discover the right career path.",
+    desc: "One Platform, Thousands of Subjects - Find Exactly Where You Fit.",
     link: "#",
   },
   {
-    icon: <FaChalkboard size={32} />,
-    title: "Working Professionals Guidance",
-    desc: "Support for professionals planning job transitions or upskilling.",
+    // CORRECTED: From FaChalkboard to FaBriefcase (Professional life/Jobs)
+    icon: <FaBriefcase size={32} />, 
+    title: "Working Professionals",
+    desc: "Helping Professionals - Connect Education, Experience, and Ambition.",
     link: "#",
   },
   {
     icon: <FaCalendarCheck size={32} />,
-    title: "Book Online Sessions",
-    desc: "One-on-one counseling sessions with certified career experts.",
+    title: "Book Online Session",
+    desc: "Personalized Academic & Career Guidance, Anytime, Anywhere.",
     link: "#",
   },
   {
@@ -97,7 +108,7 @@ export default function OurServices() {
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto mb-12 relative z-10">
         <h3 className="text-[#F97316] font-semibold text-lg">Our Services</h3>
-        <h2 className="text-[#1E3A8A] text-3xl md:text-4xl font-bold mt-2">
+        <h2 className="text-[#1E3A8A] text-xl md:text-3xl font-bold mt-2">
           Explore How TaleemiGuide Can Help You
         </h2>
         <p className="text-[#4B5563] mt-4 text-sm md:text-base leading-relaxed">

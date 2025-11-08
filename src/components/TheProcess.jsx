@@ -1,12 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
-import ProcessImg from "../assets/bg-images/sample1.jpg";
+import ProcessImg from "../assets/bg-images/sample2.png";
 
 export default function TheProcess() {
   const steps = [
     { number: 1, title: "Login", desc: "Access your personalized dashboard." },
     { number: 2, title: "Submit Query", desc: "Share your academic challenge with documents if needed." },
-    { number: 3, title: "Get Solutions", desc: "Our experts provide solutions within 24 hours." },
+    { number: 3, title: "Get Solutions", desc: "Our experts provide solutions in no time." },
   ];
 
   return (
@@ -50,21 +50,23 @@ export default function TheProcess() {
           <img
             src={ProcessImg}
             alt="Process"
-            className="w-[700px] h-[600px] md:w-[500px] md:h-[450px] object-cover rounded-3xl shadow-2xl hover:shadow-3xl transition-shadow duration-500"
+            className="w-full h-auto max-w-xl md:max-w-2xl object-contain rounded-3xl"
           />
         </motion.div>
 
         {/* Right: Steps */}
-        <div className="flex-1 space-y-8 md:space-y-10">
+        {/* MODIFIED: Reduced space-y here for tighter heading/paragraph group */}
+        <div className="flex-1 space-y-4 md:space-y-6"> 
           <h3 className="text-[#F97316] font-semibold text-lg md:text-base tracking-wide">The Process</h3>
-          <h2 className="text-[#1E3A8A] text-4xl md:text-5xl lg:text-6xl font-extrabold leading-snug">
+          <h2 className="text-[#1E3A8A] text-xl sm:text-2xl md:text-3xl lg:text-3xl font-extrabold leading-snug">
             Quality Guidance Made Simple
           </h2>
           <p className="text-[#4B5563] text-lg md:text-xl max-w-lg">
             Getting the right advice has never been easier — just follow 3 simple steps and start your journey with TaleemiGuide.
           </p>
 
-          <div className="relative mt-8 space-y-8 md:space-y-10">
+          {/* MODIFIED: Reduced space-y here for tighter vertical steps */}
+          <div className="relative mt-8 space-y-6 md:space-y-8">
             {/* Vertical connecting line */}
             <div className="absolute top-6 left-8 h-full w-1 bg-gradient-to-b from-[#1E3A8A] to-[#F97316] rounded"></div>
 
