@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import Hero2 from "./components/Hero2"
 import ForWhom from "./components/forWhom";
 import OurServices from "./components/OurServices";
 import TheProcess from "./components/TheProcess";
@@ -11,7 +12,8 @@ const App = () => {
   return (
     <div className="w-full min-h-screen">
       <Navbar />
-      <Hero />
+      {/* <Hero /> */}
+      <Hero2/>
       <ForWhom />
       <OurServices />
       <TheProcess />
