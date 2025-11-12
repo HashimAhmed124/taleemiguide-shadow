@@ -68,7 +68,7 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto text-center mb-12 relative z-10">
           <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">Words Of Our Clients</h3>
           <p className="text-[#E0E7FF] max-w-3xl mx-auto text-base md:text-lg">
-            Our greatest pride comes from the satisfaction of our clients — students, parents, graduates, and professionals seeking the right educational guidance.
+            Our greatest pride is the trust of students, parents, graduates, and professionals.
           </p>
         </div>
 

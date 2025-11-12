@@ -51,7 +51,7 @@ const Hero = () => {
               className="text-lg sm:text-xl leading-relaxed mb-8"
               style={{ color: COLORS.primary2, opacity: 0.9 }}
             >
-              TaleemiGuide provides clear and authentic guidance
+              TaleemiGuide provides clear and authentic guidance.
             </p>
 
             <ul className="space-y-4 text-left max-w-lg mx-auto lg:mx-0">
@@ -66,19 +66,19 @@ const Hero = () => {
                 <span className="h-6 w-6 mr-3 flex-shrink-0" style={{ color: COLORS.secondary }}>
                    <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
                 </span>
-                Match passion with profession with ease
+                Match your passion with the right career path
               </li>
               <li className="flex items-start text-lg sm:text-xl" style={{ color: COLORS.primary2 }}>
                 <span className="h-6 w-6 mr-3 flex-shrink-0" style={{ color: COLORS.secondary }}>
                    <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
                 </span>
-                Understand subject classifications
+                Understand subject classifications with clarity
               </li>
               <li className="flex items-start text-lg sm:text-xl" style={{ color: COLORS.primary2 }}>
                 <span className="h-6 w-6 mr-3 flex-shrink-0" style={{ color: COLORS.secondary }}>
                    <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
                 </span>
-                Explore BS, MS & PhD programs across all universities
+                Explore BS, MS & PhD admissions across all universities
               </li>
               <li className="flex items-start text-lg sm:text-xl" style={{ color: COLORS.primary2 }}>
                 <span className="h-6 w-6 mr-3 flex-shrink-0" style={{ color: COLORS.secondary }}>

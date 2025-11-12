@@ -6,7 +6,7 @@ export default function TheProcess() {
   const steps = [
     { number: 1, title: "Login", desc: "Access your personalized dashboard." },
     { number: 2, title: "Submit Query", desc: "Share your academic challenge with documents if needed." },
-    { number: 3, title: "Get Solutions", desc: "Our experts provide solutions in no time." },
+    { number: 3, title: "Get Solutions", desc: "Receive clear, actionable expert guidance immediately." },
   ];
 
   return (
