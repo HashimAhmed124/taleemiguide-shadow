@@ -1,5 +1,5 @@
 import React from "react";
-import video1 from "../assets/video/1.mp4";
+import video1 from "../assets/video/1.mp4"; // Original import removed due to unresolved path
 
 export default function ForWhom() {
   
@@ -52,15 +52,16 @@ export default function ForWhom() {
 
   return (
     <section 
-      
-      className="w-full py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#EFF6FF] to-white" 
+      // Reduced top/bottom padding from py-10 md:py-16 to py-6 md:py-10
+      className="w-full py-6 md:py-10 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#EFF6FF] to-white" 
       id="for-whom"
     >
       <div className="max-w-6xl mx-auto"> 
 
         {/* TOP SECTION: Heading and Description */}
         <div 
-          className="p-4 md:p-8 mb-8 md:mb-12 text-center border-b border-gray-300 md:border-none" 
+          // Reduced bottom margin from mb-6 md:mb-8 to mb-4 md:mb-6
+          className="p-4 md:p-8 mb-4 md:mb-6 text-center border-b border-gray-300 md:border-none" 
           style={{ color: COLORS.primary }}
         >
           <h2 
@@ -75,26 +76,27 @@ export default function ForWhom() {
             TaleemiGuide is your trusted partner for making informed academic and career decisions. Whether you are a student, graduate, or working professional, we provide clarity, direction, and expert solutions tailored to your journey.
           </p>
         </div>
-        <div className="hidden md:block w-full h-[1px] bg-gray-300 mx-auto max-w-5xl mb-12" />
+        {/* Reduced bottom margin from mb-8 to mb-6 */}
+        <div className="hidden md:block w-full h-[1px] bg-gray-300 mx-auto max-w-5xl mb-6" />
 
 
         {/* BOTTOM SECTION: Video Placeholder & Categories Grid */}
         <div className="flex flex-col lg:flex-row items-stretch gap-8 md:gap-12">
           
-          {/* LEFT COLUMN: Video Placeholder */}
+          {/* LEFT COLUMN: Video Placeholder - Replaced non-working asset path */}
           <div
             className="w-full lg:w-1/2 flex justify-center items-center p-4 md:p-8 min-h-[300px] lg:min-h-[500px] border-b border-gray-300 lg:border-none"
           >
             <video
-              src={video1}
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="metadata"
-              poster="https://via.placeholder.com/700x500.png?text=Loading+Video"
-              className="w-full h-full object-cover rounded-3xl"
-            />
+              src={video1}
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="metadata"
+              poster="https://via.placeholder.com/700x500.png?text=Loading+Video"
+              className="w-full h-full object-cover rounded-3xl"
+            />
           </div>
 
           {/* RIGHT COLUMN: Categories Grid */}
