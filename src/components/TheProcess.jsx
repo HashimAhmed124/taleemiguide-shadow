@@ -50,12 +50,12 @@ export default function TheProcess() {
           <img
             src={ProcessImg}
             alt="Process"
-            className="w-full h-auto max-w-xl md:max-w-2xl object-contain rounded-3xl"
+            className="w-full h-auto max-w-md md:max-w-xl object-contain rounded-3xl"
           />
         </motion.div>
 
         {/* Right: Steps */}
-        {/* MODIFIED: Reduced space-y here for tighter heading/paragraph group */}
+        
         <div className="flex-1 space-y-4 md:space-y-6"> 
           <h3 className="text-[#F97316] font-semibold text-lg md:text-base tracking-wide">The Process</h3>
           <h2 className="text-[#1E3A8A] text-xl sm:text-2xl md:text-3xl lg:text-3xl font-extrabold leading-snug">
@@ -65,7 +65,6 @@ export default function TheProcess() {
             Getting the right advice has never been easier — just follow 3 simple steps and start your journey with TaleemiGuide.
           </p>
 
-          {/* MODIFIED: Reduced space-y here for tighter vertical steps */}
           <div className="relative mt-8 space-y-6 md:space-y-8">
             {/* Vertical connecting line */}
             <div className="absolute top-6 left-8 h-full w-1 bg-gradient-to-b from-[#1E3A8A] to-[#F97316] rounded"></div>

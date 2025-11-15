@@ -1,5 +1,5 @@
 import React from "react";
-import video1 from "../assets/video/1.mp4"; // Original import removed due to unresolved path
+import video1 from "../assets/video/1.mp4"; 
 
 export default function ForWhom() {
   

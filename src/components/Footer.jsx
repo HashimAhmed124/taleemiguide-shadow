@@ -85,7 +85,7 @@ export default function Footer() {
             slidesPerView={1.2}
             breakpoints={{
               640: { slidesPerView: 2.2 },
-              1024: { slidesPerView: 3.5 },
+              1024: { slidesPerView: 3 },
             }}
             className="pb-12"
           >
