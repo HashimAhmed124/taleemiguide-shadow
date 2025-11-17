@@ -82,9 +82,9 @@ export default function Footer() {
             }}
             autoplay={{ delay: 4000, disableOnInteraction: false }}
             spaceBetween={20}
-            slidesPerView={1.2}
+            slidesPerView={1}
             breakpoints={{
-              640: { slidesPerView: 2.2 },
+              640: { slidesPerView: 2 },
               1024: { slidesPerView: 3 },
             }}
             className="pb-12"
