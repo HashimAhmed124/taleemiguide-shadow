@@ -44,7 +44,7 @@ export default function ContactUs() {
 
         {/* Form Container Card */}
         <div
-          className="relative bg-white shadow-xl rounded-3xl p-8 md:p-12 border border-gray-100 transition-shadow duration-500 max-w-3xl mx-auto"
+          className="relative bg-white shadow-xl rounded-3xl p-8 md:p-12 border border-blue-300 transition-shadow duration-500 max-w-3xl mx-auto"
         >
           {/* Form Title */}
           <h3 className="text-xl md:text-2xl font-semibold mb-8 text-center" style={{ color: COLORS.primary }}>

@@ -95,12 +95,6 @@ const Hero = () => {
                 className="px-8 py-3 text-lg font-semibold rounded-full shadow-lg transition duration-300 ease-in-out hover:scale-[1.03] transform hover:shadow-xl"
                 style={{ backgroundColor: COLORS.secondary, color: 'white' }}
               >
-                Start Your Journey
-              </button>
-              <button
-                className="px-8 py-3 text-lg font-semibold rounded-full shadow-md transition duration-300 ease-in-out hover:scale-[1.03] transform border-2 hover:shadow-lg"
-                style={{ borderColor: COLORS.primary, color: COLORS.primary, backgroundColor: 'white' }}
-              >
                 Seek Taleemi Advice
               </button>
             </div>
