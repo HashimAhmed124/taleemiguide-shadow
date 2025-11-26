@@ -1,5 +1,5 @@
 import React from "react";
-import video1 from "../assets/video/intro-video.mp4"; 
+
 import {
   School,
   GraduationCap,
@@ -68,19 +68,20 @@ export default function ForWhom() {
 
           {/* LEFT COLUMN – VIDEO */}
           <div
-            className="w-full lg:w-1/2 flex justify-center items-center p-3 md:p-6 min-h-[260px] lg:min-h-[450px]"
-          >
-            <video
-              src="https://www.youtube.com/watch?v=W8NsVWvfN0w"
-              controls
-              autoPlay
-              controlsList="nodownload noplaybackrate"
-              playsInline
-              preload="metadata"
-              poster="https://via.placeholder.com/700x500.png?text=Loading+Video"
-              className="w-full h-full object-cover rounded-3xl"
-            />
-          </div>
+  className="w-full lg:w-1/2 flex justify-center items-center p-3 md:p-6 min-h-[260px] lg:min-h-[450px]"
+>
+  <div className="w-full h-full rounded-3xl overflow-hidden">
+    <iframe
+      className="w-full h-full object-cover rounded-3xl"
+      src="https://www.youtube-nocookie.com/embed/W8NsVWvfN0w?rel=0&modestbranding=1&showinfo=0"
+      title="TaleemiGuide Intro"
+      frameBorder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+    ></iframe>
+  </div>
+</div>
+
 
           {/* RIGHT COLUMN – CATEGORY GRID */}
           <div className="w-full lg:w-1/2 grid grid-cols-1 gap-4 md:gap-6 p-3 md:p-6">
