@@ -71,7 +71,7 @@ export default function ForWhom() {
             className="w-full lg:w-1/2 flex justify-center items-center p-3 md:p-6 min-h-[260px] lg:min-h-[450px]"
           >
             <video
-              src={video1}
+              src="https://www.youtube.com/watch?v=W8NsVWvfN0w"
               controls
               autoPlay
               controlsList="nodownload noplaybackrate"
