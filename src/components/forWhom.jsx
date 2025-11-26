@@ -1,5 +1,5 @@
 import React from "react";
-import video1 from "../assets/video/1.mp4"; 
+import video1 from "../assets/video/intro-video.mp4"; 
 import {
   School,
   GraduationCap,
@@ -55,7 +55,6 @@ export default function ForWhom() {
             Who Is TaleemiGuide For?
           </h2>
 
-          {/* Description limited to 3 lines */}
           <p
             className="text-lg sm:text-xl leading-relaxed max-w-4xl mx-auto"
             style={{ opacity: 0.8, color: COLORS.primary2 }}
@@ -63,8 +62,6 @@ export default function ForWhom() {
             TaleemiGuide is your trusted partner for making informed academic and career decisions. Whether you are a student, graduate, or working professional, we provide clarity, direction, and expert solutions tailored to your journey.
           </p>
         </div>
-
-        {/* REMOVED: The middle line separator */}
 
         {/* GRID + VIDEO SECTION */}
         <div className="flex flex-col lg:flex-row items-stretch gap-6 md:gap-8 mt-2">
@@ -75,9 +72,9 @@ export default function ForWhom() {
           >
             <video
               src={video1}
+              controls
               autoPlay
-              loop
-              muted
+              controlsList="nodownload noplaybackrate"
               playsInline
               preload="metadata"
               poster="https://via.placeholder.com/700x500.png?text=Loading+Video"
