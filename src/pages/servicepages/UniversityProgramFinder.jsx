@@ -1,358 +1,419 @@
-import React from 'react';
-import { 
-    Globe, Search, ZapOff, Filter, GraduationCap, Building, 
-    MapPin, Users, FileText, Target, Compass, BookOpen, 
-    MessageCircle, LogIn, CheckSquare, ArrowRight, Eye, 
-    Layers, XCircle, Clock, DollarSign, Scale, CheckCircle
-} from 'lucide-react'; 
+// UniversityProgramFinder.jsx — Unified UI/UX
+// Source: :contentReference[oaicite:1]{index=1}
 
-// --- UNIFIED COLOR PALETTE ---
+import React from "react";
+import { NavLink } from "react-router-dom";
+import {
+  Globe,
+  Search,
+  Filter,
+  GraduationCap,
+  Building,
+  Target,
+  Compass,
+  BookOpen,
+  MessageCircle,
+  ArrowRight,
+} from "lucide-react";
+
+import ServiceLayout from "../../components/ServiceLayout";
+
+// --- UNIFIED COLOR PALETTE (shared with other service pages) ---
 const COLORS = {
-    primary: '#1E3A8A', // Dark Blue
-    secondary: '#F97316', // Bright Orange
-    textGray: '#4B5563', // Standard paragraph text color
-    lightBackground: '#EFF6FF', // Very Light Blue/Off-White
-    primaryDark: '#11253e', // For darker text/headings
+  primary: "#1E3A8A",
+  primaryDark: "#0F172A",
+  secondary: "#F97316",
+  textGray: "#4B5563",
+  grayText: "#4B5563",
+  lightBackground: "#EFF6FF",
+  surface: "#F8FAFC",
+  borderSoft: "#E5E7EB",
 };
 
-
-/**
- * 1. Hero Section: Overview and Core Value Proposition
- */
+// ===================================================================
+// 1) HERO / OVERVIEW SECTION
+// ===================================================================
 const HeroSection = () => (
-    <section 
-        className="pt-16 md:pt-28 pb-16" 
-        style={{ background: `linear-gradient(to bottom, ${COLORS.lightBackground} 0%, white 100%)` }}
+  <section className="pb-10 border-b border-gray-200 mb-10">
+    <div
+      className="p-6 sm:p-8 rounded-3xl"
+      style={{
+        backgroundColor: COLORS.surface,
+        border: `1px solid ${COLORS.borderSoft}`,
+        boxShadow: "0 8px 24px rgba(0,0,0,0.05)",
+      }}
     >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            
-            {/* Sub-title */}
-            <p className="text-sm uppercase font-bold tracking-widest mb-3" style={{ color: COLORS.secondary }}>
-                Service: University Program Finder
-            </p>
-            
-            {/* Main Title */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight" style={{ color: COLORS.primary }}>
-                Search. Compare. Decide — Every BS, MS & PhD Program in One Place.
-            </h1>
-            
-            {/* Core Description */}
-            <div className="max-w-4xl mx-auto text-lg leading-relaxed space-y-4" style={{ color: COLORS.textGray }}>
-                <p className="font-semibold text-xl" style={{ color: COLORS.primaryDark }}>
-                    Welcome to Pakistan’s first comprehensive University Program Finder. For the first time, explore every **BS, MS/MPhil, and PhD program** offered across all universities.
-                </p>
-                <p>
-                    This **national-level database** is verified, updated, organized, and completely **free**, enabling students, parents, and professionals to make informed academic decisions without guesswork or unreliable sources.
-                </p>
-            </div>
-        </div>
-    </section>
-);
-
-
-/**
- * 2. Problem/Benefit Section: Why This Matters
- */
-const ProblemBenefitSection = () => {
-    const problems = [
-        { title: 'Incomplete Information', icon: XCircle },
-        { title: 'Outdated Websites', icon: Clock },
-        { title: 'No Centralized Database', icon: ZapOff },
-        { title: 'Scattered & Inconsistent Listings', icon: Layers },
-    ];
-
-    return (
-        <section className="py-14 md:py-20" style={{ background: 'white' }}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2 className="text-3xl md:text-4xl font-extrabold mb-12" style={{ color: COLORS.primaryDark }}>
-                    ✅ Why This Matters
-                </h2>
-                
-                <p className="text-xl max-w-3xl mx-auto mb-10" style={{ color: COLORS.textGray }}>
-                    Every year, thousands of students struggle during admissions due to scattered information. TaleemiGuide provides **accurate, structured, and searchable academic data**.
-                </p>
-
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
-                    {problems.map((problem, index) => {
-                        const Icon = problem.icon;
-                        return (
-                            <div key={index} className="p-4 rounded-xl shadow-inner border border-red-100 bg-red-50/50">
-                                <Icon size={30} className="mx-auto mb-2" style={{ color: COLORS.secondary }} />
-                                <p className="text-sm font-semibold" style={{ color: COLORS.primaryDark }}>{problem.title}</p>
-                            </div>
-                        );
-                    })}
-                </div>
-            </div>
-        </section>
-    );
-};
-
-
-/**
- * 3. Features Section: What You Can Do
- */
-const FeaturesSection = () => {
-    const filters = [
-        { title: 'Degree Level (BS | MS/MPhil | PhD)', icon: GraduationCap },
-        { title: 'University Name (All Universities)', icon: Building },
-        { title: 'Field of Study / Discipline', icon: Layers },
-        { title: 'Location (Province, City, Region)', icon: MapPin },
-        { title: 'University Type (Public or Private)', icon: Scale },
-    ];
-
-    const advancedFilters = [
-        { title: 'Admission Deadlines', icon: Clock },
-        { title: 'Merit & Eligibility Criteria', icon: CheckSquare },
-        { title: 'Fee Ranges', icon: DollarSign },
-        { title: 'Accreditation (HEC, PEC, PMDC, etc.)', icon: CheckCircle },
-    ];
-
-    return (
-        <section className="py-14 md:py-20" style={{ background: COLORS.lightBackground }}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 className="text-3xl md:text-4xl font-extrabold mb-12 text-center" style={{ color: COLORS.primary }}>
-                    ✅ What You Can Do: Search, Filter & Explore Programs
-                </h2>
-                
-                <div className="grid lg:grid-cols-2 gap-10">
-                    
-                    {/* Core Filters */}
-                    <div>
-                        <h3 className="text-2xl font-bold mb-6 flex items-center" style={{ color: COLORS.primaryDark }}>
-                            <Filter size={24} className="mr-2" style={{ color: COLORS.primary }} /> Core Search Filters
-                        </h3>
-                        <div className="space-y-4">
-                            {filters.map((f, index) => {
-                                const Icon = f.icon;
-                                return (
-                                    <div key={index} className="flex items-center p-4 rounded-lg shadow-sm" style={{ backgroundColor: 'white' }}>
-                                        <Icon size={24} className="flex-shrink-0 mr-4" style={{ color: COLORS.secondary }} />
-                                        <span className="text-lg font-medium" style={{ color: COLORS.primaryDark }}>{f.title}</span>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
-
-                    {/* Advanced Filters */}
-                    <div>
-                        <h3 className="text-2xl font-bold mb-6 flex items-center" style={{ color: COLORS.primaryDark }}>
-                            <ZapOff size={24} className="mr-2" style={{ color: COLORS.secondary }} /> Coming Soon — Advanced Filters
-                        </h3>
-                        <div className="space-y-4">
-                            {advancedFilters.map((f, index) => {
-                                const Icon = f.icon;
-                                return (
-                                    <div key={index} className="flex items-center p-4 rounded-lg opacity-70" style={{ backgroundColor: 'white' }}>
-                                        <Icon size={24} className="flex-shrink-0 mr-4" style={{ color: COLORS.primary }} />
-                                        <span className="text-lg font-medium" style={{ color: COLORS.textGray }}>{f.title}</span>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
-};
-
-
-/**
- * 4. How It Helps You
- */
-const AudienceHelpSection = () => {
-    const audience = [
-        { 
-            title: 'For Class 12 Students', 
-            icon: GraduationCap, 
-            desc: 'Find all BS programs in your field of interest before applying. Compare universities, cities, and options — all in one place.' 
-        },
-        { 
-            title: 'For University Graduates', 
-            icon: BookOpen, 
-            desc: 'Explore MS/MPhil and PhD programs aligned with your academic background and future goals.' 
-        },
-        { 
-            title: 'For Parents & Counselors', 
-            icon: Users, 
-            desc: 'Get a reliable, verified database to guide students confidently and accurately.' 
-        },
-        { 
-            title: 'For Policy Researchers & Institutions', 
-            icon: FileText, 
-            desc: 'Analyze national trends in disciplines, program distribution, and academic offerings.' 
-        },
-    ];
-
-    return (
-        <section className="py-14 md:py-20" style={{ background: 'white' }}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 className="text-3xl md:text-4xl font-extrabold mb-12 text-center" style={{ color: COLORS.primaryDark }}>
-                    ✅ How It Helps You
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {audience.map((item, index) => {
-                        const Icon = item.icon;
-                        return (
-                            <div 
-                                key={index} 
-                                className="flex items-start p-6 rounded-xl shadow-lg border-l-4 transition-all duration-300 hover:shadow-xl"
-                                style={{ borderColor: COLORS.secondary, backgroundColor: COLORS.lightBackground + '60' }}
-                            >
-                                <Icon size={30} className="flex-shrink-0 mr-4 mt-1" style={{ color: COLORS.secondary }} />
-                                <div>
-                                    <h3 className="text-xl font-bold mb-1" style={{ color: COLORS.primaryDark }}>{item.title}</h3>
-                                    <p className="text-base" style={{ color: COLORS.textGray }}>{item.desc}</p>
-                                </div>
-                            </div>
-                        );
-                    })}
-                </div>
-            </div>
-        </section>
-    );
-};
-
-
-/**
- * 5. Integration and Process Section (Combined for efficiency)
- */
-const IntegrationProcessSection = () => {
-    const services = [
-        { title: 'Career Assessment Test', icon: Target, desc: 'Find fields that suit your personality, then use Program Finder to explore universities offering them.' },
-        { title: 'Class 12 Guidance', icon: Compass, desc: 'Plan admission timelines, understand specialization options, and compare institutions.' },
-        { title: 'University Graduates Guidance', icon: BookOpen, desc: 'Learn about eligibility, credit transfer, degree equivalence, or postgraduate pathways.' },
-        { title: 'Book Online Session', icon: MessageCircle, desc: 'Discuss your shortlisted programs with an expert for personalized advice.' },
-    ];
-    
-    const steps = [
-        { num: 1, title: 'Login', desc: 'Access the platform at TaleemiGuide.com.' },
-        { num: 2, title: 'Navigate', desc: 'Go to University Program Finder under the Services tab.' },
-        { num: 3, title: 'Filter', desc: 'Select filters — degree level, field, location, or university.' },
-        { num: 4, title: 'Explore & Save', desc: 'Explore, compare, and save programs that fit your profile.' },
-    ];
-
-    return (
-        <section className="py-14 md:py-20" style={{ background: COLORS.lightBackground }}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                
-                {/* Integration */}
-                <h2 className="text-3xl font-extrabold mb-8 text-center" style={{ color: COLORS.primary }}>
-                    ✅ Seamless Integration With Other TaleemiGuide Services
-                </h2>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
-                    {services.map((s, index) => {
-                        const Icon = s.icon;
-                        return (
-                            <div key={index} className="p-4 rounded-xl text-center" style={{ backgroundColor: 'white', borderBottom: `3px solid ${COLORS.secondary}` }}>
-                                <Icon size={30} className="mx-auto mb-2" style={{ color: COLORS.primaryDark }} />
-                                <h4 className="font-bold text-sm" style={{ color: COLORS.secondary }}>{s.title}</h4>
-                                <p className="text-xs mt-1" style={{ color: COLORS.textGray }}>{s.desc}</p>
-                            </div>
-                        );
-                    })}
-                </div>
-                
-                {/* Process */}
-                <h2 className="text-3xl font-extrabold mb-12 text-center" style={{ color: COLORS.primaryDark }}>
-                    ✅ How to Use: Simple. Reliable. Accurate.
-                </h2>
-                <div className="flex justify-center flex-wrap gap-4 md:gap-8">
-                    {steps.map((step) => (
-                        <div key={step.num} className="flex flex-col items-center w-36 sm:w-48 text-center p-4">
-                            <div className="w-16 h-16 flex items-center justify-center rounded-full text-white font-bold text-2xl mb-3" style={{ backgroundColor: COLORS.primary }}>
-                                {step.num}
-                            </div>
-                            <h3 className="text-lg font-bold mb-1" style={{ color: COLORS.secondary }}>{step.title}</h3>
-                            <p className="text-sm" style={{ color: COLORS.textGray }}>{step.desc}</p>
-                        </div>
-                    ))}
-                </div>
-                <p className="text-center text-lg mt-8 font-medium" style={{ color: COLORS.primaryDark }}>
-                    Your academic options — organized in one place.
-                </p>
-            </div>
-        </section>
-    );
-};
-
-
-/**
- * 6. Vision and Call to Action (CTA)
- */
-const VisionCallToActionSection = () => (
-    <section className="py-10 md:py-16 bg-gray-50 border-t border-b border-gray-100">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            
-            <h2 className="text-3xl font-extrabold mb-4 flex items-center justify-center" style={{ color: COLORS.primaryDark }}>
-                <Eye size={30} className="mr-2" style={{ color: COLORS.secondary }} /> Our Vision
-            </h2>
-            <p className="text-xl leading-relaxed mb-8 font-medium" style={{ color: COLORS.textGray }}>
-                By making this database **free and publicly accessible**, TaleemiGuide aims to build Pakistan’s most transparent and reliable academic information ecosystem, empowering every learner with clarity and access to the right academic pathways.
-            </p>
-            
-            <h2 className="text-3xl font-extrabold mb-4" style={{ color: COLORS.primary }}>
-                ✅ CTA: Start Exploring Now!
-            </h2>
-            <p className="text-xl leading-relaxed mb-8 font-bold" style={{ color: COLORS.secondary }}>
-                Find your perfect degree from Pakistan’s largest verified database of university programs.
-            </p>
-            
-            <button
-                className="px-10 py-4 text-xl font-bold rounded-xl shadow-xl transition duration-300 ease-in-out transform hover:scale-[1.03] flex items-center justify-center mx-auto"
-                style={{ backgroundColor: COLORS.secondary, color: 'white', boxShadow: `0 10px 15px -3px ${COLORS.secondary}70` }}
-                // Placeholder for actual launch link
-                onClick={() => console.log('Launch University Program Finder')}
+      {/* Top mini strip (stats) */}
+      <div className="grid gap-4 md:grid-cols-3 mb-6">
+        <div
+          className="flex items-center gap-3 p-4 rounded-2xl"
+          style={{ backgroundColor: COLORS.lightBackground }}
+        >
+          <div
+            className="w-10 h-10 rounded-xl flex items-center justify-center"
+            style={{ backgroundColor: "#FFFFFF" }}
+          >
+            <Globe size={22} style={{ color: COLORS.primary }} />
+          </div>
+          <div>
+            <p
+              className="text-[11px] font-semibold uppercase tracking-wide"
+              style={{ color: COLORS.textGray }}
             >
-                Launch University Program Finder <ArrowRight size={24} className="ml-3" />
-            </button>
+              Coverage
+            </p>
+            <p
+              className="text-sm font-bold"
+              style={{ color: COLORS.primaryDark }}
+            >
+              HEC-recognized universities
+            </p>
+          </div>
         </div>
-    </section>
+
+        <div
+          className="flex items-center gap-3 p-4 rounded-2xl"
+          style={{ backgroundColor: COLORS.lightBackground }}
+        >
+          <div
+            className="w-10 h-10 rounded-xl flex items-center justify-center"
+            style={{ backgroundColor: "#FFFFFF" }}
+          >
+            <GraduationCap size={22} style={{ color: COLORS.secondary }} />
+          </div>
+          <div>
+            <p
+              className="text-[11px] font-semibold uppercase tracking-wide"
+              style={{ color: COLORS.textGray }}
+            >
+              Levels
+            </p>
+            <p
+              className="text-sm font-bold"
+              style={{ color: COLORS.primaryDark }}
+            >
+              BS · MS/MPhil · PhD
+            </p>
+          </div>
+        </div>
+
+        <div
+          className="flex items-center gap-3 p-4 rounded-2xl"
+          style={{ backgroundColor: COLORS.lightBackground }}
+        >
+          <div
+            className="w-10 h-10 rounded-xl flex items-center justify-center"
+            style={{ backgroundColor: "#FFFFFF" }}
+          >
+            <Search size={22} style={{ color: COLORS.primary }} />
+          </div>
+          <div>
+            <p
+              className="text-[11px] font-semibold uppercase tracking-wide"
+              style={{ color: COLORS.textGray }}
+            >
+              Mode
+            </p>
+            <p
+              className="text-sm font-bold"
+              style={{ color: COLORS.primaryDark }}
+            >
+              Search &amp; compare programs
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Main copy */}
+      <h1
+        className="text-2xl sm:text-3xl font-extrabold mb-3"
+        style={{ color: COLORS.primaryDark }}
+      >
+        University Program Finder
+      </h1>
+
+      <p
+        className="text-base sm:text-lg leading-relaxed mb-3"
+        style={{ color: COLORS.textGray }}
+      >
+        The University Program Finder is your{" "}
+        <strong>all-in-one database for academic programs</strong> offered by
+        accredited universities and colleges in Pakistan, and selected programs
+        abroad. We aggregate data on degrees, admission criteria, fee
+        structures, and campus locations to simplify your application process.
+      </p>
+
+      <p
+        className="text-base sm:text-lg font-semibold"
+        style={{ color: COLORS.primaryDark }}
+      >
+        Stop manually searching dozens of university websites. Find the right
+        degree, at the right university — in one place.
+      </p>
+    </div>
+  </section>
 );
 
+// ===================================================================
+// 2) FEATURES SECTION (Premium cards)
+// ===================================================================
+const FeaturesSection = () => (
+  <section className="py-10 border-b border-gray-200 mb-10">
+    <h2
+      className="text-2xl sm:text-3xl font-extrabold mb-8"
+      style={{ color: COLORS.primaryDark }}
+    >
+      Key Features of the Finder
+    </h2>
 
-/**
- * 7. Next Step Section (Bridge to next service)
- */
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {[
+        {
+          title: "Advanced Filtering",
+          icon: Filter,
+          desc: "Search by discipline, city, degree level (BS, MS, PhD), public/private status, and more.",
+          tag: "Powerful search",
+        },
+        {
+          title: "Side-by-Side Comparison",
+          icon: Compass,
+          desc: "Compare fees, entry requirements, program duration, and campus details for multiple universities.",
+          tag: "Compare options",
+        },
+        {
+          title: "Real-Time Admission Info",
+          icon: Building,
+          desc: "Stay updated on admission timelines, application deadlines and (where available) merit-related information.",
+          tag: "Stay updated",
+        },
+      ].map((feature, index) => {
+        const Icon = feature.icon;
+        return (
+          <div
+            key={index}
+            className="rounded-3xl p-7 relative overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+            style={{
+              backgroundColor: "#FFFFFF",
+              border: `1px solid ${COLORS.borderSoft}`,
+              boxShadow: "0 12px 30px rgba(15,23,42,0.06)",
+            }}
+          >
+            {/* Accent blob */}
+            <div
+              className="absolute -top-10 -right-10 w-28 h-28 rounded-full opacity-20"
+              style={{
+                background:
+                  "radial-gradient(circle, rgba(249,115,22,0.45), transparent 70%)",
+              }}
+            />
+
+            {/* Icon */}
+            <div
+              className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-md mb-4"
+              style={{
+                backgroundColor: COLORS.lightBackground,
+                border: `1px solid ${COLORS.secondary}30`,
+              }}
+            >
+              <Icon size={30} style={{ color: COLORS.secondary }} />
+            </div>
+
+            {/* Title */}
+            <h3
+              className="text-lg sm:text-xl font-bold mb-1"
+              style={{ color: COLORS.primaryDark }}
+            >
+              {feature.title}
+            </h3>
+
+            {/* Tag */}
+            <span
+              className="inline-block text-[11px] font-semibold px-2.5 py-1 rounded-full mb-3"
+              style={{
+                backgroundColor: `${COLORS.secondary}15`,
+                color: COLORS.secondary,
+              }}
+            >
+              {feature.tag}
+            </span>
+
+            {/* Description */}
+            <p className="text-sm" style={{ color: COLORS.textGray }}>
+              {feature.desc}
+            </p>
+          </div>
+        );
+      })}
+    </div>
+  </section>
+);
+
+// ===================================================================
+// 3) INTEGRATION / WHO IT'S FOR
+// ===================================================================
+const IntegrationProcessSection = () => (
+  <section className="py-10 border-b border-gray-200 mb-10">
+    <h2
+      className="text-2xl sm:text-3xl font-extrabold mb-8"
+      style={{ color: COLORS.primaryDark }}
+    >
+      How It Fits Into Your Journey
+    </h2>
+
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      {/* Intermediate students */}
+      <div
+        className="p-6 rounded-3xl h-full"
+        style={{
+          backgroundColor: COLORS.lightBackground,
+          boxShadow: "0 10px 26px rgba(15,23,42,0.06)",
+          border: `1px solid ${COLORS.borderSoft}`,
+        }}
+      >
+        <h3
+          className="text-xl sm:text-2xl font-bold mb-3 flex items-center"
+          style={{ color: COLORS.primaryDark }}
+        >
+          <Target size={22} className="mr-2" style={{ color: COLORS.primary }} />
+          For Intermediate Students
+        </h3>
+        <p className="text-sm sm:text-base" style={{ color: COLORS.textGray }}>
+          Explore BS programs in your field of interest before applying.
+          Shortlist universities, compare cities and understand your options
+          clearly — instead of relying on scattered information.
+        </p>
+      </div>
+
+      {/* University graduates */}
+      <div
+        className="p-6 rounded-3xl h-full"
+        style={{
+          backgroundColor: COLORS.lightBackground,
+          boxShadow: "0 10px 26px rgba(15,23,42,0.06)",
+          border: `1px solid ${COLORS.borderSoft}`,
+        }}
+      >
+        <h3
+          className="text-xl sm:text-2xl font-bold mb-3 flex items-center"
+          style={{ color: COLORS.primaryDark }}
+        >
+          <BookOpen size={22} className="mr-2" style={{ color: COLORS.primary }} />
+          For University Graduates
+        </h3>
+        <p className="text-sm sm:text-base" style={{ color: COLORS.textGray }}>
+          Search MS/MPhil and PhD programs aligned with your academic
+          background, research interests and long-term goals — locally and,
+          where possible, abroad.
+        </p>
+      </div>
+
+      {/* Need support */}
+      <div
+        className="p-6 rounded-3xl h-full"
+        style={{
+          backgroundColor: "#FFFFFF",
+          boxShadow: "0 10px 26px rgba(15,23,42,0.08)",
+          border: `1px solid ${COLORS.borderSoft}`,
+        }}
+      >
+        <h3
+          className="text-xl sm:text-2xl font-bold mb-3 flex items-center"
+          style={{ color: COLORS.primaryDark }}
+        >
+          <MessageCircle
+            size={22}
+            className="mr-2"
+            style={{ color: COLORS.primary }}
+          />
+          Need Guidance with Choices?
+        </h3>
+        <p className="text-sm sm:text-base mb-4" style={{ color: COLORS.textGray }}>
+          Our guidance team can help you interpret admission rules, calculate
+          merit, and choose universities that fit both your profile and your
+          future plans.
+        </p>
+
+        <NavLink
+          to="/service/online-session"
+          className="inline-flex items-center px-4 py-2 rounded-xl text-sm font-semibold shadow-md transition-transform duration-200 hover:scale-[1.03]"
+          style={{
+            backgroundColor: COLORS.secondary,
+            color: "white",
+          }}
+        >
+          Book a Guidance Session
+          <ArrowRight size={16} className="ml-2" />
+        </NavLink>
+      </div>
+    </div>
+  </section>
+);
+
+// ===================================================================
+// 4) NEXT STEP / CTA SECTION (same pattern as other pages)
+// ===================================================================
 const NextStepSection = () => (
-    <section className="py-10 md:py-16" style={{ background: COLORS.lightBackground }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-extrabold mb-4" style={{ color: COLORS.primaryDark }}>
-                Your Next Step in the Journey
-            </h2>
-            <p className="text-xl leading-relaxed mb-6" style={{ color: COLORS.textGray }}>
-                Once students enter university, a new set of challenges begins — and TaleemiGuide continues supporting them through our **University Graduates Guidance** service.
-            </p>
-            <button
-                className="px-8 py-3 text-lg font-semibold rounded-xl shadow-lg transition duration-300 ease-in-out transform hover:scale-[1.03] flex items-center justify-center mx-auto"
-                style={{ backgroundColor: COLORS.primary, color: 'white' }}
-                // Placeholder for actual link to University Graduates Guidance page
-                onClick={() => console.log('Navigate to University Graduates Guidance page')}
-            >
-                Explore University Graduates Guidance &rarr;
-            </button>
-        </div>
-    </section>
+  <section className="pt-4 pb-14">
+    <div
+      className="p-8 rounded-3xl text-center relative overflow-hidden"
+      style={{
+        background:
+          "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 60%, #FFFFFF 100%)",
+        border: "1px solid rgba(0,0,0,0.04)",
+        boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
+      }}
+    >
+      <div
+        aria-hidden="true"
+        className="absolute -right-24 -top-24 w-52 h-52 rounded-full opacity-20"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(30,58,138,0.15), transparent 70%)",
+        }}
+      />
+
+      <h2
+        className="text-2xl sm:text-3xl font-extrabold mb-4"
+        style={{ color: COLORS.primaryDark }}
+      >
+        Your Next Step in the Journey
+      </h2>
+
+      <p
+        className="text-sm sm:text-base md:text-lg max-w-3xl mx-auto mb-6"
+        style={{ color: COLORS.textGray }}
+      >
+        Once students enter university, a new set of academic, administrative and
+        emotional challenges begins — and TaleemiGuide continues supporting them
+        through our{" "}
+        <strong>University Graduates Guidance</strong> service.
+      </p>
+
+      <NavLink
+        to="/service/university-graduates-guidance"
+        className="inline-flex items-center px-8 py-3 text-base font-semibold rounded-xl shadow-md transition-transform duration-200 hover:scale-[1.03]"
+        style={{
+          backgroundColor: COLORS.secondary,
+          color: "white",
+        }}
+      >
+        Explore University Graduates Guidance
+        <ArrowRight size={20} className="ml-2" />
+      </NavLink>
+    </div>
+  </section>
 );
 
-
-/**
- * Main University Program Finder Page Component
- */
-export default function UniversityProgramFinderPage({ onNavigate = (path) => console.log('Navigating to:', path) }) {
-    return (
-        <div style={{ fontFamily: 'Inter, sans-serif' }}>
-            
-            <HeroSection />
-            <ProblemBenefitSection />
-            <FeaturesSection />
-            <AudienceHelpSection />
-            <IntegrationProcessSection />
-            <VisionCallToActionSection />
-            <NextStepSection />
-
-        </div>
-    );
+// ===================================================================
+// MAIN PAGE COMPONENT
+// ===================================================================
+export default function UniversityProgramFinder() {
+  return (
+    <ServiceLayout>
+      <HeroSection />
+      <FeaturesSection />
+      <IntegrationProcessSection />
+      <NextStepSection />
+    </ServiceLayout>
+  );
 }

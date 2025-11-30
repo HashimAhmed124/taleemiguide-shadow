@@ -1,22 +1,21 @@
-// SubjectClassification.jsx — Unified UI/UX
+// TaleemiAdvicePage.jsx — Unified & Upgraded
 // Source: :contentReference[oaicite:1]{index=1}
 
 import React from "react";
 import { NavLink } from "react-router-dom";
 import {
-  BookOpen,
-  Layers,
-  Briefcase,
-  Map,
-  CheckCircle,
-  Lightbulb,
-  Globe,
+  Zap,
   Users,
+  CheckCircle,
+  Smartphone,
+  MessageSquare,
+  MessageCircle,
   ArrowRight,
+  BookOpen,
 } from "lucide-react";
 import ServiceLayout from "../../components/ServiceLayout";
 
-// --- UNIFIED COLOR PALETTE (same structure as other service pages) ---
+// --- UNIFIED COLOR PALETTE (aligned with other service pages) ---
 const COLORS = {
   primary: "#1E3A8A",
   primaryDark: "#0F172A",
@@ -51,20 +50,20 @@ const HeroSection = () => (
             className="w-10 h-10 rounded-xl flex items-center justify-center"
             style={{ backgroundColor: "#FFFFFF" }}
           >
-            <Layers size={22} style={{ color: COLORS.primary }} />
+            <MessageCircle size={22} style={{ color: COLORS.primary }} />
           </div>
           <div>
             <p
               className="text-[11px] font-semibold uppercase tracking-wide"
               style={{ color: COLORS.textGray }}
             >
-              Coverage
+              Mode
             </p>
             <p
               className="text-sm font-bold"
               style={{ color: COLORS.primaryDark }}
             >
-              3,000+ subjects &amp; fields
+              Quick Academic Query
             </p>
           </div>
         </div>
@@ -77,20 +76,20 @@ const HeroSection = () => (
             className="w-10 h-10 rounded-xl flex items-center justify-center"
             style={{ backgroundColor: "#FFFFFF" }}
           >
-            <BookOpen size={22} style={{ color: COLORS.secondary }} />
+            <Users size={22} style={{ color: COLORS.secondary }} />
           </div>
           <div>
             <p
               className="text-[11px] font-semibold uppercase tracking-wide"
               style={{ color: COLORS.textGray }}
             >
-              Purpose
+              Ideal For
             </p>
             <p
               className="text-sm font-bold"
               style={{ color: COLORS.primaryDark }}
             >
-              From “career idea” to degree
+              Students &amp; parents with 1–2 key questions
             </p>
           </div>
         </div>
@@ -103,86 +102,85 @@ const HeroSection = () => (
             className="w-10 h-10 rounded-xl flex items-center justify-center"
             style={{ backgroundColor: "#FFFFFF" }}
           >
-            <Map size={22} style={{ color: COLORS.primary }} />
+            <Zap size={22} style={{ color: COLORS.primary }} />
           </div>
           <div>
             <p
               className="text-[11px] font-semibold uppercase tracking-wide"
               style={{ color: COLORS.textGray }}
             >
-              Outcome
+              Response Time
             </p>
             <p
               className="text-sm font-bold"
               style={{ color: COLORS.primaryDark }}
             >
-              A clear subject roadmap
+              Usually within 24–48 hours
             </p>
           </div>
         </div>
       </div>
 
-      {/* Main copy (from original, cleaned) */}
+      {/* Main copy */}
       <p
         className="text-base sm:text-lg leading-relaxed mb-3"
         style={{ color: COLORS.textGray }}
       >
-        The Subject Classification service provides a{" "}
-        <strong>
-          comprehensive, up-to-date directory of over 3,000 subjects and fields
-          of study
-        </strong>{" "}
-        available in Pakistan, categorized by their domain, career scope, and
-        academic requirement. This is essential for converting a broad career
-        idea into a specific, achievable academic degree.
+        <strong>Taleemi Advice</strong> is our rapid query resolution service.
+        It’s perfect when you have a single, specific question that needs a
+        quick, expert answer — without booking a full consultation. Ideal for
+        quick checks on eligibility, university deadlines, career definitions,
+        or general academic queries.
       </p>
 
       <p
         className="text-base sm:text-lg font-semibold"
         style={{ color: COLORS.primaryDark }}
       >
-        It is the missing link between knowing{" "}
-        <em>what</em> you want to be and knowing <em>what</em> you need to study
-        to get there.
+        Get expert advice quickly and efficiently, straight to your inbox or
+        phone.
       </p>
     </div>
   </section>
 );
 
 // ===================================================================
-// 2) BENEFITS SECTION
+// 2) WHY CHOOSE TALEEMI ADVICE (USPs)
 // ===================================================================
-const BenefitsSection = () => (
+const USPSection = () => (
   <section className="py-10 border-b border-gray-200 mb-10">
     <h2
       className="text-2xl sm:text-3xl font-extrabold mb-8"
       style={{ color: COLORS.primaryDark }}
     >
-      Why Understanding Your Field of Study Matters
+      Why Choose Taleemi Advice?
     </h2>
 
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
       {[
         {
-          title: "Academic Clarity",
-          icon: BookOpen,
-          desc: "See how subjects like Psychology or Data Science are classified (for example: Arts, Social Sciences, Computer Science).",
+          title: "Speed",
+          icon: Zap,
+          desc: "Get clear, actionable answers within a short time window — without long booking delays.",
+          tag: "Fast response",
         },
         {
-          title: "Career Scope",
-          icon: Briefcase,
-          desc: "View typical job roles, industries, and growth potential connected to each academic field.",
+          title: "Accuracy",
+          icon: CheckCircle,
+          desc: "Responses are drafted by experienced academic and career counselors, not generic automated replies.",
+          tag: "Expert-backed",
         },
         {
-          title: "Global Alignment",
-          icon: Globe,
-          desc: "Understand how Pakistani degree titles align with international standards and fields.",
+          title: "Simplicity",
+          icon: MessageSquare,
+          desc: "Submit your question in simple text form; we guide you only on what’s necessary to answer it well.",
+          tag: "Easy to use",
         },
-      ].map((benefit, index) => {
-        const Icon = benefit.icon;
+      ].map((usp, i) => {
+        const Icon = usp.icon;
         return (
           <div
-            key={index}
+            key={i}
             className="rounded-3xl p-7 relative overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
             style={{
               backgroundColor: "#FFFFFF",
@@ -199,7 +197,7 @@ const BenefitsSection = () => (
               }}
             />
 
-            {/* Icon badge */}
+            {/* Icon Badge */}
             <div
               className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-md mb-4"
               style={{
@@ -211,13 +209,24 @@ const BenefitsSection = () => (
             </div>
 
             <h3
-              className="text-lg sm:text-xl font-bold mb-2"
+              className="text-lg sm:text-xl font-bold mb-1"
               style={{ color: COLORS.primaryDark }}
             >
-              {benefit.title}
+              {usp.title}
             </h3>
+
+            <span
+              className="inline-block text-[11px] font-semibold px-2.5 py-1 rounded-full mb-3"
+              style={{
+                backgroundColor: `${COLORS.secondary}15`,
+                color: COLORS.secondary,
+              }}
+            >
+              {usp.tag}
+            </span>
+
             <p className="text-sm" style={{ color: COLORS.textGray }}>
-              {benefit.desc}
+              {usp.desc}
             </p>
           </div>
         );
@@ -227,130 +236,87 @@ const BenefitsSection = () => (
 );
 
 // ===================================================================
-// 3) CLASSIFICATION FRAMEWORK SECTION
+// 3) PROCESS SECTION (3-step flow)
 // ===================================================================
-const FrameworkSection = () => (
+const ProcessSection = () => (
   <section className="py-10 border-b border-gray-200 mb-10">
     <h2
       className="text-2xl sm:text-3xl font-extrabold mb-8"
       style={{ color: COLORS.primaryDark }}
     >
-      The Classification Framework
+      The Simple 3-Step Process
     </h2>
 
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      {/* Pillars card */}
-      <div
-        className="p-6 sm:p-7 rounded-3xl h-full"
-        style={{
-          backgroundColor: "#FFFFFF",
-          border: `1px solid ${COLORS.borderSoft}`,
-          boxShadow: "0 10px 24px rgba(0,0,0,0.05)",
-        }}
-      >
-        <h3
-          className="text-xl sm:text-2xl font-bold mb-4 flex items-center"
-          style={{ color: COLORS.primaryDark }}
-        >
-          <Layers size={24} className="mr-2" />
-          Two Core Pillars
-        </h3>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {[
+        {
+          num: 1,
+          title: "Ask Your Question",
+          desc: "Submit your query along with any relevant marks, grades or academic details.",
+          icon: BookOpen,
+        },
+        {
+          num: 2,
+          title: "Expert Review",
+          desc: "A dedicated counselor analyzes your situation and researches a precise, context-aware answer.",
+          icon: Users,
+        },
+        {
+          num: 3,
+          title: "Receive Response",
+          desc: "Get a detailed answer via your selected contact method (email, WhatsApp, or platform inbox).",
+          icon: Smartphone,
+        },
+      ].map((step, i) => {
+        const Icon = step.icon;
+        return (
+          <div
+            key={i}
+            className="p-6 rounded-3xl text-center"
+            style={{
+              backgroundColor: "#FFFFFF",
+              border: `1px solid ${COLORS.borderSoft}`,
+              boxShadow: "0 10px 24px rgba(0,0,0,0.05)",
+            }}
+          >
+            <div
+              className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 text-sm font-bold"
+              style={{
+                backgroundColor: COLORS.primary,
+                color: "white",
+              }}
+            >
+              {step.num}
+            </div>
 
-        <ul
-          className="space-y-4 text-sm sm:text-base"
-          style={{ color: COLORS.textGray }}
-        >
-          <li>
-            <span className="font-bold">Domain Classification:</span>{" "}
-            <span className="font-normal">
-              Categorizes subjects into broad areas (for example: Science,
-              Technology, Arts, Social Sciences, Business).
-            </span>
-          </li>
-          <li>
-            <span className="font-bold">Career Classification:</span>{" "}
-            <span className="font-normal">
-              Maps academic subjects directly to industry sectors and job
-              titles, so you can see where a degree actually leads.
-            </span>
-          </li>
-        </ul>
+            <div
+              className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-3"
+              style={{
+                backgroundColor: COLORS.lightBackground,
+                border: `1px solid ${COLORS.secondary}30`,
+              }}
+            >
+              <Icon size={22} style={{ color: COLORS.secondary }} />
+            </div>
 
-        <div className="mt-5 rounded-2xl p-4 flex items-start gap-3"
-          style={{
-            backgroundColor: COLORS.lightBackground,
-          }}
-        >
-          <CheckCircle
-            size={20}
-            className="mt-0.5 flex-shrink-0"
-            style={{ color: COLORS.primary }}
-          />
-          <p className="text-sm" style={{ color: COLORS.textGray }}>
-            This dual view helps you connect{" "}
-            <strong>“What should I study?”</strong> with{" "}
-            <strong>“What will I do with it?”</strong>
-          </p>
-        </div>
-      </div>
-
-      {/* Emerging fields / Why it stays relevant */}
-      <div
-        className="p-6 sm:p-7 rounded-3xl h-full"
-        style={{
-          backgroundColor: COLORS.lightBackground,
-          boxShadow: "0 10px 24px rgba(0,0,0,0.04)",
-          border: `1px solid ${COLORS.borderSoft}`,
-        }}
-      >
-        <h3
-          className="text-xl sm:text-2xl font-bold mb-3 flex items-center"
-          style={{ color: COLORS.primaryDark }}
-        >
-          <Lightbulb
-            size={24}
-            className="mr-2"
-            style={{ color: COLORS.secondary }}
-          />
-          Emerging &amp; Evolving Fields
-        </h3>
-
-        <p
-          className="text-sm sm:text-base leading-relaxed mb-4"
-          style={{ color: COLORS.textGray }}
-        >
-          We constantly update our database to include modern and emerging
-          disciplines such as{" "}
-          <strong>Artificial Intelligence, Cybersecurity, Fintech, Data
-          Science,</strong> and more — so your decisions are not based on
-          outdated information.
-        </p>
-
-        <div
-          className="rounded-2xl p-4 flex items-start gap-3"
-          style={{
-            backgroundColor: "#FFFFFF",
-            border: `1px solid ${COLORS.borderSoft}`,
-          }}
-        >
-          <Users
-            size={20}
-            className="mt-0.5 flex-shrink-0"
-            style={{ color: COLORS.primary }}
-          />
-          <p className="text-sm" style={{ color: COLORS.textGray }}>
-            Whether you&apos;re a school student, university student, or working
-            professional planning a transition, this framework helps you see the{" "}
-            <strong>full subject landscape</strong> before committing.
-          </p>
-        </div>
-      </div>
+            <h4
+              className="text-lg font-bold mb-2"
+              style={{ color: COLORS.primaryDark }}
+            >
+              {step.title}
+            </h4>
+            <p className="text-sm" style={{ color: COLORS.textGray }}>
+              {step.desc}
+            </p>
+          </div>
+        );
+      })}
     </div>
   </section>
 );
 
 // ===================================================================
-// 4) NEXT STEP / CTA SECTION
+// 4) NEXT STEP SECTION (CTA → Online Session)
 // ===================================================================
 const NextStepSection = () => (
   <section className="pt-4 pb-14">
@@ -380,25 +346,23 @@ const NextStepSection = () => (
       </h2>
 
       <p
-        className="text-sm sm:text-base md:text-lg max-w-3xl mx-auto mb-6"
+        className="text-sm sm:text-base md:text-lg leading-relaxed max-w-3xl mx-auto mb-6"
         style={{ color: COLORS.textGray }}
       >
-        After understanding your field and related disciplines, the next step is
-        to explore{" "}
-        <strong>where these subjects are actually offered</strong>. Use our
-        University Program Finder to see which universities provide the degrees
-        that match your chosen field.
+        If you feel your situation is complex, or you want to discuss multiple
+        questions in detail, your next step is to{" "}
+        <strong>book an Online Session</strong> with our expert counselors.
       </p>
 
       <NavLink
-        to="/service/university-program-finder"
+        to="/service/online-session"
         className="inline-flex items-center px-8 py-3 text-base font-semibold rounded-xl shadow-md transition-transform duration-200 hover:scale-[1.03]"
         style={{
           backgroundColor: COLORS.secondary,
           color: "white",
         }}
       >
-        Explore University Program Finder
+        Book an Online Session
         <ArrowRight size={20} className="ml-2" />
       </NavLink>
     </div>
@@ -408,12 +372,12 @@ const NextStepSection = () => (
 // ===================================================================
 // MAIN PAGE COMPONENT
 // ===================================================================
-export default function SubjectClassification() {
+export default function TaleemiAdvicePage() {
   return (
-    <ServiceLayout title="Subject Classification" subtitle="Field Mapping">
+    <ServiceLayout title="Taleemi Advice" subtitle="Quick Advisory">
       <HeroSection />
-      <BenefitsSection />
-      <FrameworkSection />
+      <USPSection />
+      <ProcessSection />
       <NextStepSection />
     </ServiceLayout>
   );
