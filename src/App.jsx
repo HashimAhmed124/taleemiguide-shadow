@@ -2,7 +2,7 @@
 
 import { Routes, Route, useNavigate } from "react-router-dom"; // 👈 CRITICAL: Add useNavigate
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero2";
+import Hero from "./components/Hero";
 import ForWhom from "./components/forWhom";
 import OurServices from "./components/OurServices";
 import TheProcess from "./components/TheProcess";

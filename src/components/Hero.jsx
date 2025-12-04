@@ -1,187 +1,135 @@
-import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import HeroImg1 from "../assets/hero-img/1.png";
-import HeroImg2 from "../assets/hero-img/2.png";
-import HeroImg3 from "../assets/hero-img/3.png";
-import HeroImg4 from "../assets/hero-img/4.png";
-import HeroImg5 from "../assets/hero-img/5.png";
 
-const slides = [
-  { title: "Struggling with your Educational Career?", desc: "TaleemiGuide saves your time.", img: HeroImg1, link: "#" },
-  { title: "Lost in Specializations?", desc: "TaleemiGuide matches passion with profession.", img: HeroImg2, link: "#" },
-  { title: "Need Admissions or Scholarships?", desc: "TaleemiGuide guides you step by step.", img: HeroImg3, link: "#" },
-  { title: "Looking for Mentors?", desc: "TaleemiGuide connects you with experts.", img: HeroImg4, link: "#" },
-  { title: "Shifting Careers?", desc: "TaleemiGuide provides practical solutions.", img: HeroImg5, link: "#" },
-];
+import React, { useState, useEffect } from 'react';
+import sliderImage1 from '../assets/1.png'; 
+import sliderImage2 from '../assets/2.png';
+import sliderImage3 from '../assets/3.png';
 
-export default function Hero() {
-  const [current, setCurrent] = useState(0);
-  const [progress, setProgress] = useState(100);
 
-  const requestRef = useRef(null);
-  const startTimeRef = useRef(null);
-  const duration = 10000; // 10 seconds per slide
+const COLORS = {
+  primary: '#1E3A8A', 
+  secondary: '#f2592d', 
+  backgroundLight: '#f4fcff',
+  primary2: '#11253e' 
+};
 
+
+const sliderImages = [sliderImage1, sliderImage2, sliderImage3];
+
+const Hero = () => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const totalImages = sliderImages.length;
+
+  // Logic for 8-second image transition
   useEffect(() => {
-    const animate = (time) => {
-      if (!startTimeRef.current) startTimeRef.current = time;
-      const elapsed = time - startTimeRef.current;
+    const timer = setInterval(() => {
 
-      const percentage = 100 - (elapsed / duration) * 100;
-      setProgress(Math.max(percentage, 0));
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % totalImages);
+    }, 8000); 
 
-      if (elapsed >= duration) {
-        setCurrent((prev) => (prev + 1) % slides.length);
-        startTimeRef.current = time; // reset timer for next slide
-      }
 
-      requestRef.current = requestAnimationFrame(animate);
-    };
+    return () => clearInterval(timer);
+  }, [totalImages]);
 
-    requestRef.current = requestAnimationFrame(animate);
-
-    return () => cancelAnimationFrame(requestRef.current);
-  }, [current]);
 
   return (
-    <section className="relative w-full overflow-hidden">
-      {/* Background Layers */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        {/* Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#EFF6FF] via-[#E0E7FF] to-[#FDF6E3]" />
+    <section 
+      className="py-6 md:py-10" 
+      style={{ backgroundColor: COLORS.backgroundLight }} 
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
+          
+          {/* LEFT SIDE */}
+          <div className="lg:w-1/2 text-center lg:text-left">
+            <h1 
+              className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight mb-4"
+              style={{ color: COLORS.primary }}
+            >
+              Struggling With Your <br /> Educational Career?
+            </h1>
+            
+            <p 
+              className="text-lg sm:text-xl leading-relaxed mb-6"
+              style={{ color: COLORS.primary2, opacity: 0.9 }}
+            >
+              TaleemiGuide provides clear and authentic guidance at every step.
+            </p>
 
-        {/* Floating Shapes */}
-        <motion.div
-          animate={{ y: [0, 25, 0], x: [0, 15, 0], rotate: [0, 10, 0] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute w-64 h-64 bg-[#F97316]/20 rounded-full top-20 left-10 blur-3xl"
-        />
-        <motion.div
-          animate={{ y: [0, -20, 0], x: [0, -20, 0], rotate: [0, -10, 0] }}
-          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute w-96 h-96 bg-[#3B82F6]/20 rounded-full bottom-0 right-20 blur-3xl"
-        />
+            <ul className="space-y-4 text-left max-w-lg mx-auto lg:mx-0">
+              {/* Bullet Points */}
+              <li className="flex items-start text-lg sm:text-xl" style={{ color: COLORS.primary2 }}>
+                <span className="h-6 w-6 mr-3 flex-shrink-0" style={{ color: COLORS.secondary }}>
+                  <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                </span>
+                Make smarter academic and career choices
+              </li>
+              <li className="flex items-start text-lg sm:text-xl" style={{ color: COLORS.primary2 }}>
+                <span className="h-6 w-6 mr-3 flex-shrink-0" style={{ color: COLORS.secondary }}>
+                   <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                </span>
+                Match your passion with the right field
+              </li>
+              <li className="flex items-start text-lg sm:text-xl" style={{ color: COLORS.primary2 }}>
+                <span className="h-6 w-6 mr-3 flex-shrink-0" style={{ color: COLORS.secondary }}>
+                   <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                </span>
+                Understand subject classifications with clarity
+              </li>
+              <li className="flex items-start text-lg sm:text-xl" style={{ color: COLORS.primary2 }}>
+                <span className="h-6 w-6 mr-3 flex-shrink-0" style={{ color: COLORS.secondary }}>
+                   <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                </span>
+                Explore verified study programs across all institutions
+              </li>
+              <li className="flex items-start text-lg sm:text-xl" style={{ color: COLORS.primary2 }}>
+                <span className="h-6 w-6 mr-3 flex-shrink-0" style={{ color: COLORS.secondary }}>
+                   <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                </span>
+                Get step-by-step help with admissions, scholarships, and academic issues
+              </li>
+            </ul>
 
-        {/* Bottom Wave */}
-        <motion.svg
-          className="absolute bottom-0 w-full h-40"
-          viewBox="0 0 1440 320"
-          preserveAspectRatio="none"
-          animate={{ y: [0, -10, 0] }}
-          transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-        >
-          <path
-            fill="#FDF6E3"
-            fillOpacity="0.8"
-            d="M0,128L48,133.3C96,139,192,149,288,149.3C384,149,480,139,576,133.3C672,128,768,128,864,133.3C960,139,1056,149,1152,160C1248,171,1344,181,1392,186.7L1440,192L1440,320L0,320Z"
-          />
-        </motion.svg>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 py-20 flex flex-col gap-12">
-        {/* Hero Content */}
-        <div className="flex flex-col md:flex-row items-center gap-12">
-          {/* LEFT: Text */}
-          <div className="flex-1 text-center md:text-left space-y-6">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={current}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.6 }}
-                className="space-y-6 md:space-y-8"
+            {/* Action Buttons */}
+            <div className="mt-10 flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+              <button 
+                className="px-8 py-3 text-lg font-semibold rounded-full shadow-lg transition duration-300 ease-in-out hover:scale-[1.03] transform hover:shadow-xl"
+                style={{ backgroundColor: COLORS.secondary, color: 'white' }}
               >
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#1E3A8A] drop-shadow-lg">
-                  {slides[current].title}
-                </h1>
-                <p className="text-lg sm:text-xl text-[#4B5563] max-w-xl mx-auto md:mx-0 leading-relaxed">
-                  {slides[current].desc}
-                </p>
-                <div className="flex justify-center md:justify-start">
-                  <a
-                    href={slides[current].link}
-                    className="px-8 py-4 rounded-full bg-gradient-to-r from-[#F97316] to-[#FB923C] text-white text-lg font-bold shadow-lg hover:scale-105 transition-transform duration-300"
-                  >
-                    Learn More
-                  </a>
-                </div>
-              </motion.div>
-            </AnimatePresence>
+                Seek Taleemi Advice
+              </button>
+            </div>
+            
           </div>
-
-          {/* RIGHT: Image */}
-          <div className="flex-1 flex justify-center md:justify-end">
-            <AnimatePresence mode="wait">
-              <motion.img
-                key={slides[current].img}
-                src={slides[current].img}
-                alt="Slide"
-                loading="lazy"
-                className="rounded-2xl object-contain shadow-2xl"
-                initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
-                animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                exit={{ opacity: 0, scale: 0.9, rotate: 2 }}
-                transition={{ duration: 0.6 }}
-              />
-            </AnimatePresence>
-          </div>
-        </div>
-
-        {/* Bottom: Progress Circles */}
-        <div className="flex justify-center items-center gap-4">
-          {slides.map((_, i) => {
-            const radius = 12;
-            const circumference = 2 * Math.PI * radius;
-            const offset = circumference - (progress / 100) * circumference;
-
-            return (
-              <div
-                key={i}
-                onClick={() => {
-                  setCurrent(i);
-                  setProgress(100);
-                  startTimeRef.current = null; // reset timer immediately
-                }}
-                className="relative w-8 h-8 cursor-pointer group"
-              >
-                {/* Base Circle */}
-                <svg className="absolute inset-0 w-full h-full rotate-[-90deg]">
-                  <circle
-                    cx="16"
-                    cy="16"
-                    r={radius}
-                    stroke="#9CA3AF"
-                    strokeWidth="3"
-                    fill="none"
+          
+          {/* RIGHT SIDE - Image Slider */}
+          <div className="lg:w-1/2 w-full mt-12 lg:mt-0 flex justify-center relative">
+            <div 
+              
+              className="w-full max-w-lg lg:max-w-none relative h-[36rem] lg:h-[42rem]"
+            >
+                
+              {sliderImages.map((image, index) => (
+                  <img
+                      key={index}
+                      src={image}
+                      alt={`Educational Career Guidance Slide ${index + 1}`}
+                      className={`
+                          absolute inset-0 
+                          w-full h-full 
+                          object-contain 
+                          transition-opacity duration-700 ease-in-out 
+                          rounded-2xl
+                          ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}
+                      `}
                   />
-                </svg>
-
-                {/* Active Circle with Timer */}
-                {current === i && (
-                  <svg className="absolute inset-0 w-full h-full rotate-[-90deg]">
-                    <circle
-                      cx="16"
-                      cy="16"
-                      r={radius}
-                      stroke="#F97316"
-                      strokeWidth="3"
-                      fill="none"
-                      strokeDasharray={circumference}
-                      strokeDashoffset={offset}
-                      strokeLinecap="round"
-                      className="transition-none"
-                    />
-                  </svg>
-                )}
-
-                {/* Hover Highlight */}
-                <div className="absolute inset-0 rounded-full bg-[#F97316] opacity-20 scale-0 group-hover:scale-110 transition-transform duration-300"></div>
-              </div>
-            );
-          })}
+              ))}
+            </div>
+          </div>
+          
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default Hero;

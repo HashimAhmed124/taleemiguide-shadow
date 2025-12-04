@@ -182,16 +182,14 @@ const ServiceLayout = ({ children }) => {
       className="w-full min-h-screen"
       style={{
         fontFamily: "Inter, sans-serif",
-        background: "radial-gradient(circle at top left, #DBEAFE 0, #EFF6FF 40%, #FFFFFF 80%)",
+        background:
+          "radial-gradient(circle at top left, #DBEAFE 0, #EFF6FF 40%, #FFFFFF 80%)",
       }}
     >
       <ScrollToTop />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-10 lg:pb-16">
-        
-        {/* ❌ REMOVED NAVBAR / BREADCRUMB  */}
-        {/* Just a clean heading now: */}
-
+      {/* 🔵 UPDATED: remove max-w-7xl and let it go full-width */}
+      <div className="w-full mx-auto px-3 sm:px-4 lg:px-6 xl:px-10 2xl:px-16 pt-6 pb-10 lg:pb-16">
         <h1
           className="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2"
           style={{ color: COLORS.primaryDark }}
@@ -211,15 +209,16 @@ const ServiceLayout = ({ children }) => {
         {/* MOBILE TABS */}
         <ServiceMobileTabs />
 
-        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
-          {/* SIDEBAR */}
-          <div className="lg:w-[24%]">
+        {/* 🔵 UPDATED: slightly smaller gap so columns sit closer */}
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-6 xl:gap-8">
+          {/* 🔵 UPDATED: sidebar narrower, pushes main wider */}
+          <div className="lg:w-[20%] xl:w-[18%]">
             <ServiceSidebar />
           </div>
 
-          {/* MAIN CONTENT */}
+          {/* 🔵 UPDATED: main area wider */}
           <main
-            className="lg:w-[76%] rounded-3xl relative overflow-hidden"
+            className="lg:w-[80%] xl:w-[82%] rounded-3xl relative overflow-hidden"
             style={{
               backgroundColor: "white",
               boxShadow: "0 22px 45px rgba(15,23,42,0.12)",

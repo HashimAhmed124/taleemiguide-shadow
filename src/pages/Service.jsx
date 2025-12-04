@@ -16,9 +16,9 @@ import {
 
 // --- UNIFIED COLOR PALETTE ---
 const COLORS = {
-  primary: '#1E3A8A',       // Dark Blue (Main Brand Color)
-  secondary: '#F97316',     // Bright Orange (Accent & CTA Color)
-  textGray: '#4B5563',      // Standard paragraph text color
+  primary: '#1E3A8A',       
+  secondary: '#F97316',     
+  textGray: '#4B5563',      
   lightBackground: '#EFF6FF',
   primaryDark: '#11253e',
 };

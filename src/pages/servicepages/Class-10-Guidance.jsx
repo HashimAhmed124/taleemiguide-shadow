@@ -1,6 +1,6 @@
 // Class-10-Guidance.jsx
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import {
   BookOpen,
@@ -18,21 +18,22 @@ import {
   Globe2,
 } from "lucide-react";
 import ServiceLayout from "../../components/ServiceLayout";
+import Logo from "./../../assets/logo-bg-less.png"
 
-// --- UNIFIED COLOR PALETTE (shared structure with other service pages) ---
+// --- BRAND COLORS ----------------------------------------------------
 const COLORS = {
   primary: "#1E3A8A",
-  primaryDark: "#0F172A",
+  primaryDark: "#11253e",
   secondary: "#F97316",
   textGray: "#4B5563",
-  grayText: "#4B5563", // alias for consistency
+  grayText: "#4B5563",
   lightBackground: "#EFF6FF",
   surface: "#F8FAFC",
-  borderSoft: "#E5E7EB",
+  borderSoft: "#E5E7EB"
 };
 
 // --------------------------------------------------------------------
-// 1) TOP HERO STRIP (aligned with Class 12 style)
+// 1) TOP HERO STRIP
 // --------------------------------------------------------------------
 const OverviewStrip = () => (
   <section className="pb-8 border-b border-gray-200 mb-8">
@@ -130,17 +131,18 @@ const OverviewStrip = () => (
       >
         The decision after{" "}
         <strong className="font-semibold">Matriculation or O-Levels</strong> is
-        your first major academic choice. It sets the foundation for your
-        intermediate (F.Sc, I.Com, ICS, Arts) and future university path.
-        Choosing the right stream is critical to aligning your studies with your
-        long-term career goals.
+        your first major academic choice. It decides what you can study in
+        Intermediate and which university or career options stay open for you.
+        This page uses a{" "}
+        <strong className="font-semibold">mind-map style roadmap</strong> to
+        show how each choice connects to degrees and careers.
       </p>
     </div>
   </section>
 );
 
 // --------------------------------------------------------------------
-// 2) INTRO COPY (kept compact, supports hero)
+// 2) INTRO COPY
 // --------------------------------------------------------------------
 const InitialContent = () => (
   <section className="pb-8 border-b border-gray-200 mb-8 space-y-4">
@@ -168,10 +170,11 @@ const InitialContent = () => (
           className="text-sm sm:text-base leading-relaxed"
           style={{ color: COLORS.textGray }}
         >
-          We help students avoid common decision traps and choose a stream that
-          is{" "}
-          <strong className="font-semibold">scientifically matched</strong> to
-          their potential, interests, and future career direction.
+          We help students avoid trial-and-error decisions. Instead of guessing
+          after Matric, you can see how{" "}
+          <strong>each stream flows into degrees and careers</strong>, and then
+          match it with your strengths using guidance sessions and assessment
+          tools.
         </p>
       </div>
     </div>
@@ -179,278 +182,745 @@ const InitialContent = () => (
 );
 
 // --------------------------------------------------------------------
-// 3) PREMIUM COUNSELING ROADMAP (uses same structure language as other pages)
+// 3) MIND MAP DATA (Path → Degrees / Courses → Careers)
 // --------------------------------------------------------------------
 
-const PATH_COLORS = {
-  academic: { tint: "#E8EDFF", border: "#C7D2FE", icon: "#1D4ED8" },
-  technical: { tint: "#E6FAF4", border: "#A7F3D0", icon: "#0D9488" },
-  vocational: { tint: "#FFF1E6", border: "#FED7AA", icon: "#F97316" },
-  religious: { tint: "#FDF6D4", border: "#FDE68A", icon: "#D97706" },
-  global: { tint: "#F3EFFF", border: "#DDD6FE", icon: "#7C3AED" },
-};
+// NOTE: labels are intentionally short so they fit inside the circles;
+// full descriptions for each path are still shown below / in panels.
 
-const PATHS = [
+const MINDMAP_PATHS = [
   {
-    id: "academic",
+    id: "general",
     icon: GraduationCap,
-    title: "General Education Stream (HSSC)",
-    subtitle: "For students with strong academic performance",
-    subjects: "Pre-Medical, Pre-Engineering, ICS, I.Com, FA/Humanities",
-    leadsTo:
-      "MBBS, Engineering, BS Sciences, Social Sciences, IT, Business, Law",
-    careers: "Doctors, Engineers, Researchers, Analysts, IT Professionals",
-    recommended: [
-      "You enjoy theory-based subjects",
-      "You perform well in exams",
-      "You want many university degree options",
+    name: "General Education (HSSC)",
+    label: "HSSC (F.Sc/FA/ICS/I.Com)",
+    color: "#1E3A8A",
+    bg: "#E0ECFF",
+    description:
+      "For students who like academic study and want many university options in Pakistan.",
+    degrees: [
+      {
+        id: "pre_med",
+        name: "Pre-Medical (F.Sc)",
+        note: "Biology, Chemistry, Physics",
+        careers: [
+          "MBBS, BDS and other medical degrees",
+          "DPT, Pharmacy, Nursing, Allied Health",
+          "BS Biology / Biochemistry / Life Sciences",
+          "Research & healthcare administration",
+        ],
+      },
+      {
+        id: "pre_eng",
+        name: "Pre-Engineering (F.Sc)",
+        note: "Mathematics, Physics, Chemistry",
+        careers: [
+          "BE / BS Engineering (Electrical, Mechanical, Civil, etc.)",
+          "BS Mathematics, Physics & other STEM programs",
+          "Architecture, Industrial Design (with required subjects)",
+          "Engineering management and technical leadership roles",
+        ],
+      },
+      {
+        id: "ics",
+        name: "ICS (Computer Science)",
+        note: "Maths + Computer Science + Physics / Stats",
+        careers: [
+          "BS Computer Science / Software Engineering / IT",
+          "AI, Data Science, Cyber Security specializations",
+          "Software development & tech startups",
+          "IT management and product roles",
+        ],
+      },
+      {
+        id: "icom",
+        name: "I.Com / Commerce",
+        note: "Accounting, Economics, Business Studies",
+        careers: [
+          "BBA, BS Accounting & Finance, BS Economics",
+          "ACCA / CA and professional accountancy",
+          "Banking, corporate finance & taxation",
+          "Business ownership & entrepreneurship",
+        ],
+      },
+      {
+        id: "fa",
+        name: "FA / Humanities & Social Sciences",
+        note: "Social sciences, languages, arts, media",
+        careers: [
+          "BS in Psychology, Sociology, Education, IR, etc.",
+          "Law (LLB) and Civil Service preparation (CSS/PMS)",
+          "Media, journalism, languages and design",
+          "Teaching and training careers",
+        ],
+      },
     ],
   },
   {
     id: "technical",
     icon: Wrench,
-    title: "Technical Education Stream",
-    subtitle: "For practical, hands-on learners",
-    subjects: "Electrical, Mechanical, Civil, DAE, Industrial Tech",
-    leadsTo: "Applied BS, Engineering Tech, Industrial Diplomas",
-    careers: "Technicians, Supervisors, Engineering Technologists",
-    recommended: [
-      "You like machines, tools, labs & real-world tasks",
-      "You learn better by doing",
-      "You want job-ready skills early",
+    name: "Technical Education (HSSC-Tech & DAE)",
+    label: "Tech (HSSC-Tech / DAE)",
+    color: "#0D9488",
+    bg: "#D1FAE5",
+    description:
+      "For students who like machines, tools and labs and want strong technical skills.",
+    degrees: [
+      {
+        id: "hssc_tech",
+        name: "HSSC-Tech (Technical Intermediate)",
+        note: "Electrical, Mechanical, Civil, HVACR, IT & Networking, Hospitality, Media Production, Livestock, etc.",
+        careers: [
+          "Entry-level technical and support roles",
+          "Further diplomas and certificates in specific trades",
+          "Progression to BS Technology programs",
+        ],
+      },
+      {
+        id: "dae_elect",
+        name: "Diploma of Associate Engineering (DAE)",
+        note: "3-year post-Matric diploma in Electrical/Mechanical/Civil/Electronics, etc.",
+        careers: [
+          "Engineering technologist and technician roles",
+          "Industry jobs in plants, factories and construction",
+          "BS Tech and Engineering Technology degrees",
+          "Overseas technical employment opportunities",
+        ],
+      },
     ],
   },
   {
     id: "vocational",
     icon: Briefcase,
-    title: "Vocational & Skill-Based Programs",
-    subtitle: "For fast employment pathways",
-    subjects: "IT Skills, HVAC, Graphics, Digital Skills, Hospitality",
-    leadsTo: "Freelancing, Technical Jobs, Startups, Overseas Work",
-    careers: "Designers, IT Technicians, Skilled Trades, Technicians",
-    recommended: [
-      "You prefer practical skills",
-      "You want quick employment",
-      "You want freelancing or startup routes",
+    name: "Vocational & Skill-Based Training",
+    label: "Skills (NAVTTC/TEVTA)",
+    color: "#F97316",
+    bg: "#FFE7D3",
+    description:
+      "For students who want short skill courses, quick earning, or support for family business.",
+    degrees: [
+      {
+        id: "it_digital",
+        name: "IT & Digital Skills",
+        note: "Graphic Design, Web basics, IoT fundamentals, Office & digital tools",
+        careers: [
+          "Freelancing in design & digital services",
+          "Office & support roles in IT-enabled companies",
+          "Starting small online businesses",
+        ],
+      },
+      {
+        id: "trades",
+        name: "Technical Trades",
+        note: "HVACR, Auto Electrician, Welding, Plumbing, Agri Tech, etc.",
+        careers: [
+          "Technician & skilled worker roles (local & overseas)",
+          "Self-employment as a service provider",
+          "Stepping stone to further technical education",
+        ],
+      },
+      {
+        id: "creative_service",
+        name: "Creative & Service Skills",
+        note: "Beautician, Fashion Design, Culinary / Baking, Tourism & Hospitality",
+        careers: [
+          "Work in salons, hotels, restaurants and boutiques",
+          "Small ventures (home kitchen, salon, boutique)",
+          "Opportunities in tourism and hospitality industry",
+        ],
+      },
     ],
   },
   {
-    id: "religious",
+    id: "madaris",
     icon: BookIcon,
-    title: "Dars-e-Nizami / Islamic Studies",
-    subtitle: "For students passionate about Islamic scholarship",
-    subjects: "Arabic, Fiqh, Tafseer, Hadith, Islamic History",
-    leadsTo: "Islamic Scholarship, HSSC Equivalence, University Options",
-    careers: "Teachers, Scholars, Counselors, Community Leaders",
-    recommended: [
-      "You want structured Islamic learning",
-      "You enjoy languages & history",
-      "You want a respected religious academic path",
+    name: "Dars-e-Nizami / Madaris Pathway",
+    label: "Dars-e-Nizami / Madaris",
+    color: "#D97706",
+    bg: "#FEF3C7",
+    description:
+      "For students studying in madaris who want structured Islamic learning with HSSC equivalence options.",
+    degrees: [
+      {
+        id: "sanvia",
+        name: "Sanvia Aama & Khaasa + Equivalence",
+        note: "Core Dars-e-Nizami plus English, Urdu, Pak Studies and electives for IBCC equivalence.",
+        careers: [
+          "Entry to universities for Islamic Studies, Arabic and Education",
+          "Teaching in schools and madaris",
+          "Islamic guidance and community roles",
+        ],
+      },
+      {
+        id: "advanced_dars",
+        name: "Advanced Dars-e-Nizami / Alimiyyah",
+        note: "Higher studies in Tafseer, Hadith, Fiqh, Arabic and Islamic history.",
+        careers: [
+          "Scholarship and research roles",
+          "Imamat, khateeb and counseling positions",
+          "Islamic finance and advisory positions (with additional training)",
+        ],
+      },
     ],
   },
   {
-    id: "global",
+    id: "international",
     icon: Globe2,
-    title: "International / Foreign Systems",
-    subtitle: "For global-standard academic exposure",
-    subjects: "A-Levels, IB, International Curricula",
-    leadsTo: "Global Universities, Local Elite Universities, Scholarships",
-    careers: "Business, Economics, Law, IT, Medicine (with conditions)",
-    recommended: [
-      "You want global opportunities",
-      "You want flexible subject selection",
-      "You aim for prestigious international universities",
+    name: "International / Foreign Systems",
+    label: "International (O/A Levels, IB, etc.)",
+    color: "#7C3AED",
+    bg: "#EDE9FE",
+    description:
+      "For students in international schools aiming at top local and global universities.",
+    degrees: [
+      {
+        id: "alevels",
+        name: "O-Levels → A-Levels",
+        note: "Subject combinations chosen for Medicine, Engineering, Business, Social Sciences, etc.",
+        careers: [
+          "Admissions to competitive universities in Pakistan & abroad",
+          "Professional degrees (Medicine, Engineering, CS, Law, Business) with right subjects",
+          "Scholarships and exchange programs",
+        ],
+      },
+      {
+        id: "ib",
+        name: "IB Diploma / Career-related Program",
+        note: "IB groups with extended essay, CAS and internal assessments.",
+        careers: [
+          "International-standard academic profile",
+          "Admissions to IB-friendly universities worldwide",
+          "Strong preparation for research-heavy degrees",
+        ],
+      },
+      {
+        id: "american",
+        name: "American High School Diploma",
+        note: "Grade 9-12 with required credits and standardized tests.",
+        careers: [
+          "Direct entry to many international universities",
+          "IBCC equivalence and access to Pakistani universities",
+          "Pathway to SAT-based scholarships abroad",
+        ],
+      },
     ],
   },
 ];
 
-const Class10Roadmap = () => (
-  <div className="mt-16 select-none" style={{ userSelect: "none" }}>
-    {/* Header */}
-    <div className="text-center mb-10 pointer-events-none">
-      <h2
-        className="text-3xl font-extrabold mb-2"
-        style={{ color: COLORS.primaryDark }}
-      >
-        Your Pathways After Class 10
-      </h2>
+// --------------------------------------------------------------------
+// 4) MIND MAP ROADMAP COMPONENT (updated design)
+// --------------------------------------------------------------------
 
+const MindMapRoadmapClass10 = () => {
+  const [selectedPathId, setSelectedPathId] = useState("general");
+  const [selectedDegreeId, setSelectedDegreeId] = useState(null);
+
+  const selectedPath =
+    MINDMAP_PATHS.find((p) => p.id === selectedPathId) || MINDMAP_PATHS[0];
+
+  useEffect(() => {
+    if (selectedPath?.degrees?.length) {
+      setSelectedDegreeId(selectedPath.degrees[0].id);
+    }
+  }, [selectedPathId, selectedPath]);
+
+  const selectedDegree =
+    selectedPath.degrees.find((d) => d.id === selectedDegreeId) ||
+    selectedPath.degrees[0];
+
+  return (
+    <section
+      className="py-10 mb-10 select-none"
+      style={{
+        userSelect: "none",
+        backgroundColor: COLORS.lightBackground, // solid light band, no fade
+      }}
+    >
       <div
-        className="w-24 mx-auto h-1 rounded-full mb-4"
-        style={{ backgroundColor: COLORS.secondary }}
-      />
-
-      <p
-        className="text-sm sm:text-base max-w-2xl mx-auto"
-        style={{ color: COLORS.textGray }}
+        className="max-w-6xl mx-auto"
       >
-        Explore the five major academic and professional paths available after
-        Matric / O-Levels — each showing the future academic and career
-        direction it unlocks for you.
-      </p>
-    </div>
-
-    {/* Roadmap Spine (desktop) */}
-    <div className="relative mb-10 hidden md:block pointer-events-none">
-      <div
-        className="w-full h-[3px] rounded-full"
-        style={{ backgroundColor: COLORS.borderSoft }}
-      />
-      <div className="flex justify-between -mt-[10px] px-2">
-        {PATHS.map((p) => (
+        <div
+          className="relative rounded-[32px] p-6 sm:p-8 overflow-hidden transition-all duration-300"
+          style={{
+            backgroundColor: "#FFFFFF", // plain white card, no gradient
+            border: `1px solid ${COLORS.borderSoft || "#E5E7EB"}`,
+            boxShadow: "0 20px 45px rgba(17,37,62,0.18)",
+          }}
+        >
+          {/* Soft very-light decorations so it still feels premium */}
           <div
-            key={p.id}
-            className="w-4 h-4 rounded-full border-2"
+            aria-hidden
+            className="pointer-events-none absolute -top-32 -right-40 w-80 h-80 rounded-full opacity-10"
             style={{
-              backgroundColor: "#ffffff",
-              borderColor: COLORS.secondary,
+              background:
+                "radial-gradient(circle, rgba(30,58,138,0.3), transparent 70%)",
             }}
           />
-        ))}
-      </div>
-    </div>
-
-    {/* Card Grid */}
-    <div
-      className="grid gap-8 md:grid-cols-2 xl:grid-cols-3"
-      style={{ pointerEvents: "none" }}
-    >
-      {PATHS.map((path) => {
-        const Icon = path.icon;
-        const c = PATH_COLORS[path.id];
-
-        return (
           <div
-            key={path.id}
-            className="rounded-3xl p-6 flex flex-col relative overflow-hidden"
+            aria-hidden
+            className="pointer-events-none absolute -bottom-32 -left-40 w-80 h-80 rounded-full opacity-10"
             style={{
-              background: `linear-gradient(135deg, #ffffff, ${c.tint})`,
-              border: `1px solid ${c.border}`,
-              boxShadow: "0 12px 30px rgba(0,0,0,0.06)",
+              background:
+                "radial-gradient(circle, rgba(249,115,22,0.3), transparent 70%)",
             }}
-          >
-            {/* Watermark */}
-            <div
-              aria-hidden="true"
-              className="absolute -right-6 -top-6 w-28 h-28 rounded-full opacity-20"
-              style={{
-                background: `radial-gradient(circle, ${c.border}, transparent 65%)`,
-              }}
-            />
+          />
 
-            {/* Icon + Title */}
-            <div className="flex items-start gap-4 mb-4 relative">
-              <div
-                className="w-12 h-12 rounded-xl flex items-center justify-center shadow-md"
-                style={{
-                  backgroundColor: "#ffffff",
-                  border: `1px solid ${c.border}`,
-                }}
-              >
-                <Icon size={22} style={{ color: c.icon }} />
-              </div>
-
+          {/* HEADER + ROOT AREA TOGETHER */}
+          <div className="relative z-10 mb-8">
+            <div className="flex flex-wrap items-center justify-between gap-4 mb-5">
               <div>
-                <h3
-                  className="text-lg font-extrabold"
+                <p
+                  className="text-[11px] font-semibold uppercase tracking-wide mb-1"
+                  style={{ color: COLORS.secondary }}
+                >
+                  Class 10 Roadmap
+                </p>
+                <h2
+                  className="text-2xl sm:text-3xl font-extrabold"
                   style={{ color: COLORS.primaryDark }}
                 >
-                  {path.title}
-                </h3>
+                  From Class 10 Choice to Future Career
+                </h2>
                 <p
-                  className="text-xs font-medium"
+                  className="text-sm sm:text-base max-w-xl mt-2"
                   style={{ color: COLORS.textGray }}
                 >
-                  {path.subtitle}
+                  See how your decision after Matric / O-Levels moves forward:
+                  <strong> Path → Degree / Course → Career Outcomes</strong>.
+                  Tap a box to reveal the next step.
                 </p>
+              </div>
+
+              {/* Logo block */}
+              <div className="flex flex-col items-end gap-1">
+                <img
+                  src={Logo}
+                  className="h-25 w-auto object-contain"
+                  draggable="false"
+                  alt="TaleemiGuide"
+                />
+                <span
+                  className="text-[10px] uppercase tracking-wide font-semibold px-2 py-0.5 rounded-full"
+                  style={{
+                    backgroundColor: COLORS.lightBackground,
+                    border: `1px solid ${COLORS.primaryDark}22`,
+                    color: COLORS.textGray,
+                  }}
+                >
+                  © TaleemiGuide Roadmap
+                </span>
               </div>
             </div>
 
-            {/* Sections */}
-            <div className="space-y-4 relative">
-              <div>
-                <p
-                  className="text-xs uppercase font-semibold"
-                  style={{ color: COLORS.textGray }}
-                >
-                  Subjects / Structure
-                </p>
-                <p
-                  className="text-sm mt-1"
-                  style={{ color: COLORS.textGray }}
-                >
-                  {path.subjects}
-                </p>
-              </div>
+            {/* ROOT BOX under title */}
+            <div className="flex flex-col items-center">
               <div
-                className="h-px w-full"
-                style={{ backgroundColor: c.border }}
-              />
-
-              <div>
-                <p
-                  className="text-xs uppercase font-semibold"
-                  style={{ color: COLORS.textGray }}
-                >
-                  Leads To
+                className="rounded-[26px] px-7 py-4 w-full max-w-xs text-center shadow-md"
+                style={{
+                  backgroundColor: COLORS.primaryDark, // solid navy root
+                  color: "white",
+                }}
+              >
+                <p className="text-[11px] uppercase tracking-wide opacity-90">
+                  Starting Point
                 </p>
-                <p
-                  className="text-sm mt-1"
-                  style={{ color: COLORS.textGray }}
-                >
-                  {path.leadsTo}
-                </p>
+                <p className="text-lg font-bold">Class 10 / Matric</p>
+                <p className="text-[11px] opacity-90">(or O-Levels Completed)</p>
               </div>
-              <div
-                className="h-px w-full"
-                style={{ backgroundColor: c.border }}
-              />
 
-              <div>
-                <p
-                  className="text-xs uppercase font-semibold"
-                  style={{ color: COLORS.textGray }}
-                >
-                  Future Careers
-                </p>
-                <p
-                  className="text-sm mt-1"
-                  style={{ color: COLORS.textGray }}
-                >
-                  {path.careers}
-                </p>
-              </div>
+              {/* breadcrumb chip */}
               <div
-                className="h-px w-full"
-                style={{ backgroundColor: c.border }}
-              />
-
-              <div>
-                <p
-                  className="text-xs uppercase font-semibold mb-1"
-                  style={{ color: COLORS.textGray }}
+                className="mt-3 inline-flex items-center text-xs sm:text-sm px-3 py-1 rounded-full"
+                style={{
+                  backgroundColor: COLORS.lightBackground,
+                  border: `1px solid ${COLORS.primary}22`,
+                  color: COLORS.textGray,
+                }}
+              >
+                <span
+                  className="font-semibold"
+                  style={{ color: COLORS.primaryDark }}
                 >
-                  Recommended For You If:
-                </p>
-                <ul
-                  className="text-sm list-disc ml-4 space-y-1"
-                  style={{ color: COLORS.textGray }}
-                >
-                  {path.recommended.map((r, i) => (
-                    <li key={i}>{r}</li>
-                  ))}
-                </ul>
+                  You are exploring:&nbsp;
+                </span>
+                Class 10 → {selectedPath.label} → {selectedDegree?.name}
               </div>
             </div>
           </div>
-        );
-      })}
-    </div>
-  </div>
-);
+
+          {/* STEP 1 — MAIN PATHS */}
+          <div className="relative z-10 mb-10">
+            <div className="grid lg:grid-cols-[2.1fr,1fr] gap-6">
+              {/* PATH BOXES */}
+              <div>
+                <div className="text-center mb-4">
+                  <span
+                    className="text-[11px] font-semibold uppercase tracking-wide px-3 py-1 rounded-full"
+                    style={{
+                      backgroundColor: COLORS.lightBackground,
+                      border: `1px dashed ${COLORS.primaryDark}33`,
+                      color: COLORS.textGray,
+                    }}
+                  >
+                    Step 1 • Choose Your Main Path
+                  </span>
+                </div>
+
+                <div className="flex flex-wrap justify-center gap-5">
+                  {MINDMAP_PATHS.map((path) => {
+                    const Icon = path.icon;
+                    const active = path.id === selectedPathId;
+
+                    return (
+                      <button
+                        onClick={() => setSelectedPathId(path.id)}
+                        key={path.id}
+                        className="focus:outline-none"
+                        style={{ userSelect: "none" }}
+                      >
+                        <div
+                          className="rounded-[22px] w-44 h-36 flex flex-col items-center justify-center text-center 
+                                     transition-all duration-200 ease-out px-3 hover:scale-[1.03] hover:shadow-xl cursor-pointer"
+                          style={{
+                            // 2. INACTIVE navy, ACTIVE orange
+                            backgroundColor: active
+                              ? COLORS.secondary // active = orange
+                              : COLORS.primaryDark, // inactive = navy
+                            border: active
+                              ? `2px solid ${COLORS.secondary}`
+                              : `1px solid ${COLORS.primaryDark}55`,
+                            boxShadow: active
+                              ? "0 14px 34px rgba(17,37,62,0.38)"
+                              : "0 6px 16px rgba(17,37,62,0.16)",
+                          }}
+                        >
+                          <div
+                            className="w-11 h-11 rounded-xl flex items-center justify-center mb-1"
+                            style={{
+                              backgroundColor: "#FFFFFF",
+                              border: `1px solid rgba(255,255,255,0.3)`,
+                            }}
+                          >
+                            <Icon
+                              size={20}
+                              style={{ color: COLORS.primaryDark }}
+                            />
+                          </div>
+
+                          <p
+                            className="text-[10px] uppercase font-semibold"
+                            style={{ color: "#FFFFFF" }}
+                          >
+                            {path.label}
+                          </p>
+                        </div>
+
+                        <p
+                          className="mt-1 text-[11px] text-center font-medium leading-snug max-w-[10rem]"
+                          style={{ color: COLORS.textGray }}
+                        >
+                          {path.name}
+                        </p>
+
+                        {active && (
+                          <p
+                            className="text-[10px] text-center font-semibold mt-0.5"
+                            style={{ color: COLORS.secondary }}
+                          >
+                            Selected
+                          </p>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Step 1 Tip */}
+              <div className="flex lg:justify-end">
+                <div
+                  className="max-w-xs rounded-2xl px-4 py-3 shadow-md relative"
+                  style={{
+                    backgroundColor: "#FFFFFF",
+                    border: `1px solid ${COLORS.primary}22`,
+                  }}
+                >
+                  <div
+                    className="absolute -left-3 top-5 w-3 h-3 rotate-45"
+                    style={{
+                      backgroundColor: "#FFFFFF",
+                      borderLeft: `1px solid ${COLORS.primary}22`,
+                      borderBottom: `1px solid ${COLORS.primary}22`,
+                    }}
+                  />
+                  <p
+                    className="text-[11px] uppercase font-semibold flex items-center gap-1 mb-1"
+                    style={{ color: COLORS.secondary }}
+                  >
+                    <Lightbulb size={14} /> Step 1 Tip
+                  </p>
+                  <p
+                    className="text-[11px] leading-snug"
+                    style={{ color: COLORS.textGray }}
+                  >
+                    Don&apos;t just pick what friends are choosing. Explore each
+                    path and think: &quot;Does this match my interests and marks?&quot;
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* STEP 2 — DEGREE OPTIONS */}
+          <div className="relative z-10 mb-10">
+            <div className="grid lg:grid-cols-[2fr,1fr] gap-6">
+              <div>
+                <div className="flex items-center gap-2 mb-4">
+                  <span
+                    className="text-[11px] uppercase font-semibold px-3 py-1 rounded-full"
+                    style={{
+                      backgroundColor: COLORS.primary,
+                      color: "white",
+                    }}
+                  >
+                    Step 2 • Degrees / Courses
+                  </span>
+                  <span
+                    className="text-[11px]"
+                    style={{ color: COLORS.textGray }}
+                  >
+                    under {selectedPath.label}
+                  </span>
+                </div>
+
+                <div className="flex flex-wrap gap-4">
+                  {selectedPath.degrees.map((deg) => {
+                    const active = deg.id === selectedDegreeId;
+                    return (
+                      <button
+                        key={deg.id}
+                        onClick={() => setSelectedDegreeId(deg.id)}
+                        className="focus:outline-none"
+                        style={{ userSelect: "none" }}
+                      >
+                        <div
+                          className="rounded-[20px] w-56 h-28 p-3 flex flex-col justify-between 
+                                     transition-all duration-200 ease-out hover:scale-[1.03] hover:shadow-lg cursor-pointer"
+                          style={{
+                            // 2. INACTIVE navy, ACTIVE orange
+                            backgroundColor: active
+                              ? COLORS.secondary
+                              : COLORS.primaryDark,
+                            border: active
+                              ? `2px solid ${COLORS.secondary}`
+                              : `1px solid ${COLORS.primaryDark}55`,
+                            boxShadow: active
+                              ? "0 10px 28px rgba(17,37,62,0.32)"
+                              : "0 3px 10px rgba(17,37,62,0.12)",
+                          }}
+                        >
+                          <p
+                            className="text-sm font-semibold line-clamp-2"
+                            style={{ color: "#FFFFFF" }}
+                          >
+                            {deg.name}
+                          </p>
+                          <p
+                            className="text-[11px] leading-snug line-clamp-2"
+                            style={{ color: "#F9FAFB" }}
+                          >
+                            {deg.note}
+                          </p>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Step 2 Tip */}
+              <div className="flex lg:justify-end">
+                <div
+                  className="max-w-xs rounded-2xl px-4 py-3 shadow-md relative"
+                  style={{
+                    backgroundColor: "#FFFFFF",
+                    border: `1px solid ${COLORS.primary}22`,
+                  }}
+                >
+                  <div
+                    className="absolute -left-3 top-5 w-3 h-3 rotate-45"
+                    style={{
+                      backgroundColor: "#FFFFFF",
+                      borderLeft: `1px solid ${COLORS.primary}22`,
+                      borderBottom: `1px solid ${COLORS.primary}22`,
+                    }}
+                  />
+                  <p
+                    className="text-[11px] uppercase font-semibold flex items-center gap-1 mb-1"
+                    style={{ color: COLORS.secondary }}
+                  >
+                    <BookOpen size={14} /> Step 2 Tip
+                  </p>
+                  <p
+                    className="text-[11px] leading-snug"
+                    style={{ color: COLORS.textGray }}
+                  >
+                    Shortlist 2–3 degrees. Later, you can refine with a Career
+                    Assessment Test or a 1:1 Guidance Session.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* STEP 3 — CAREER OUTCOMES (3. single-color bg) */}
+          <div className="relative z-10">
+            <div className="grid lg:grid-cols-[2fr,1fr] gap-6">
+              <div>
+                <div className="flex items-center gap-2 mb-4">
+                  <span
+                    className="text-[11px] uppercase font-semibold px-3 py-1 rounded-full"
+                    style={{
+                      backgroundColor: COLORS.secondary,
+                      color: "white",
+                    }}
+                  >
+                    Step 3 • Career Outcomes
+                  </span>
+                </div>
+
+                {/* Single-color panel: primaryDark */}
+                <div
+                  className="rounded-[24px] p-5 sm:p-6 relative overflow-hidden shadow-xl 
+                             transition-all duration-300 ease-out hover:shadow-[0_0_32px_rgba(17,37,62,0.45)] hover:scale-[1.01]"
+                  style={{
+                    backgroundColor: COLORS.primaryDark,
+                    color: "white",
+                  }}
+                >
+                  <div
+                    aria-hidden
+                    className="absolute inset-0 rounded-[24px] pointer-events-none"
+                    style={{
+                      border: "1px solid rgba(255,255,255,0.12)",
+                    }}
+                  />
+
+                  <div className="relative z-10">
+                    <p className="text-[11px] uppercase font-semibold opacity-85">
+                      Based on your choice
+                    </p>
+                    <p className="text-base font-bold mt-1">
+                      {selectedPath.label} → {selectedDegree.name}
+                    </p>
+                    <p className="text-[11px] opacity-90 mb-4">
+                      {selectedDegree.note}
+                    </p>
+
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      {/* Typical Careers */}
+                      <div
+                        className="rounded-2xl p-3 backdrop-blur-sm transition-all duration-200 
+                                   hover:bg-white/12 hover:scale-[1.02]"
+                        style={{
+                          backgroundColor: "rgba(255,255,255,0.08)",
+                          border: "1px solid rgba(255,255,255,0.12)",
+                        }}
+                      >
+                        <p className="text-[11px] uppercase font-semibold mb-1">
+                          Typical Careers
+                        </p>
+                        <ul className="space-y-1 text-[11px]">
+                          {selectedDegree.careers.slice(0, 3).map((c, i) => (
+                            <li key={i} className="flex gap-1.5">
+                              <span className="text-orange-300">●</span> {c}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Further Options */}
+                      <div
+                        className="rounded-2xl p-3 backdrop-blur-sm transition-all duration-200 
+                                   hover:bg-white/12 hover:scale-[1.02]"
+                        style={{
+                          backgroundColor: "rgba(255,255,255,0.05)",
+                          border: "1px solid rgba(255,255,255,0.12)",
+                        }}
+                      >
+                        <p className="text-[11px] uppercase font-semibold mb-1">
+                          Further Options
+                        </p>
+                        <ul className="space-y-1 text-[11px]">
+                          {selectedDegree.careers.slice(3).length > 0 ? (
+                            selectedDegree.careers.slice(3).map((c, i) => (
+                              <li key={i} className="flex gap-1.5">
+                                <span className="text-orange-300">→</span> {c}
+                              </li>
+                            ))
+                          ) : (
+                            <li className="opacity-85">
+                              Related specializations, professional
+                              certifications &amp; advanced degrees.
+                            </li>
+                          )}
+                        </ul>
+                      </div>
+                    </div>
+
+                    <p className="text-[11px] opacity-90 mt-4 leading-snug">
+                      No decision is permanent, but starting in a{" "}
+                      <strong>good-fit path</strong> makes your journey through
+                      Class 11–12, university and jobs much smoother.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Step 3 Tip */}
+              <div className="flex lg:justify-end">
+                <div
+                  className="max-w-xs rounded-2xl px-4 py-3 shadow-md relative"
+                  style={{
+                    backgroundColor: "#FFFFFF",
+                    border: `1px solid ${COLORS.primary}22`,
+                  }}
+                >
+                  <div
+                    className="absolute -left-3 top-5 w-3 h-3 rotate-45"
+                    style={{
+                      backgroundColor: "#FFFFFF",
+                      borderLeft: `1px solid ${COLORS.primary}22`,
+                      borderBottom: `1px solid ${COLORS.primary}22`,
+                    }}
+                  />
+                  <p
+                    className="text-[11px] uppercase font-semibold flex items-center gap-1 mb-1"
+                    style={{ color: COLORS.secondary }}
+                  >
+                    <Briefcase size={14} /> Step 3 Tip
+                  </p>
+                  <p
+                    className="text-[11px] leading-snug"
+                    style={{ color: COLORS.textGray }}
+                  >
+                    Discuss this with your parents or guardians. Look at the{" "}
+                    <strong>full cluster of careers</strong> instead of only
+                    one job title like &quot;doctor&quot; or &quot;engineer&quot;.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 
 // --------------------------------------------------------------------
-// 4) CHALLENGE + ROADMAP SECTION
+// 5) CHALLENGE SECTION
 // --------------------------------------------------------------------
 const ChallengeSection = () => (
   <section className="py-10 border-b border-gray-200 mb-10">
@@ -487,7 +957,7 @@ const ChallengeSection = () => (
             />
             <span>
               Following friends or trends without considering personal aptitude
-              or goals.
+              or long-term goals.
             </span>
           </li>
 
@@ -499,7 +969,7 @@ const ChallengeSection = () => (
             />
             <span>
               Family or societal pressure to choose “prestigious” streams like
-              Pre-Medical or Pre-Engineering.
+              Pre-Medical or Pre-Engineering, even when they don&apos;t fit.
             </span>
           </li>
 
@@ -510,11 +980,11 @@ const ChallengeSection = () => (
               style={{ color: COLORS.primary }}
             />
             <span>
-              Limited understanding of the{" "}
+              Very little awareness of{" "}
               <strong className="font-semibold">
-                actual scope, workload and future pathways
+                technical, vocational and international
               </strong>{" "}
-              of different subjects.
+              routes that may suit the student better.
             </span>
           </li>
         </ul>
@@ -547,9 +1017,9 @@ const ChallengeSection = () => (
           className="mt-3 space-y-2 text-sm sm:text-base"
           style={{ color: COLORS.textGray }}
         >
-          <li>• Struggling for two years in mismatched subjects.</li>
-          <li>• Lower grades and lost confidence.</li>
-          <li>• Closed doors to preferred university programs later on.</li>
+          <li>• Two years of struggle in mismatched subjects.</li>
+          <li>• Lower grades and loss of confidence.</li>
+          <li>• Closed doors to preferred universities later on.</li>
         </ul>
 
         <p
@@ -563,14 +1033,11 @@ const ChallengeSection = () => (
         </p>
       </div>
     </div>
-
-    {/* Roadmap below cards */}
-    <Class10Roadmap />
   </section>
 );
 
 // --------------------------------------------------------------------
-// 5) OPTIONS SECTION (shared style with Class 12)
+// 6) OPTIONS SECTION
 // --------------------------------------------------------------------
 const OptionsSection = () => (
   <section className="py-12 border-b border-gray-200 mb-12">
@@ -586,8 +1053,8 @@ const OptionsSection = () => (
         className="text-sm sm:text-base max-w-2xl mx-auto"
         style={{ color: COLORS.textGray }}
       >
-        Choose the support that fits your needs — whether you want deep guidance,
-        scientific testing, or quick subject-level clarity.
+        Choose the support that fits your needs — whether you want deep
+        guidance, scientific testing, or quick subject-level clarity.
       </p>
     </div>
 
@@ -599,7 +1066,7 @@ const OptionsSection = () => (
           icon: User,
           tag: "1:1 Deep Guidance",
           description:
-            "A one-on-one session to evaluate your marks, interests, learning style, and future direction with professional clarity.",
+            "A one-on-one session to evaluate your marks, interests, learning style, and future direction.",
           idealFor: "Students & parents seeking a deep understanding.",
           link: "/service/online-session",
           cta: "Book a Session",
@@ -717,7 +1184,7 @@ const OptionsSection = () => (
 );
 
 // --------------------------------------------------------------------
-// 6) NEXT STEP SECTION (same pattern as Class 12)
+// 7) NEXT STEP SECTION
 // --------------------------------------------------------------------
 const NextStepSection = () => (
   <section className="pt-6">
@@ -751,13 +1218,13 @@ const NextStepSection = () => (
           className="text-sm sm:text-base md:text-lg leading-relaxed mb-5 max-w-3xl"
           style={{ color: COLORS.textGray }}
         >
-          Once you choose the right stream in Class 10, the next decision in
+          Once you choose the right stream after Class 10, the next decision in
           Class 11–12 is selecting a{" "}
           <strong className="font-semibold">
             specialization and preparing for university admissions
           </strong>
-          . We continue supporting you at each stage through structured
-          guidance.
+          . TaleemiGuide continues supporting you at each stage through
+          structured guidance.
         </p>
 
         <NavLink
@@ -777,7 +1244,7 @@ const NextStepSection = () => (
 );
 
 // --------------------------------------------------------------------
-// 7) MAIN COMPONENT
+// 8) MAIN COMPONENT
 // --------------------------------------------------------------------
 export default function Class10Guidance() {
   return (
@@ -785,6 +1252,7 @@ export default function Class10Guidance() {
       <OverviewStrip />
       <InitialContent />
       <ChallengeSection />
+      <MindMapRoadmapClass10 />
       <OptionsSection />
       <NextStepSection />
     </ServiceLayout>
