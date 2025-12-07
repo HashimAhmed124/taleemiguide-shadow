@@ -15,18 +15,70 @@ const COLORS = {
 };
 
 // SERVICE LIST
+// SERVICE LIST
 const serviceData = [
-  { id: "service-1", title: "Class 10 Guidance", path: "/service/class-10-guidance" },
-  { id: "service-2", title: "Class 12 Guidance", path: "/service/class-12-guidance" },
-  { id: "service-3", title: "Career Assessment Test", path: "/service/career-assessment" },
-  { id: "service-4", title: "Subject Classification", path: "/service/subject-classification" },
-  { id: "service-5", title: "University Program Finder", path: "/service/university-program-finder" },
-  { id: "service-6", title: "University Graduates Guidance", path: "/service/university-graduates-guidance" },
-  { id: "service-7", title: "Working Professionals Guidance", path: "/service/working-professional-guidance" },
-  { id: "service-8", title: "Taleemi Advice", path: "/service/taleemi-advice" },
-  { id: "service-9", title: "Book Online Session", path: "/service/online-session" },
-  { id: "service-10", title: "Taleemi Announcements", path: "/service/announcement" },
+  {
+    id: "service-1",
+    title: "Class 10 Guidance",
+    path: "/service/class-10-guidance",
+    subtitle: "Your First Major Academic Decision Starts Here.",
+  },
+  {
+    id: "service-2",
+    title: "Class 12 Guidance",
+    path: "/service/class-12-guidance",
+    subtitle: "Select your specialization and prepare for university admissions.",
+  },
+  {
+    id: "service-3",
+    title: "Career Assessment Test",
+    path: "/service/career-assessment",
+    subtitle: "Discover your strengths, interests, and best-fit academic paths.",
+  },
+  {
+    id: "service-4",
+    title: "Subject Classification",
+    path: "/service/subject-classification",
+    subtitle: "Explore and understand 1000+ academic subjects across all fields.",
+  },
+  {
+    id: "service-5",
+    title: "University Program Finder",
+    path: "/service/university-program-finder",
+    subtitle: "Search every BS, MS/MPhil & PhD program in Pakistan — verified & updated.",
+  },
+  {
+    id: "service-6",
+    title: "University Graduates Guidance",
+    path: "/service/university-graduates-guidance",
+    subtitle: "Resolve academic, administrative, and research challenges with expert help.",
+  },
+  {
+    id: "service-7",
+    title: "Working Professionals Guidance",
+    path: "/service/working-professional-guidance",
+    subtitle: "Align your education, skills, and experience with career growth.",
+  },
+  {
+    id: "service-8",
+    title: "Taleemi Advice",
+    path: "/service/taleemi-advice",
+    subtitle: "Ask any academic question and get quick, expert guidance.",
+  },
+  {
+    id: "service-9",
+    title: "Book Online Session",
+    path: "/service/online-session",
+    subtitle: "Talk to an expert counselor one-on-one for personalized guidance.",
+  },
+  {
+    id: "service-10",
+    title: "Taleemi Announcements",
+    path: "/service/announcement",
+    subtitle: "Stay updated with important academic deadlines and notifications.",
+  },
 ];
+
 
 // AUTO SCROLL TO TOP
 const ScrollToTop = () => {
@@ -198,13 +250,13 @@ const ServiceLayout = ({ children }) => {
         </h1>
 
         <p
-          className="text-sm sm:text-base max-w-2xl mb-6"
-          style={{ color: COLORS.textGray }}
-        >
-          {currentService
-            ? "Comprehensive support tailored to your academic and career stage."
-            : "Explore all our academic and career guidance services."}
-        </p>
+  className="text-sm sm:text-base max-w-2xl mb-6"
+  style={{ color: COLORS.textGray }}
+>
+  {currentService?.subtitle ||
+    "Explore all our academic and career guidance services."}
+</p>
+
 
         {/* MOBILE TABS */}
         <ServiceMobileTabs />
