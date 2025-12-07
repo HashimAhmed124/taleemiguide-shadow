@@ -310,51 +310,10 @@ const OptionsSection = () => (
             className="text-sm mb-3 leading-relaxed"
             style={{ color: COLORS.textGray }}
           >
-            If you want to choose your stream based on your interests, aptitude,
-            strengths, and personality, this test is ideal.
+            If you want to choose your Post-Matric stream based on your interests, strengths, and aptitude, this test is for you. Attempt it in a relaxed environment and receive a concise Personalized Career Profile with your top interests, strengths, best-fit fields, and recommended stream after Matric. For Career Assessment Test; 
           </p>
 
-          <p
-            className="text-sm font-semibold mb-1"
-            style={{ color: COLORS.textGray }}
-          >
-            Steps:
-          </p>
-
-          <ol
-            className="list-decimal list-inside text-sm mb-3 space-y-1"
-            style={{ color: COLORS.textGray }}
-          >
-            <li>Login at TaleemiGuide.com</li>
-            <li>From Home Page, select Career Assessment Test</li>
-            <li>Attempt the test in a relaxed environment</li>
-            <li>
-              Get your detailed Personalized Career Profile, including:
-              <ul className="list-disc list-inside mt-1 space-y-1 ml-4">
-                <li>Your top interests</li>
-                <li>Strengths and aptitude</li>
-                <li>Best-fit fields</li>
-                <li>Recommended stream after Matric</li>
-                <li>Long-term academic pathways</li>
-              </ul>
-            </li>
-          </ol>
-
-          <p
-            className="text-sm mb-3 leading-relaxed"
-            style={{ color: COLORS.textGray }}
-          >
-            This report helps you make a scientific, data-based decision rather
-            than emotional or pressure-driven choices.
-          </p>
-
-          <p
-            className="text-sm mb-6 leading-relaxed"
-            style={{ color: COLORS.textGray }}
-          >
-            If you want to discuss the report further, you can book a session
-            (Option 2).
-          </p>
+          
 
           <NavLink
             to="/service/career-assessment"
@@ -420,18 +379,7 @@ const OptionsSection = () => (
             For one-on-one guidance with our expert counselors:
           </p>
 
-          <ol
-            className="list-decimal list-inside text-sm mb-4 space-y-1"
-            style={{ color: COLORS.textGray }}
-          >
-            <li>Login at TaleemiGuide.com</li>
-            <li>Select Book Online Session</li>
-            <li>Choose your preferred date and time</li>
-            <li>
-              Receive confirmation and join the session through a shared link
-            </li>
-          </ol>
-
+          
           <div
             className="rounded-xl p-3 mb-6"
             style={{
