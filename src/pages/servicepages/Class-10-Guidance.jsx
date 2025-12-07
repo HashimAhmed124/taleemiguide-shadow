@@ -22,6 +22,14 @@ const COLORS = {
 
 const ROADMAP_LINK = "/roadmap/class-10";
 
+// Small helper: unified card style
+const baseCardStyle = {
+  backgroundColor: "#FFFFFF",
+  border: "1px solid #E0E7FF",
+  boxShadow: "0 12px 30px rgba(15,23,42,0.08)",
+  borderRadius: "1.5rem",
+};
+
 // --------------------------------------------------------------------
 // 1) MERGED HERO + INTRO + QUESTIONS
 // --------------------------------------------------------------------
@@ -41,9 +49,9 @@ const HeroIntroSection = () => {
 
   return (
     <section className="py-10 border-b border-gray-200">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Top row: text (left) + hero image (right) */}
-        <div className="grid md:grid-cols-2 gap-10 lg:gap-12 items-center mb-10">
+        <div className="grid md:grid-cols-2 gap-10 lg:gap-12 items-center">
           {/* LEFT: main narrative */}
           <div className="space-y-4">
             <p
@@ -81,9 +89,10 @@ const HeroIntroSection = () => {
           {/* RIGHT: hero image card */}
           <div className="flex justify-center md:justify-end">
             <div
-              className="overflow-hidden rounded-3xl border border-gray-200 bg-slate-50 w-full max-w-md lg:max-w-lg"
+              className="overflow-hidden bg-slate-50 w-full max-w-md lg:max-w-lg"
               style={{
-                boxShadow: "0 16px 40px rgba(15,23,42,0.08)",
+                ...baseCardStyle,
+                borderRadius: "1.5rem",
               }}
             >
               <div className="w-full aspect-[4/3]">
@@ -158,7 +167,7 @@ const HowTaleemiGuideHelpsSection = ({ onOpenRoadmap }) => (
       <div
         className="rounded-2xl p-5 sm:p-6 lg:p-7"
         style={{
-          backgroundColor: "white",
+          backgroundColor: "#FFFFFF",
           border: `1px solid ${COLORS.borderSoft}`,
           boxShadow: "0 10px 28px rgba(15,23,42,0.04)",
         }}
@@ -239,9 +248,9 @@ const HowTaleemiGuideHelpsSection = ({ onOpenRoadmap }) => (
 );
 
 // --------------------------------------------------------------------
-// 3) OPTIONS SECTION – NOW ONLY 2 OPTIONS (2 COLUMNS)
+// 3) OPTIONS SECTION – 3 OPTIONS, OPTION 1 SCROLLS TO FORM
 // --------------------------------------------------------------------
-const OptionsSection = () => (
+const OptionsSection = ({ onSeekAdviceClick }) => (
   <section className="py-12 border-b border-gray-200">
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-10">
@@ -249,7 +258,7 @@ const OptionsSection = () => (
           className="text-3xl font-extrabold mb-2"
           style={{ color: COLORS.primaryDark }}
         >
-          Two Core Ways to Decide
+          Three Paths to the Right Decision
         </h2>
 
         <p
@@ -257,19 +266,101 @@ const OptionsSection = () => (
           style={{ color: COLORS.textGray }}
         >
           If you or your child is transitioning from Class 10 and needs guidance,
-          TaleemiGuide offers these core support options.
+          TaleemiGuide offers three support options:
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* OPTION 2 – Career Assessment Test */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* OPTION 1 — Taleemi Advice (Scroll to form) */}
         <div
           className="rounded-3xl p-7 flex flex-col h-full relative overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
-          style={{
-            backgroundColor: "#FFFFFF",
-            border: "1px solid #E0E7FF",
-            boxShadow: "0 12px 30px rgba(15,23,42,0.08)",
-          }}
+          style={baseCardStyle}
+        >
+          <div
+            className="absolute -top-10 -right-10 w-28 h-28 rounded-full opacity-20"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(249,115,22,0.45), transparent 70%)",
+            }}
+          />
+
+          <div
+            className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg mb-5"
+            style={{
+              backgroundColor: COLORS.lightBackground,
+              border: `1px solid ${COLORS.secondary}30`,
+            }}
+          >
+            <MessageCircle size={30} style={{ color: COLORS.secondary }} />
+          </div>
+
+          <h3
+            className="text-base sm:text-lg font-bold mb-3"
+            style={{ color: COLORS.primaryDark }}
+          >
+            Option 1 — Seek Quick Information (Taleemi Advice)
+          </h3>
+
+            <span
+            className="inline-block text-[11px] font-semibold px-2.5 py-1 rounded-full mb-4"
+            style={{
+              backgroundColor: `${COLORS.secondary}15`,
+              color: COLORS.secondary,
+            }}
+          >
+            Quick Response
+          </span>
+          <p
+            className="text-sm mb-4 leading-relaxed"
+            style={{ color: COLORS.textGray }}
+          >
+            If you need fast answers to any educational query related to
+            Post-Matric subjects, options, or entry test requirements:
+          </p>
+
+          <div
+            className="rounded-xl p-3 mb-6"
+            style={{
+              backgroundColor: COLORS.lightBackground,
+              border: "1px solid #E0E7FF",
+            }}
+          >
+            <p
+              className="text-[11px] uppercase font-semibold mb-1"
+              style={{ color: COLORS.grayText }}
+            >
+              Ideal For
+            </p>
+            <ul
+              className="text-xs sm:text-sm leading-snug space-y-1"
+              style={{ color: COLORS.grayText }}
+            >
+              <li>✔ Immediate questions</li>
+            <li>✔ Clarification on streams</li>
+            <li>✔ Subject combination queries</li>
+            </ul>
+          </div>
+
+          <button
+            type="button"
+            onClick={onSeekAdviceClick}
+            className="inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-semibold mb-4 shadow-md transition-transform duration-200 hover:scale-[1.03]"
+            style={{
+              backgroundColor: COLORS.secondary,
+              color: "white",
+            }}
+          >
+            Click Here
+            <ArrowRight size={16} className="ml-2" />
+          </button>
+
+          
+        </div>
+
+        {/* OPTION 2 — Career Assessment Test */}
+        <div
+          className="rounded-3xl p-7 flex flex-col h-full relative overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+          style={baseCardStyle}
         >
           <div
             className="absolute -top-10 -right-10 w-28 h-28 rounded-full opacity-20"
@@ -290,10 +381,10 @@ const OptionsSection = () => (
           </div>
 
           <h3
-            className="text-lg sm:text-xl font-bold mb-2"
+            className="text-base sm:text-lg font-bold mb-3"
             style={{ color: COLORS.primaryDark }}
           >
-            Option 1 — Take the Career Assessment Test
+            Option 2 — Take the Career Assessment Test
           </h3>
 
           <span
@@ -307,35 +398,33 @@ const OptionsSection = () => (
           </span>
 
           <p
-            className="text-sm mb-3 leading-relaxed"
+            className="text-sm mb-4 leading-relaxed"
             style={{ color: COLORS.textGray }}
           >
-            If you want to choose your Post-Matric stream based on your interests, strengths, and aptitude, this test is for you. Attempt it in a relaxed environment and receive a concise Personalized Career Profile with your top interests, strengths, best-fit fields, and recommended stream after Matric. For Career Assessment Test; 
+            If you want to choose your Post-Matric stream based on your
+            interests, strengths, and aptitude, this test is for you. Attempt it
+            in a relaxed environment and receive a concise Personalized Career
+            Profile with your top interests, strengths, best-fit fields, and
+            recommended stream after Matric. For Career Assessment Test;
           </p>
-
-          
 
           <NavLink
             to="/service/career-assessment"
-            className="inline-flex items-center justify-center mt-auto px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 hover:scale-[1.03] shadow-md"
+            className="inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-semibold mb-2 shadow-md transition-transform duration-200 hover:scale-[1.03]"
             style={{
               backgroundColor: COLORS.secondary,
               color: "white",
             }}
           >
-            Take the Test
+            Click Here
             <ArrowRight size={16} className="ml-2" />
           </NavLink>
         </div>
 
-        {/* OPTION 3 – Online Consultation */}
+        {/* OPTION 3 — Online Consultation */}
         <div
           className="rounded-3xl p-7 flex flex-col h-full relative overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
-          style={{
-            backgroundColor: "#FFFFFF",
-            border: "1px solid #E0E7FF",
-            boxShadow: "0 12px 30px rgba(15,23,42,0.08)",
-          }}
+          style={baseCardStyle}
         >
           <div
             className="absolute -top-10 -right-10 w-28 h-28 rounded-full opacity-20"
@@ -356,10 +445,10 @@ const OptionsSection = () => (
           </div>
 
           <h3
-            className="text-lg sm:text-xl font-bold mb-2"
+            className="text-base sm:text-lg font-bold mb-3"
             style={{ color: COLORS.primaryDark }}
           >
-            Option 2 — Book an Online Consultation
+            Option 3 — Book an Online Consultation
           </h3>
 
           <span
@@ -373,13 +462,12 @@ const OptionsSection = () => (
           </span>
 
           <p
-            className="text-sm mb-3 leading-relaxed"
+            className="text-sm mb-4 leading-relaxed"
             style={{ color: COLORS.textGray }}
           >
             For one-on-one guidance with our expert counselors:
           </p>
 
-          
           <div
             className="rounded-xl p-3 mb-6"
             style={{
@@ -405,13 +493,13 @@ const OptionsSection = () => (
 
           <NavLink
             to="/service/online-session"
-            className="inline-flex items-center justify-center mt-auto px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 hover:scale-[1.03] shadow-md"
+            className="inline-flex items-center justify-center px-4 py-2 rounded-xl text-sm font-semibold mb-4 shadow-md transition-transform duration-200 hover:scale-[1.03]"
             style={{
               backgroundColor: COLORS.secondary,
               color: "white",
             }}
           >
-            Book a Session
+            Click Here
             <ArrowRight size={16} className="ml-2" />
           </NavLink>
         </div>
@@ -421,14 +509,12 @@ const OptionsSection = () => (
 );
 
 // --------------------------------------------------------------------
-// 4) NEW TALEEMI ADVICE FORM SECTION (YOUR FORM, ADAPTED)
+// 4) TALEEMI ADVICE FORM SECTION (SCROLL TARGET)
 // --------------------------------------------------------------------
-const TaleemiAdviceFormSection = () => {
-  const ref = useRef(null);
-
+const TaleemiAdviceFormSection = ({ sectionRef }) => {
   return (
     <section
-      ref={ref}
+      ref={sectionRef}
       className="py-16 md:py-24 border-b border-gray-200"
       style={{
         background: `linear-gradient(to bottom right, ${COLORS.lightBackground} 0%, white 100%)`,
@@ -462,7 +548,14 @@ const TaleemiAdviceFormSection = () => {
           </div>
 
           {/* Form Container Card */}
-          <div className="relative bg-white shadow-xl rounded-3xl p-8 md:p-12 border border-blue-300 transition-shadow duration-500 max-w-3xl mx-auto">
+          <div
+            className="relative rounded-3xl p-8 md:p-12"
+            style={{
+              backgroundColor: "#FFFFFF",
+              border: "1px solid #BFDBFE",
+              boxShadow: "0 18px 40px rgba(15,23,42,0.12)",
+            }}
+          >
             {/* Form Title */}
             <h3
               className="text-xl md:text-2xl font-semibold mb-8 text-center"
@@ -601,7 +694,7 @@ const TaleemiAdviceFormSection = () => {
 };
 
 // --------------------------------------------------------------------
-// 5) NEXT STEP SECTION (UNCHANGED FROM STRUCTURE VIEW, LAYOUT REFINED)
+// 5) NEXT STEP SECTION (LAYOUT CONSISTENT)
 // --------------------------------------------------------------------
 const NextStepSection = () => (
   <section className="py-10">
@@ -720,6 +813,16 @@ const RoadmapModal = ({ open, onClose }) => {
 // --------------------------------------------------------------------
 export default function Class10Guidance() {
   const [roadmapOpen, setRoadmapOpen] = useState(false);
+  const adviceRef = useRef(null);
+
+  const handleSeekAdviceClick = () => {
+    if (adviceRef.current) {
+      adviceRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
 
   return (
     <ServiceLayout>
@@ -727,8 +830,8 @@ export default function Class10Guidance() {
       <HowTaleemiGuideHelpsSection
         onOpenRoadmap={() => setRoadmapOpen(true)}
       />
-      <OptionsSection />
-      <TaleemiAdviceFormSection />
+      <OptionsSection onSeekAdviceClick={handleSeekAdviceClick} />
+      <TaleemiAdviceFormSection sectionRef={adviceRef} />
       <NextStepSection />
       <RoadmapModal open={roadmapOpen} onClose={() => setRoadmapOpen(false)} />
     </ServiceLayout>
