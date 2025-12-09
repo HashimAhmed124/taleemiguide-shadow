@@ -1,6 +1,6 @@
 // App.jsx
 
-import { Routes, Route, useNavigate } from "react-router-dom"; // 👈 CRITICAL: Add useNavigate
+import { Routes, Route, useNavigate } from "react-router-dom"; 
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import ForWhom from "./components/forWhom";
@@ -12,9 +12,9 @@ import Footer from "./components/Footer";
 
 // Pages
 import AboutUs from "./pages/about"; 
-import Service from "./pages/Service"; // The master service page (which is 'ServicePage' inside the file)
+import Service from "./pages/Service"; // The master service page 
 
-// Service pages (Ensure all of these are correctly imported)
+// Service pages 
 import Class10Guidance from "./pages/servicepages/Class-10-Guidance"
 import Class12Guidance from "./pages/servicepages/Class12Guidance";
 import CareerAssessmentTest from "./pages/servicepages/CareerAssessmentTest"
@@ -32,7 +32,7 @@ const Home = () => (
     <div className="w-full min-h-screen">
         <Hero />
         <ForWhom />
-        <OurServices /> {/* Navigation logic removed here */}
+        <OurServices /> 
         <TheProcess />
         <ContactUs />
         <Testimonials />
@@ -40,11 +40,10 @@ const Home = () => (
 );
 // ----------------------------------------------------------------------
 
-// 1. Define the Wrapper component to inject the navigation prop
+//  Wrapper component to inject the navigation prop
 const ServiceWrapper = () => {
-    // useNavigate is a hook and must be called inside a functional component
+    
     const navigate = useNavigate();
-    // Pass the real 'navigate' function to the Service component (which expects 'onNavigate')
     return <Service onNavigate={navigate} />; 
 };
 // ----------------------------------------------------------------------
