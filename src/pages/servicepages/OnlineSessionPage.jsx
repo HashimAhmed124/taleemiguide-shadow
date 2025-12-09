@@ -1,376 +1,459 @@
-// OnlineSessionPage.jsx — Unified & Upgraded
-// Source: :contentReference[oaicite:1]{index=1}
-
 import React from "react";
 import { NavLink } from "react-router-dom";
-import {
-  Users,
-  Briefcase,
-  Zap,
-  CheckCircle,
-  Smartphone,
-  ArrowRight,
-  Calendar,
-  Lock,
-  Globe,
-  Video,
-} from "lucide-react";
 import ServiceLayout from "../../components/ServiceLayout";
+import onlineSessionHero from "../../assets/service-images/online-session.jpg"; 
 
-// --- UNIFIED COLOR PALETTE (aligned with other service pages) ---
 const COLORS = {
   primary: "#1E3A8A",
-  primaryDark: "#0F172A",
+  primaryDark: "#11253e",
   secondary: "#F97316",
   textGray: "#4B5563",
-  grayText: "#4B5563",
   lightBackground: "#EFF6FF",
   surface: "#F8FAFC",
   borderSoft: "#E5E7EB",
 };
 
-// ===================================================================
-// 1) HERO / INTRO SECTION
-// ===================================================================
+// 1) HERO SECTION ----------------------------------------------------
 const HeroSection = () => (
-  <section className="pb-10 border-b border-gray-200 mb-10">
-    <div
-      className="p-6 sm:p-8 rounded-3xl"
-      style={{
-        backgroundColor: COLORS.surface,
-        border: `1px solid ${COLORS.borderSoft}`,
-        boxShadow: "0 8px 24px rgba(0,0,0,0.05)",
-      }}
-    >
-      {/* Top mini strip */}
-      <div className="grid gap-4 md:grid-cols-3 mb-6">
-        <div
-          className="flex items-center gap-3 p-4 rounded-2xl"
-          style={{ backgroundColor: COLORS.lightBackground }}
-        >
-          <div
-            className="w-10 h-10 rounded-xl flex items-center justify-center"
-            style={{ backgroundColor: "#FFFFFF" }}
+  <section className="py-10 border-b border-gray-200">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="grid md:grid-cols-2 gap-8 items-start">
+        {/* LEFT – TEXT */}
+        <div>
+          <h2
+            className="text-2xl sm:text-3xl font-extrabold mb-4"
+            style={{ color: COLORS.primaryDark }}
           >
-            <Video size={22} style={{ color: COLORS.primary }} />
+            Book Online Session
+          </h2>
+
+          <p
+            className="text-sm sm:text-base leading-relaxed"
+            style={{ color: COLORS.textGray }}
+          >
+            Whether you’re a student choosing a specialization, a parent seeking
+            clarity, a college/university graduate facing academic challenges,
+            or a working professional navigating career transitions, our expert
+            counselors are here to provide clear, precise, and personalized
+            guidance. An online session gives you the chance to discuss your
+            concerns in detail and receive expert-led strategies tailored
+            specifically to your goals.
+          </p>
+        </div>
+
+        {/* RIGHT – IMAGE */}
+        <div className="flex md:justify-end">
+          <div
+            className="overflow-hidden rounded-3xl border border-gray-200 bg-slate-50 w-full max-w-md"
+            style={{
+              boxShadow: "0 16px 40px rgba(15,23,42,0.08)",
+            }}
+          >
+            <div className="w-full h-64 sm:h-72 md:h-80 lg:h-96">
+              <img
+                src={onlineSessionHero}
+                alt="Online counseling session with TaleemiGuide counselors"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
-          <div>
-            <p
-              className="text-[11px] font-semibold uppercase tracking-wide"
-              style={{ color: COLORS.textGray }}
+        </div>
+      </div>
+    </div>
+  </section>
+);
+//---------------------------------------------------------------------
+// 2) WHY CHOOSE TALEEMIGUIDE ONLINE SESSIONS -------------------------
+//---------------------------------------------------------------------
+const WhyChooseSection = () => (
+  <section className="py-10 border-b border-gray-200">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2
+        className="text-2xl sm:text-3xl font-extrabold mb-6 sm:mb-8"
+        style={{ color: COLORS.primaryDark }}
+      >
+        Why Choose TaleemiGuide Online Sessions?
+      </h2>
+
+      {/* Single-column qualities */}
+      <div className="space-y-8 sm:space-y-10">
+        {/* 1. Expert Guidance */}
+        <div className="flex gap-4 sm:gap-5">
+          <div className="mt-1 flex-shrink-0">
+            <div
+              className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold"
+              style={{
+                backgroundColor: COLORS.lightBackground,
+                border: `1px solid ${COLORS.borderSoft}`,
+                color: COLORS.primaryDark,
+              }}
             >
-              Mode
-            </p>
+              01
+            </div>
+          </div>
+
+          <div className="flex-1 border-b border-gray-200 pb-6 sm:pb-7">
             <p
-              className="text-sm font-bold"
+              className="text-sm sm:text-base font-semibold mb-2"
               style={{ color: COLORS.primaryDark }}
             >
-              1:1 Online Session
+              Expert Guidance
+            </p>
+
+            <p
+              className="text-sm sm:text-base leading-relaxed mb-2"
+              style={{ color: COLORS.textGray }}
+            >
+              Our team includes highly experienced:
+            </p>
+
+            <ul
+              className="list-disc list-inside space-y-1 text-sm sm:text-base mb-3"
+              style={{ color: COLORS.textGray }}
+            >
+              <li>Educationists</li>
+              <li>Academicians</li>
+              <li>Industry professionals</li>
+              <li>Domain specialists</li>
+              <li>Psychologists</li>
+              <li>Certified counselors</li>
+            </ul>
+
+            <p
+              className="text-sm sm:text-base leading-relaxed"
+              style={{ color: COLORS.textGray }}
+            >
+              Customized to your concerns, they provide deep insights, accurate
+              information, and practical strategies for academic and
+              professional success.
             </p>
           </div>
         </div>
 
-        <div
-          className="flex items-center gap-3 p-4 rounded-2xl"
-          style={{ backgroundColor: COLORS.lightBackground }}
-        >
-          <div
-            className="w-10 h-10 rounded-xl flex items-center justify-center"
-            style={{ backgroundColor: "#FFFFFF" }}
-          >
-            <Users size={22} style={{ color: COLORS.secondary }} />
-          </div>
-          <div>
-            <p
-              className="text-[11px] font-semibold uppercase tracking-wide"
-              style={{ color: COLORS.textGray }}
+        {/* 2. Total Convenience */}
+        <div className="flex gap-4 sm:gap-5">
+          <div className="mt-1 flex-shrink-0">
+            <div
+              className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold"
+              style={{
+                backgroundColor: COLORS.lightBackground,
+                border: `1px solid ${COLORS.borderSoft}`,
+                color: COLORS.primaryDark,
+              }}
             >
-              Ideal For
-            </p>
+              02
+            </div>
+          </div>
+
+          <div className="flex-1 border-b border-gray-200 pb-6 sm:pb-7">
             <p
-              className="text-sm font-bold"
+              className="text-sm sm:text-base font-semibold mb-2"
               style={{ color: COLORS.primaryDark }}
             >
-              Complex &amp; detailed cases
+              Total Convenience
+            </p>
+
+            <p
+              className="text-sm sm:text-base leading-relaxed"
+              style={{ color: COLORS.textGray }}
+            >
+              No travel, no waiting, no scheduling stress. Book a session at a
+              time that suits you — from the comfort of your home, office, or
+              anywhere.
             </p>
           </div>
         </div>
 
-        <div
-          className="flex items-center gap-3 p-4 rounded-2xl"
-          style={{ backgroundColor: COLORS.lightBackground }}
-        >
-          <div
-            className="w-10 h-10 rounded-xl flex items-center justify-center"
-            style={{ backgroundColor: "#FFFFFF" }}
-          >
-            <Briefcase size={22} style={{ color: COLORS.primary }} />
-          </div>
-          <div>
-            <p
-              className="text-[11px] font-semibold uppercase tracking-wide"
-              style={{ color: COLORS.textGray }}
+        {/* 3. Personalized Support */}
+        <div className="flex gap-4 sm:gap-5">
+          <div className="mt-1 flex-shrink-0">
+            <div
+              className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold"
+              style={{
+                backgroundColor: COLORS.lightBackground,
+                border: `1px solid ${COLORS.borderSoft}`,
+                color: COLORS.primaryDark,
+              }}
             >
-              Format
-            </p>
+              03
+            </div>
+          </div>
+
+          <div className="flex-1 border-b border-gray-200 pb-6 sm:pb-7">
             <p
-              className="text-sm font-bold"
+              className="text-sm sm:text-base font-semibold mb-2"
               style={{ color: COLORS.primaryDark }}
             >
-              Live video / audio session
+              Personalized Support
+            </p>
+
+            <p
+              className="text-sm sm:text-base leading-relaxed mb-2"
+              style={{ color: COLORS.textGray }}
+            >
+              Every student and professional has unique circumstances. We offer
+              guidance tailored to your:
+            </p>
+
+            <ul
+              className="list-disc list-inside space-y-1 text-sm sm:text-base"
+              style={{ color: COLORS.textGray }}
+            >
+              <li>Goals</li>
+              <li>Strengths</li>
+              <li>Academic background</li>
+              <li>Career aspirations</li>
+              <li>Personal challenges</li>
+            </ul>
+          </div>
+        </div>
+
+        {/* 4. Confidentiality Guaranteed */}
+        <div className="flex gap-4 sm:gap-5">
+          <div className="mt-1 flex-shrink-0">
+            <div
+              className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold"
+              style={{
+                backgroundColor: COLORS.lightBackground,
+                border: `1px solid ${COLORS.borderSoft}`,
+                color: COLORS.primaryDark,
+              }}
+            >
+              04
+            </div>
+          </div>
+
+          <div className="flex-1">
+            <p
+              className="text-sm sm:text-base font-semibold mb-2"
+              style={{ color: COLORS.primaryDark }}
+            >
+              Confidentiality Guaranteed
+            </p>
+
+            <p
+              className="text-sm sm:text-base leading-relaxed"
+              style={{ color: COLORS.textGray }}
+            >
+              Your privacy is our top priority. All sessions are conducted
+              through secure and encrypted channels to ensure that your
+              information and discussions remain strictly confidential.
             </p>
           </div>
         </div>
       </div>
-
-      {/* Main copy */}
-      <p
-        className="text-base sm:text-lg leading-relaxed mb-3"
-        style={{ color: COLORS.textGray }}
-      >
-        Our Online Session service provides dedicated, one-on-one time with a
-        professional counselor to discuss complex cases, review documents, and
-        create detailed academic or professional action plans. This is the
-        premium level of personalized guidance.
-      </p>
-      <p
-        className="text-base sm:text-lg font-semibold"
-        style={{ color: COLORS.primaryDark }}
-      >
-        Whether you need help with subject selection, university admission
-        strategy, or career pivots, our experts are here to guide you live.
-      </p>
     </div>
   </section>
 );
 
-// ===================================================================
-// 2) BENEFITS SECTION (premium cards)
-// ===================================================================
-const BenefitsSection = () => (
-  <section className="py-10 border-b border-gray-200 mb-10">
-    <h2
-      className="text-2xl sm:text-3xl font-extrabold mb-8"
-      style={{ color: COLORS.primaryDark }}
-    >
-      Key Benefits of a Live Session
-    </h2>
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {[
-        {
-          title: "Personalized Review",
-          icon: Users,
-          desc: "Your specific grades, personal statement, and documents are reviewed in real-time.",
-          color: COLORS.primary,
-        },
-        {
-          title: "Career Mapping",
-          icon: Briefcase,
-          desc: "We map your profile to specific degree programs and professional paths.",
-          color: COLORS.primary,
-        },
-        {
-          title: "Instant Clarification",
-          icon: Zap,
-          desc: "Get immediate answers and feedback on all your doubts without back-and-forth delays.",
-          color: COLORS.secondary,
-        },
-        {
-          title: "Secure & Private",
-          icon: Lock,
-          desc: "Sessions are conducted securely and your information remains confidential.",
-          color: COLORS.secondary,
-        },
-      ].map((benefit, index) => {
-        const Icon = benefit.icon;
-        return (
-          <div
-            key={index}
-            className="rounded-3xl p-7 h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl relative overflow-hidden"
-            style={{
-              backgroundColor: "#FFFFFF",
-              borderLeft: `4px solid ${benefit.color}`,
-              borderTop: `1px solid ${COLORS.borderSoft}`,
-              borderRight: `1px solid ${COLORS.borderSoft}`,
-              borderBottom: `1px solid ${COLORS.borderSoft}`,
-              boxShadow: "0 12px 30px rgba(15,23,42,0.06)",
-            }}
-          >
-            <div
-              className="absolute -top-10 -right-10 w-24 h-24 rounded-full opacity-20"
-              style={{
-                background:
-                  "radial-gradient(circle, rgba(249,115,22,0.45), transparent 70%)",
-              }}
-            />
-            <div
-              className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-md mb-4"
-              style={{
-                backgroundColor: COLORS.lightBackground,
-                border: `1px solid ${benefit.color}40`,
-              }}
-            >
-              <Icon size={26} style={{ color: benefit.color }} />
-            </div>
-            <h3
-              className="text-lg sm:text-xl font-bold mb-2"
-              style={{ color: COLORS.primaryDark }}
-            >
-              {benefit.title}
-            </h3>
-            <p className="text-sm" style={{ color: COLORS.textGray }}>
-              {benefit.desc}
-            </p>
-          </div>
-        );
-      })}
-    </div>
-  </section>
-);
-
-// ===================================================================
-// 3) BOOKING PROCESS SECTION
-// ===================================================================
-const BookingProcessSection = () => (
-  <section className="py-10 border-b border-gray-200 mb-10">
-    <h2
-      className="text-2xl sm:text-3xl font-extrabold mb-8"
-      style={{ color: COLORS.primaryDark }}
-    >
-      The Seamless Booking Process
-    </h2>
-
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-      {[
-        {
-          num: 1,
-          title: "Select Service",
-          desc: "Choose the relevant service on the main page.",
-          icon: Globe,
-        },
-        {
-          num: 2,
-          title: "Select Time",
-          desc: "Choose your preferred date and time from available expert slots.",
-          icon: Calendar,
-        },
-        {
-          num: 3,
-          title: "Payment",
-          desc: "Complete the booking via our secure payment gateway.",
-          icon: Lock,
-        },
-        {
-          num: 4,
-          title: "Connect Live",
-          desc: "Join the session on Zoom/Google Meet at the scheduled time.",
-          icon: Smartphone,
-        },
-      ].map((step, index) => {
-        const Icon = step.icon;
-        return (
-          <div
-            key={index}
-            className="text-center p-5 rounded-2xl border-2 h-full"
-            style={{ borderColor: COLORS.primary + "30", backgroundColor: "#FFFFFF" }}
-          >
-            <div
-              className="flex items-center justify-center w-12 h-12 rounded-full mx-auto mb-3 text-sm font-bold"
-              style={{ backgroundColor: COLORS.primary, color: "white" }}
-            >
-              {step.num}
-            </div>
-            <div
-              className="flex items-center justify-center w-12 h-12 rounded-2xl mx-auto mb-3"
-              style={{
-                backgroundColor: COLORS.lightBackground,
-                border: `1px solid ${COLORS.secondary}30`,
-              }}
-            >
-              <Icon size={22} style={{ color: COLORS.secondary }} />
-            </div>
-            <h4
-              className="text-lg font-bold mb-1"
-              style={{ color: COLORS.primaryDark }}
-            >
-              {step.title}
-            </h4>
-            <p className="text-sm mt-1" style={{ color: COLORS.textGray }}>
-              {step.desc}
-            </p>
-          </div>
-        );
-      })}
-    </div>
-  </section>
-);
-
-// ===================================================================
-// 4) NEXT STEP SECTION (CTA → Taleemi Announcements)
-// ===================================================================
-const NextStepSection = () => (
-  <section className="pt-4 pb-14">
-    <div
-      className="p-8 rounded-3xl text-center relative overflow-hidden"
-      style={{
-        background:
-          "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 60%, #FFFFFF 100%)",
-        border: "1px solid rgba(0,0,0,0.04)",
-        boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
-      }}
-    >
-      <div
-        aria-hidden="true"
-        className="absolute -right-24 -top-24 w-52 h-52 rounded-full opacity-20"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(30,58,138,0.15), transparent 70%)",
-        }}
-      />
-
+//---------------------------------------------------------------------
+// 3) WHAT TO EXPECT IN THE SESSION -----------------------------------
+//---------------------------------------------------------------------
+const WhatToExpectSection = () => (
+  <section className="py-10 border-b border-gray-200">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2
         className="text-2xl sm:text-3xl font-extrabold mb-4"
         style={{ color: COLORS.primaryDark }}
       >
-        Your Next Step in the Journey
+        What to Expect in the Session
       </h2>
 
-      <p
-        className="text-sm sm:text-base md:text-lg leading-relaxed max-w-3xl mx-auto mb-6"
-        style={{ color: COLORS.textGray }}
-      >
-        After your session, stay connected with new scholarships, admissions,
-        opportunities, and career updates through our{" "}
-        <strong>Taleemi Announcements</strong>.
-      </p>
-
-      <NavLink
-        to="/service/announcement"
-        className="inline-flex items-center px-8 py-3 text-base font-semibold rounded-xl shadow-md transition-transform duration-200 hover:scale-[1.03]"
+      <div
+        className="rounded-3xl p-6 sm:p-7"
         style={{
-          backgroundColor: COLORS.primary,
-          color: "white",
+          backgroundColor: COLORS.surface,
+          border: `1px solid ${COLORS.borderSoft}`,
+          boxShadow: "0 12px 30px rgba(15,23,42,0.08)",
         }}
       >
-        Explore Taleemi Announcements
-        <ArrowRight size={20} className="ml-2" />
-      </NavLink>
+        <p
+          className="text-sm sm:text-base leading-relaxed mb-3"
+          style={{ color: COLORS.textGray }}
+        >
+          During your session, you will have the opportunity to discuss:
+        </p>
+
+        <ul
+          className="list-disc list-inside space-y-1 text-sm sm:text-base mb-4"
+          style={{ color: COLORS.textGray }}
+        >
+          <li>Academic choices (At your desired level of study)</li>
+          <li>Career direction and planning</li>
+          <li>University admission concerns</li>
+          <li>Program and specialization selection</li>
+          <li>Workplace challenges and transitions</li>
+          <li>Stress, motivation, confidence, or work-life balance</li>
+          <li>Any academic or career-related issue</li>
+        </ul>
+
+        <p
+          className="text-sm sm:text-base leading-relaxed"
+          style={{ color: COLORS.textGray }}
+        >
+          Our counselors will listen attentively, analyze your situation, and
+          offer realistic, actionable strategies that guide you toward your
+          goals.
+        </p>
+      </div>
     </div>
   </section>
 );
 
-// ===================================================================
-// MAIN PAGE COMPONENT
-// ===================================================================
-export default function OnlineSessionPage() {
+//---------------------------------------------------------------------
+// 4) HOW TO BOOK YOUR SESSION ----------------------------------------
+//---------------------------------------------------------------------
+const HowToBookSection = () => (
+  <section className="py-10 border-b border-gray-200">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2
+        className="text-2xl sm:text-3xl font-extrabold mb-6"
+        style={{ color: COLORS.primaryDark }}
+      >
+        How to Book Your Session
+      </h2>
+
+      <div className="space-y-4">
+        <p
+          className="text-sm sm:text-base leading-relaxed"
+          style={{ color: COLORS.textGray }}
+        >
+          Step 1: Click “Book an Appointment” on the Home Page.
+        </p>
+        <p
+          className="text-sm sm:text-base leading-relaxed"
+          style={{ color: COLORS.textGray }}
+        >
+          Step 2: Select your preferred date and time from the available slots.
+        </p>
+        <p
+          className="text-sm sm:text-base leading-relaxed"
+          style={{ color: COLORS.textGray }}
+        >
+          Step 3: Fill out the short booking form and attach any documents you
+          want us to review.
+        </p>
+        <p
+          className="text-sm sm:text-base leading-relaxed"
+          style={{ color: COLORS.textGray }}
+        >
+          Step 4: Receive a confirmation email with instructions and a secure
+          link to join session.
+        </p>
+      </div>
+    </div>
+  </section>
+);
+
+//---------------------------------------------------------------------
+// 5) INVEST IN YOUR FUTURE -------------------------------------------
+//---------------------------------------------------------------------
+const InvestInYourFutureSection = () => (
+  <section className="py-10 border-b border-gray-200">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2
+        className="text-2xl sm:text-3xl font-extrabold mb-4"
+        style={{ color: COLORS.primaryDark }}
+      >
+        Invest in Your Future
+      </h2>
+
+      <p
+        className="text-sm sm:text-base leading-relaxed mb-6 max-w-3xl"
+        style={{ color: COLORS.textGray }}
+      >
+        A single conversation with the right expert can change your direction —
+        and your future.
+        <br />
+        Take the next step toward clarity, confidence, and achievement.
+      </p>
+
+      <button
+        type="button"
+        className="w-full sm:w-auto text-left sm:text-center rounded-3xl px-6 py-5 sm:px-8 sm:py-6 font-semibold text-sm sm:text-base transition-transform duration-200 hover:scale-[1.02]"
+        style={{
+          background:
+            "linear-gradient(135deg, rgba(37,99,235,0.08), rgba(249,115,22,0.12))",
+          color: COLORS.primaryDark,
+          boxShadow: "0 14px 35px rgba(15,23,42,0.18)",
+          border: `1px solid ${COLORS.borderSoft}`,
+        }}
+      >
+        Book your online session today and receive personalized guidance from
+        the experts at TaleemiGuide.
+      </button>
+    </div>
+  </section>
+);
+
+//---------------------------------------------------------------------
+// 6) NEXT STEP IN THE JOURNEY ----------------------------------------
+//---------------------------------------------------------------------
+const NextStepSection = () => (
+  <section className="py-10">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        className="p-6 sm:p-8 rounded-3xl relative overflow-hidden"
+        style={{
+          background:
+            "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 60%, #FFFFFF 100%)",
+          border: "1px solid rgba(0,0,0,0.04)",
+          boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
+        }}
+      >
+        <div
+          aria-hidden="true"
+          className="absolute -right-24 -top-24 w-52 h-52 rounded-full opacity-20"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(30,58,138,0.15), transparent 70%)",
+          }}
+        />
+
+        <div className="relative">
+          <h2
+            className="text-2xl sm:text-3xl font-extrabold mb-3"
+            style={{ color: COLORS.primaryDark }}
+          >
+            Next Step in the Journey
+          </h2>
+
+          <p
+            className="text-sm sm:text-base md:text-lg leading-relaxed mb-5 max-w-3xl"
+            style={{ color: COLORS.textGray }}
+          >
+            After your session, stay connected with new scholarships,
+            admissions, opportunities, and career updates through our section:
+            Taleemi Announcements.
+          </p>
+
+          <NavLink
+            to="/service/announcement"
+            className="inline-flex items-center px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-lg font-semibold rounded-xl shadow-md transition-transform duration-200 hover:scale-[1.03]"
+            style={{
+              backgroundColor: COLORS.secondary,
+              color: "white",
+            }}
+          >
+            Go to Taleemi Announcements
+          </NavLink>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+//---------------------------------------------------------------------
+// MAIN PAGE ----------------------------------------------------------
+//---------------------------------------------------------------------
+export default function BookOnlineSession() {
   return (
-    <ServiceLayout
-      title="Book Online Session"
-      subtitle="Personalized Guidance"
-    >
+    <ServiceLayout>
       <HeroSection />
-      <BenefitsSection />
-      <BookingProcessSection />
+      <WhyChooseSection />
+      <WhatToExpectSection />
+      <HowToBookSection />
+      <InvestInYourFutureSection />
       <NextStepSection />
     </ServiceLayout>
   );

@@ -1,497 +1,491 @@
-// src/pages/about-us.jsx (or About.jsx)
+import React, { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaPlay, FaBook, FaGraduationCap, FaArrowCircleRight, FaGlobe, FaFacebook, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import { FaComputer } from "react-icons/fa6";
+import { desc, select } from "framer-motion/client";
 
-import React from "react";
-import {
-  Users,
-  Target,
-  Lightbulb,
-  Compass,
-  BookOpenCheck,
-  Globe2,
-  GraduationCap,
-  Briefcase,
-} from "lucide-react";
+import { Play } from "lucide-react";
 
-const COLORS = {
-  primary: "#1E3A8A",      // same navy as home
-  secondary: "#F97316",    // orange accent
-  textGray: "#4B5563",
-  lightBackground: "#EFF6FF",
-  primary2: "#11253e",
-};
 
-// Simple section wrapper to keep spacing consistent
-const Section = ({ children, bg = "white" }) => (
-  <section
-    className="py-12 md:py-16 border-b border-gray-100"
-    style={{ backgroundColor: bg }}
-  >
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">{children}</div>
-  </section>
-);
+export default function AboutPage() {
+  const [loaded, setLoaded] = useState(false);
 
-// =========================================
-// HERO – aligned with homepage Hero
-// =========================================
-const AboutHero = () => (
-  <section
-    className="py-10 md:py-16 border-b border-gray-100"
-    style={{ backgroundColor: COLORS.lightBackground }}
-  >
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
-        {/* LEFT: text */}
-        <div className="lg:w-1/2 text-center lg:text-left">
-          <h1
-            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight mb-4"
-            style={{ color: COLORS.primary }}
+  useEffect(() => {
+
+    requestAnimationFrame(() => setLoaded(true));
+  }, []);
+
+  const Feature = [
+    {
+      icon: <FaBook className="text-orange-600 text-7xl mb-4" />,
+      title: "10/12 Students",
+      description:
+        "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    {
+      icon: <FaGraduationCap className="text-orange-600 text-7xl mb-4" />,
+      title: "University Student",
+      description:
+        "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+
+    },
+    {
+      icon: <FaComputer className="text-orange-600 text-7xl mb-4" />,
+      title: "Graduates",
+      description:
+        "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    {
+      icon: <FaGlobe className="text-orange-600 text-7xl mb-4" />,
+      title: "Professionals",
+      description:
+        "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+  ];
+
+  const boardMembers = [
+    {
+      id: 1,
+      name: "HidayatUllah Kasi",
+      img: "/profile.jpg",
+      description: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      designation: "CEO",
+      email: "aouudhw",
+      facebook: "asdasd",
+      linkedin: "asdasd"
+    },
+    {
+      id: 2,
+      name: "Haabeel Kasi ",
+      img: "/profile.jpg",
+      description: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      designation: "Research & Development",
+      email: "aouudhw",
+      facebook: "asdasd",
+      linkedin: "asdasd"
+    },
+    {
+      id: 3,
+      name: "Abiha Fatima ",
+      img: "/profile.jpg",
+      description: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      designation: "IT Dept",
+      email: "aouudhw",
+      facebook: "asdasd",
+      linkedin: "asdasd"
+    },
+    {
+      id: 4,
+      name: "Muhammad Hashim",
+      img: "/profile.jpg",
+      description: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      designation: "IT Dept",
+      email: "aouudhw",
+      facebook: "asdasd",
+      linkedin: "asdasd"
+    },
+    {
+      id: 5,
+      name: "Adan ",
+      img: "/profile.jpg",
+      description: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      designation: " Manager",
+      email: "aouudhw",
+      facebook: "asdasd",
+      linkedin: "asdasd"
+    }
+    ,
+    {
+      id: 6,
+      name: "fardeen ",
+      img: "/profile.jpg",
+      description: "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      designation: " Manager",
+      email: "aouudhw",
+      facebook: "asdasd",
+      linkedin: "asdasd"
+    }
+  ];
+  const [showVideo, setShowVideo] = useState(false);
+  const [activeTab, setActiveTab] = useState("benefit");
+  const [selected, setSelected] = useState(boardMembers[0]);
+  const tabs = [
+    {
+      id: "benefit",
+      title: "Benefits",
+      img: "/bg-1.jpg",
+      subheading: "why choose us?",
+      desc: "We provide personalized career counseling, expert guidance, and comprehensive resources to help students make informed decisions about their academic and professional futures."
+    },
+    {
+      id: "vision",
+      title: "Vision",
+      img: "/bg-2.jpg",
+      subheading: "Our Vision",
+      desc: "To be the leading platform for career guidance, empowering students worldwide to achieve their full potential through informed educational choices."
+
+    },
+    {
+      id: "Mission",
+      title: "Mission",
+      img: "/bg-2.jpg",
+      subheading: "Our Vision",
+      desc: "Our mission is to provide accurate, personalized, and accessible career guidance to students, helping them navigate their educational journeys with confidence and clarity."
+
+    },
+
+  ];
+  const current = tabs.find((tab) => tab.id === activeTab);
+  return (
+    <div className="w-full text-[#14223C]">
+
+      {/* ================= MAIN SECTION ================= */}
+      <div className="relative w-full h-[60vh] md:h-[75vh]">
+        <img
+          src="/pic.png"
+          alt="about cover"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-[#0B1C3C]/80"></div>
+        <div className="absolute inset-0 flex flex-col justify-center px-6 md:px-20">
+          <h1 className="text-white text-4xl md:text-6xl font-bold">About Us</h1>
+
+          <span
+            className="bg-white h-1 rounded mt-0 inline-block transition-all duration-700"
+            style={{ width: loaded ? "280px" : "0px" }}
+          />
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 1 }}
+            className="text-white text-lg md:text-xl mt-4 max-w-2xl"
           >
-            The System Behind{" "}
-            <span
-              className="text-transparent bg-clip-text"
-              style={{
-                backgroundImage:
-                  "linear-gradient(90deg, #F97316 0%, #1D4ED8 100%)",
-              }}
-            >
-              Smarter Educational Decisions
-            </span>
-            .
-          </h1>
-          <p
-            className="text-lg sm:text-xl leading-relaxed mb-5"
-            style={{ color: COLORS.primary2, opacity: 0.9 }}
-          >
-            TaleemiGuide is a structured guidance platform that connects your
-            subjects, degrees and skills with the futures they actually lead to
-            — from Class 10 all the way to working life.
-          </p>
+            The education landscape has transformed. Students today face thousands of institutions, 
+            hundreds of degree options, and fast-changing careers shaped by technology, AI, and automation. 
+            Traditional guidance simply can’t keep pace. 
+            <br />
+            <br />
+            This is where TaleemiGuide comes in We provide a smart, 
+            integrated platform offering personalized, reliable, 
+            and expert academic guidance  supporting learners from Class 10 to post-graduation, 
+            as well as professionals navigating career growth or transition.
 
-          <ul className="space-y-3 text-left max-w-xl mx-auto lg:mx-0 text-sm sm:text-base">
-            {[
-              "Built specifically for Pakistani students, graduates and professionals.",
-              "Combines expert humans, psychometrics and verified information — not random opinions.",
-              "Maps school, college, university and skill routes into clear, understandable pathways.",
-              "Supports you at multiple stages: Class 10, Class 12, University, and Working Professional.",
-            ].map((item, index) => (
-              <li
-                key={index}
-                className="flex items-start"
-                style={{ color: COLORS.primary2 }}
+          </motion.p>
+        </div>
+      </div>
+
+      {/* ================= FEATURE SECTION ================= */}
+      <section className="relative py-20 px-3 md:px-20 bg-[#FFDBBB]/100">
+        <div className="w-full  bg-[#0B1C3C] text-white p-10 rounded-lg mx-auto shadow-lg -mt-28 grid md:grid-cols-4 gap-8">
+          {Feature.map((feature, idx) => (
+            <div key={idx} className="flex flex-col ">
+              {feature.icon}
+              <h3 className="font-bold text-lg mb-2 text-start">{feature.title}</h3>
+              <p className="text-sm  max-w-md text-start overflow-hidden h-full justify-between">{feature.description}</p>
+              <a
+                href="#"
+                className="text-orange-600 mt-2 mb-1 text-xs hover:underline  flex items-end"
               >
-                <span
-                  className="h-5 w-5 mr-3 flex-shrink-0 flex items-center justify-center rounded-full"
-                  style={{ color: COLORS.secondary }}
-                >
-                  <svg
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    ></path>
-                  </svg>
-                </span>
-                {item}
-              </li>
-            ))}
-          </ul>
+                Learn More <FaArrowCircleRight className="inline ml-2 mb-0.5" />
+              </a>
+            </div>
+          ))}
+
         </div>
 
-        {/* RIGHT: “system” visual instead of images */}
-        <div className="lg:w-1/2 w-full mt-6 lg:mt-0 flex justify-center">
-          <div className="w-full max-w-md lg:max-w-lg relative">
-            {/* Soft background blob */}
-            <div className="absolute -top-10 -right-8 w-40 h-40 bg-blue-200/60 rounded-full blur-3xl" />
-            <div className="absolute -bottom-10 -left-6 w-40 h-40 bg-orange-200/60 rounded-full blur-3xl" />
+      </section>
 
-            <div className="relative bg-white rounded-3xl shadow-xl border border-blue-100 p-6 md:p-7">
-              <div className="flex items-center gap-3 mb-4">
-                <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center"
-                  style={{ backgroundColor: COLORS.lightBackground }}
+      {/* ================= OUR MISSION ================= */}
+      <section className="py-20 px-6 md:px-20 bg-white">
+        <div className="relative w-full flex items-center justify-between max-w-7xl mx-auto gap-10">
+
+          {/* Text side */}
+
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-3xl md:text-4xl font-bold mb-6 flex-col"
+          >
+            Our Mission
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-lg max-w-3xl leading-relaxed"
+          >
+            TaleemiGuide is dedicated to helping students discover their true
+            potential. We connect students with expert counselors, provide
+            accurate career insights, and empower them to make informed decisions
+            about their academic journey.
+          </motion.p>
+
+          <img
+            src="/pic.png"
+            alt="Diagonal"
+            className="w-full h-120 object-cover -mt-20 -mb-20 -mr-30 b"
+            style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 15% 100%)' }}
+          />
+          <div
+            className="absolute inset-0 bg-[#0B1C3C]/80 w-[56.3%] h-120 left-170 -mt-20 -mb-20 "
+            style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 15% 100%)' }}
+          ></div>
+
+        </div>
+      </section>
+      {/* ================= OUR VISION ================= */}
+      <section className="py-10 px-6 md:px-20 bg-white">
+        <div className="grid md:grid-cols-2 gap-10 items-center">
+
+          {/* Image side */}
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={current.id}
+              src={current.img}
+              alt={current.title}
+              className="w-full h-115 object-cover rounded-2xl shadow-lg"
+              initial={{ opacity: 0, x: 15 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -15 }}
+              transition={{ duration: 0.5 }}
+            />
+          </AnimatePresence>
+
+          {/* Text side */}
+          <div className="flex flex-col">
+            <div className="flex gap-2 ">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`px-4 rounded-lg py-2 font-semibold border ${activeTab === tab.id
+                    ? "bg-[#0B1C3C] text-white border-[#0B1C3C]"
+                    : "bg-white text-[#0B1C3C] border-gray-300"
+                    }`}
                 >
-                  <Users size={22} style={{ color: COLORS.secondary }} />
-                </div>
-                <div>
-                  <p
-                    className="text-xs font-semibold uppercase tracking-wide"
-                    style={{ color: COLORS.textGray }}
-                  >
-                    One-Window Guidance
-                  </p>
-                  <p
-                    className="text-xs"
-                    style={{ color: COLORS.textGray, opacity: 0.8 }}
-                  >
-                    Students · Graduates · Professionals
-                  </p>
-                </div>
-              </div>
+                  {tab.title}
+                </button>
+              ))}
+            </div>
 
-              {/* mini “cards” showing system layers */}
-              <div className="space-y-3 text-sm">
-                <HeroMiniRow
-                  title="Academic Structure"
-                  text="Boards, streams, subjects and programs organised into a clear map."
-                />
-                <HeroMiniRow
-                  title="Career Pathways"
-                  text="Fields, roles and sectors linked with relevant study routes."
-                />
-                <HeroMiniRow
-                  title="Human + Data Insight"
-                  text="Psychology, profiles and real market knowledge combined."
-                />
-              </div>
+            <motion.h2
+              key={current.title}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-3xl md:text-4xl font-bold mt-6 mb-4 text-[#0B1C3C]"
+            >
+              {current.title}
+            </motion.h2>
 
-              <div className="mt-5 grid grid-cols-2 gap-3 text-[11px] text-center">
-                <div className="rounded-xl py-2 px-3 bg-blue-50 text-blue-900 font-semibold">
-                  Class 10 → 12
-                </div>
-                <div className="rounded-xl py-2 px-3 bg-orange-50 text-orange-900 font-semibold">
-                  BS / MS / PhD
-                </div>
-                <div className="rounded-xl py-2 px-3 bg-emerald-50 text-emerald-800 font-semibold">
-                  Skills & Exams
-                </div>
-                <div className="rounded-xl py-2 px-3 bg-slate-50 text-slate-700 font-semibold">
-                  Working Professionals
-                </div>
-              </div>
+            <motion.p
+              key={current.desc}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="text-lg leading-relaxed text-[#14223C]"
+            >
+              {current.desc}
+              <img
+                src="/logo.jpg"
+                className=" w-90 h-60 ml-90 opacity-30 select-none pointer-events-none"
+              />
+            </motion.p>
+
+          </div>
+        </div>
+      </section>
+
+
+
+      {/* ================= OUR VIDEO================= */}
+
+      <section className="relative w-full h-[90vh] flex items-center justify-center text-center "
+      >
+        <div className=" absolute inset-0 bg-cover bg-center opacity-60 transition-all duration-300"
+          style={{
+            backgroundImage: "url('/video.jpg')",
+          }}
+        >
+        </div>
+
+        <div className="relative z-10 px-4">
+          <button
+            onClick={() => setShowVideo(true)}
+            className="mx-auto mb-6 flex items-center justify-center w-24 h-24 rounded-full bg-white/20 backdrop-blur-sm border
+             border-[#0B1C3C] hover:bg-50 transition">
+            <play size={55} color="white" /><FaPlay className=" w-50 h-16 ml-4 text-white/300" />
+          </button>
+          <h2 className=" font-bold text-4xl md:text-5xl text-[#0B1C3C] mb-4">
+            Watch Our Introduction Video
+          </h2>
+          <p className="text-lg text-[#0B1C3C] md:text-xl max-w-2xl mx-auto">
+            Introduction to TaleemiGuide and our mission to help students succeed.
+          </p>
+        </div>
+        {showVideo && (
+          <div className="fixed inset-0 bg-black/80 flex items-center justify-center justify-center z-20"
+          >
+            <div className="relative w-full max-w-4xl p-4">
+              <button className="absolute -top-10 right-0 text-white text-3xl"
+                onClick={() => setShowVideo(false)}>
+                X
+              </button>
+              <iframe className="w-full h-[500px] rounded-lg"
+                src="https://www.youtube-nocookie.com/embed/W8NsVWvfN0w?rel=0&modestbranding=1&showinfo=0 "
+                title="video"
+                frameBorder={0}
+                allowFullScreen
+              >
+
+              </iframe>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-);
+        )}
 
-const HeroMiniRow = ({ title, text }) => (
-  <div className="flex items-start gap-3">
-    <div className="mt-1 w-2 h-2 rounded-full" style={{ backgroundColor: COLORS.secondary }} />
-    <div>
-      <p
-        className="text-xs font-semibold mb-0.5"
-        style={{ color: COLORS.primary2 }}
-      >
-        {title}
-      </p>
-      <p className="text-xs" style={{ color: COLORS.textGray }}>
-        {text}
-      </p>
-    </div>
-  </div>
-);
+      </section>
+      <section className="py-20 px-6 md:px-20 bg-[#FFDBBB]/100" >
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="text-3xl md:text-4xl font-bold mb-12 text-center"
+        >
+          Why Choose TaleemiGuide?
+        </motion.h2>
 
-// =========================================
-// OUR STORY / VISION / MISSION
-// =========================================
-const StorySection = () => (
-  <Section bg="white">
-    <div className="grid gap-10 lg:grid-cols-[1.2fr,1fr] items-start">
-      <div>
-        <h2
-          className="text-2xl sm:text-3xl font-extrabold mb-3"
-          style={{ color: COLORS.primary2 }}
-        >
-          Why TaleemiGuide Exists
-        </h2>
-        <p
-          className="text-sm sm:text-base leading-relaxed mb-3"
-          style={{ color: COLORS.textGray }}
-        >
-          In Pakistan, many academic and career decisions are still made based
-          on pressure, hearsay and incomplete information. Students follow
-          trends, parents rely on limited exposure, and professionals struggle
-          to connect their education with real opportunities.
-        </p>
-        <p
-          className="text-sm sm:text-base leading-relaxed"
-          style={{ color: COLORS.textGray }}
-        >
-          TaleemiGuide was created to change that — by building a{" "}
-          <strong className="font-semibold">
-            system of guidance, not just individual advice
-          </strong>
-          . We connect data, experience and empathy so that every learner can
-          see their options clearly and choose with confidence.
-        </p>
-      </div>
-
-      <div className="space-y-4">
-        <div className="rounded-2xl bg-[#EFF6FF] border border-blue-100 p-5">
-          <div className="flex items-center gap-3 mb-2">
-            <Target size={22} style={{ color: COLORS.secondary }} />
-            <h3
-              className="text-sm font-semibold"
-              style={{ color: COLORS.primary2 }}
+        <div className="grid md:grid-cols-3 gap-10">
+          {[
+            {
+              title: "Expert Guidance",
+              text: "Our team consists of certified education counselors with years of experience.",
+            },
+            {
+              title: "Personalized Roadmaps",
+              text: "We create custom study and career plans based on each student's strengths.",
+            },
+            {
+              title: "Trusted by Students",
+              text: "Thousands of students rely on TaleemiGuide to shape their academic future.",
+            },
+          ].map((item, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="bg-white shadow-lg rounded-2xl p-8 hover:shadow-xl transition"
             >
-              Our Vision
-            </h3>
-          </div>
-          <p className="text-sm" style={{ color: COLORS.textGray }}>
-            A Pakistan where every learner — regardless of city or background —
-            can access authentic, structured academic and career guidance.
-          </p>
-        </div>
+              <h3 className="text-xl font-semibold mb-3 text-[#F97316]">
+                {item.title}
+              </h3>
+              <p className="text-[#14223C] leading-relaxed">{item.text}</p>
 
-        <div className="rounded-2xl bg-white border border-gray-200 p-5">
-          <div className="flex items-center gap-3 mb-2">
-            <Lightbulb size={22} style={{ color: COLORS.secondary }} />
-            <h3
-              className="text-sm font-semibold"
-              style={{ color: COLORS.primary2 }}
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+
+
+      {/* ================= OUR BOARD MEMBERS ================= */}
+
+
+      <section className="py-8 px-6 md:px-20 bg-[url('/bg-2.jpg')] bg-cover bg-center bg-no-repeat">
+
+        <div className="w-full bg-[#0B1C3C]/80 py-4 px-6 md:px-10 text-center rounded-xl">
+          <div className="flex flex-col items-center">
+            <h2 className="font-bold text-3xl text-white">
+              TALEEMI GUIDE TEAM
+            </h2>
+            <span className=" mx-auto bg-white w-90 h-1 text-black rounded-full mb-10"></span>
+          </div>
+          <div className="grid md:grid-cols-2 gap-10">
+            <AnimatePresence mode="wait">
+              {selected && (
+                <motion.div
+                  key={selected.id}
+                  layout
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{
+                    duration: 0.4,
+                    ease: "easeInOut",
+                    layout: { duration: 0.35, ease: "easeInOut" }
+                  }}
+                  className=" w-140 h-135 mb-3 gap-1 bg-[#0B1C3C] p-6 ml-6 rounded-2xl shadow-2xl flex flex-col items-center text-center "
+                >
+                  <img
+                    src={selected.img}
+                    alt={selected.name}
+                    className="w-72 h-72 object-cover rounded-full bg-[#000] shadow-2xl" />
+                  <h2 className="font-bold text-3xl text-white mt-4" >{selected.name}</h2>
+                  <h3 className="font-bold text-l text-orange-600" >{selected.designation}</h3>
+                  <div className="w-50 mx-auto my-1 border-b-2 border-white"></div>
+                  <p className="text-sm text-start text-white mt-2">{selected.description}</p>
+                  <div className=" gap-7 justify-center flex mt-8 text-white">
+                    <a href={selected.facebook} className=" text-3xl hover:text-orange-600"><FaFacebook className="cursor-pointer "></FaFacebook></a>
+                    <a href={selected.linkedin} className=" text-3xl hover:text-orange-600"><FaLinkedin className="cursor-pointer "></FaLinkedin></a>
+                    <a href={selected.email} className=" text-3xl hover:text-orange-600"><FaEnvelope className="cursor-pointer"></FaEnvelope></a>
+                  </div>
+
+                </motion.div>
+              )
+
+              }
+            </AnimatePresence>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 w-150 h-120 ">
+              {boardMembers.map((member) => (
+                <motion.div
+                  key={member.id}
+                  whileHover={{ scale: 1.05 }}
+                  onClick={() => setSelected(member)}
+
+                  className={`cursor-pointer p-3 rounded-xl bg-[#0B1C3C] transition-all duration-300 border-2  ${selected.id === member.id
+                    ? "border-white shadow-xl"
+                    : "border-transparent"
+                    }`}>
+
+                  <img
+                    src={member.img}
+                    alt={member.name}
+                    className="w-34 h-34 rounded-full mb-4 object-cover ml-2"
+                  />
+                  <h4 className="text-l font-bold text-center text-white">{member.name}</h4>
+
+                  <div className="w-25 mx-auto my-1 border-b-2 border-white"></div>
+                  <h5 className="text-xs text-center text-orange-600">{member.designation}</h5>
+                </motion.div>
+              ))}
+
+
+
+
+            </div>
+
+
+          </div>
+
+          <div className="-mt-8 mr-5 flex justify-end">
+            <a
+              href="#"
+              className="text-orange-600 text-l hover:underline inline-flex items-center"
             >
-              Our Mission
-            </h3>
-          </div>
-          <p className="text-sm" style={{ color: COLORS.textGray }}>
-            To organize academic options, professional pathways and local
-            realities into a clear guidance system that students, parents and
-            professionals can rely on.
-          </p>
-        </div>
-      </div>
-    </div>
-  </Section>
-);
-
-// =========================================
-// WHAT WE DO (aligned with OurServices tone)
-// =========================================
-const WhatWeDoSection = () => (
-  <Section bg="#F9FAFB">
-    <div className="text-center mb-10">
-      <h3
-        className="font-semibold text-sm sm:text-base mb-1"
-        style={{ color: COLORS.secondary }}
-      >
-        What We Do
-      </h3>
-      <h2
-        className="text-2xl sm:text-3xl lg:text-4xl font-extrabold"
-        style={{ color: COLORS.primary }}
-      >
-        From Confusion to Clear Pathways
-      </h2>
-      <p
-        className="mt-3 text-sm sm:text-base max-w-3xl mx-auto"
-        style={{ color: COLORS.textGray }}
-      >
-        TaleemiGuide connects individual services like Class 10 Guidance,
-        Career Assessment, Subject Classification and Program Finder into one
-        complete journey.
-      </p>
-    </div>
-
-    <div className="grid gap-6 md:grid-cols-3">
-      {[
-        {
-          icon: <BookOpenCheck className="w-7 h-7" />,
-          title: "Structure the Information",
-          text: "We categorize subjects, degrees and opportunities so they make sense together.",
-        },
-        {
-          icon: <Compass className="w-7 h-7" />,
-          title: "Match You to Pathways",
-          text: "Using your background, interests and goals, we highlight realistic options.",
-        },
-        {
-          icon: <Lightbulb className="w-7 h-7" />,
-          title: "Guide Your Next Steps",
-          text: "Through Taleemi Advice, online sessions and tools, we help you move forward.",
-        },
-      ].map((item, index) => (
-        <div
-          key={index}
-          className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 flex flex-col gap-3"
-        >
-          <div
-            className="w-11 h-11 rounded-xl flex items-center justify-center"
-            style={{ backgroundColor: COLORS.lightBackground }}
-          >
-            {React.cloneElement(item.icon, { style: { color: COLORS.secondary } })}
-          </div>
-          <h3
-            className="text-base font-semibold"
-            style={{ color: COLORS.primary2 }}
-          >
-            {item.title}
-          </h3>
-          <p className="text-sm" style={{ color: COLORS.textGray }}>
-            {item.text}
-          </p>
-        </div>
-      ))}
-    </div>
-  </Section>
-);
-
-// =========================================
-// WHO WE SUPPORT (aligned with ForWhom)
-// =========================================
-const WhoWeSupportSection = () => (
-  <Section>
-    <div className="text-center mb-8">
-      <h2
-        className="text-2xl sm:text-3xl lg:text-4xl font-extrabold mb-3"
-        style={{ color: COLORS.primary }}
-      >
-        Who Is TaleemiGuide For?
-      </h2>
-      <p
-        className="text-sm sm:text-base max-w-3xl mx-auto"
-        style={{ color: COLORS.primary2, opacity: 0.85 }}
-      >
-        Whether you are just choosing your first stream or planning a complete
-        career shift, TaleemiGuide is designed to support you with clarity and
-        respect.
-      </p>
-    </div>
-
-    <div className="grid gap-6 md:grid-cols-2">
-      {[
-        {
-          Icon: GraduationCap,
-          title: "Class 10–12 &amp; A-Level Students",
-          text: "Choosing streams, subjects, boards and future directions with confidence.",
-        },
-        {
-          Icon: Globe2,
-          title: "University Students &amp; Graduates",
-          text: "Handling academic issues, credit confusion, further studies and specialization choices.",
-        },
-        {
-          Icon: Briefcase,
-          title: "Working Professionals",
-          text: "Planning cross-field shifts, further education, certifications and growth strategies.",
-        },
-        {
-          Icon: Users,
-          title: "Parents &amp; Families",
-          text: "Getting structured, unbiased guidance instead of conflicting opinions.",
-        },
-      ].map(({ Icon, title, text }, index) => (
-        <div
-          key={index}
-          className="flex gap-4 bg-white rounded-2xl shadow-sm border border-gray-200 p-5"
-        >
-          <div
-            className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
-            style={{ backgroundColor: COLORS.lightBackground }}
-          >
-            <Icon size={22} style={{ color: COLORS.secondary }} />
-          </div>
-          <div>
-            <h3
-              className="text-sm sm:text-base font-semibold mb-1"
-              style={{ color: COLORS.primary2 }}
-            >
-              {title}
-            </h3>
-            <p
-              className="text-xs sm:text-sm leading-relaxed"
-              style={{ color: COLORS.textGray }}
-            >
-              {text}
-            </p>
+              Learn More <FaArrowCircleRight className="ml-2 mb-0.5" />
+            </a>
           </div>
         </div>
-      ))}
-    </div>
-  </Section>
-);
 
-// =========================================
-// HOW WE WORK – small 3-step (mirrors TheProcess tone)
-// =========================================
-const HowWeWorkSection = () => (
-  <Section bg="#FDF6E3">
-    <div className="max-w-4xl mx-auto text-center mb-8">
-      <h3
-        className="text-sm font-semibold tracking-wide mb-1"
-        style={{ color: COLORS.secondary }}
-      >
-        How We Work
-      </h3>
-      <h2
-        className="text-2xl sm:text-3xl font-extrabold mb-3"
-        style={{ color: COLORS.primary }}
-      >
-        Quality Guidance, Simple Process
-      </h2>
-      <p
-        className="text-sm sm:text-base"
-        style={{ color: COLORS.textGray }}
-      >
-        You don’t need to understand the entire education system. You just need
-        to tell us where you are and where you hope to go — we help with the
-        rest.
-      </p>
-    </div>
+      </section >
 
-    <div className="grid gap-6 md:grid-cols-3 max-w-5xl mx-auto">
-      {[
-        {
-          step: "01",
-          title: "Understand You",
-          text: "We learn about your academics, interests, constraints and goals.",
-        },
-        {
-          step: "02",
-          title: "Map Options",
-          text: "We connect your profile with suitable subjects, programs and paths.",
-        },
-        {
-          step: "03",
-          title: "Plan Next Moves",
-          text: "We recommend practical next steps and support you as you act.",
-        },
-      ].map((item, index) => (
-        <div
-          key={index}
-          className="bg-white rounded-2xl shadow-sm border border-amber-100 p-6 flex flex-col gap-3"
-        >
-          <div
-            className="inline-flex items-center justify-center rounded-full px-3 py-1 text-xs font-semibold"
-            style={{
-              backgroundColor: "#FFFBEB",
-              color: COLORS.secondary,
-            }}
-          >
-            Step {item.step}
-          </div>
-          <h3
-            className="text-base font-semibold"
-            style={{ color: COLORS.primary2 }}
-          >
-            {item.title}
-          </h3>
-          <p className="text-sm" style={{ color: COLORS.textGray }}>
-            {item.text}
-          </p>
-        </div>
-      ))}
-    </div>
-  </Section>
-);
 
-// =========================================
-// MAIN ABOUT PAGE
-// =========================================
-export default function AboutUs() {
-  return (
-    <div className="font-sans">
-      <AboutHero />
-      <StorySection />
-      <WhatWeDoSection />
-      <WhoWeSupportSection />
-      <HowWeWorkSection />
-    </div>
+
+
+
+    </div >
   );
 }

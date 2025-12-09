@@ -1,24 +1,21 @@
-// TaleemiAdvicePage.jsx — Unified & Upgraded
-// Source: :contentReference[oaicite:1]{index=1}
-
 import React from "react";
 import { NavLink } from "react-router-dom";
 import {
   Zap,
-  Users,
-  CheckCircle,
-  Smartphone,
-  MessageSquare,
   MessageCircle,
-  ArrowRight,
-  BookOpen,
+  Users,
+  CheckCircle2,
+  MonitorSmartphone,
 } from "lucide-react";
-import ServiceLayout from "../../components/ServiceLayout";
 
-// --- UNIFIED COLOR PALETTE (aligned with other service pages) ---
+import ServiceLayout from "../../components/ServiceLayout";
+import TaleemiAdviseForm from "../../components/ContactUs";
+import taleemiAdviceHero from "../../assets/service-images/Taleemi-Advice.png";
+
+// --- BRAND COLORS ----------------------------------------------------
 const COLORS = {
   primary: "#1E3A8A",
-  primaryDark: "#0F172A",
+  primaryDark: "#11253e",
   secondary: "#F97316",
   textGray: "#4B5563",
   grayText: "#4B5563",
@@ -27,357 +24,304 @@ const COLORS = {
   borderSoft: "#E5E7EB",
 };
 
-// ===================================================================
-// 1) HERO / INTRO SECTION
-// ===================================================================
+const baseCardStyle = {
+  backgroundColor: "#FFFFFF",
+  border: "1px solid #E0E7FF",
+  boxShadow: "0 12px 30px rgba(15,23,42,0.08)",
+};
+
+// --------------------------------------------------------------------
+// 1) HERO SECTION
+// --------------------------------------------------------------------
 const HeroSection = () => (
-  <section className="pb-10 border-b border-gray-200 mb-10">
-    <div
-      className="p-6 sm:p-8 rounded-3xl"
-      style={{
-        backgroundColor: COLORS.surface,
-        border: `1px solid ${COLORS.borderSoft}`,
-        boxShadow: "0 8px 24px rgba(0,0,0,0.05)",
-      }}
-    >
-      {/* Top mini strip */}
-      <div className="grid gap-4 md:grid-cols-3 mb-6">
-        <div
-          className="flex items-center gap-3 p-4 rounded-2xl"
-          style={{ backgroundColor: COLORS.lightBackground }}
-        >
-          <div
-            className="w-10 h-10 rounded-xl flex items-center justify-center"
-            style={{ backgroundColor: "#FFFFFF" }}
+  <section className="py-10 border-b border-gray-200">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="grid md:grid-cols-2 gap-8 items-start">
+        {/* LEFT: TEXT */}
+        <div>
+          <p
+            className="text-sm sm:text-base leading-relaxed"
+            style={{ color: COLORS.textGray }}
           >
-            <MessageCircle size={22} style={{ color: COLORS.primary }} />
+            In the fast-moving world of education and careers, timely guidance
+            can make all the difference. Whether you are a student facing an
+            urgent academic issue or a professional seeking immediate clarity,
+            Taleemi Advice provides fast, accurate, and personalized solutions —
+            exactly when you need them. As Pakistan’s first tech-based
+            educational solution provider, TaleemiGuide offers quick-response
+            support for all academic and professional matters, ensuring clarity,
+            relief, and direction within hours.
+          </p>
+        </div>
+
+        {/* RIGHT: IMAGE */}
+        <div className="flex md:justify-end mt-6 md:mt-0">
+          <div
+            className="overflow-hidden rounded-3xl border border-gray-200 bg-slate-50 w-full max-w-md"
+            style={{
+              boxShadow: "0 16px 40px rgba(15,23,42,0.08)",
+            }}
+          >
+            <div className="w-full h-64 sm:h-72 md:h-80 lg:h-96">
+              <img
+                src={taleemiAdviceHero}
+                alt="Student and professional receiving Taleemi Advice"
+                className="w-full h-full object-contain"
+              />
+            </div>
           </div>
-          <div>
-            <p
-              className="text-[11px] font-semibold uppercase tracking-wide"
-              style={{ color: COLORS.textGray }}
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+// --------------------------------------------------------------------
+// 2) WHAT MAKES TALEEMI ADVICE UNIQUE?
+// --------------------------------------------------------------------
+const WhatMakesUniqueSection = () => (
+  <section className="py-12 border-b border-gray-200">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Section Heading */}
+      <h2
+        className="text-2xl sm:text-3xl font-extrabold mb-6 sm:mb-8"
+        style={{ color: COLORS.primaryDark }}
+      >
+        What Makes Taleemi Advice Unique?
+      </h2>
+
+      {/* Qualities List – single column */}
+      <div className="space-y-8 sm:space-y-10">
+        {/* 1) Immediate Assistance */}
+        <div className="flex gap-4 sm:gap-5">
+          {/* Icon bubble */}
+          <div className="mt-1">
+            <div
+              className="w-10 h-10 rounded-2xl flex items-center justify-center"
+              style={{
+                backgroundColor: COLORS.lightBackground,
+                border: `1px solid ${COLORS.borderSoft}`,
+              }}
             >
-              Mode
-            </p>
+              <Zap size={20} style={{ color: COLORS.secondary }} />
+            </div>
+          </div>
+
+          {/* Content */}
+          <div className="flex-1 border-b border-gray-200 pb-6 sm:pb-7">
             <p
-              className="text-sm font-bold"
+              className="text-sm sm:text-base font-semibold mb-2"
               style={{ color: COLORS.primaryDark }}
             >
-              Quick Academic Query
+              Immediate Assistance — Quick Response Like 1122
+            </p>
+            <p
+              className="text-sm sm:text-base leading-relaxed"
+              style={{ color: COLORS.textGray }}
+            >
+              Some decisions can’t wait. Taleemi Advice works like 1122 in the academic world, giving you urgent access to expert advice, reliable information, and clear answers — fast.
+              <br />
+              Whenever you face uncertainty, confusion, or a time-sensitive issue, we are here with instant, expert-backed support.
             </p>
           </div>
         </div>
 
-        <div
-          className="flex items-center gap-3 p-4 rounded-2xl"
-          style={{ backgroundColor: COLORS.lightBackground }}
-        >
-          <div
-            className="w-10 h-10 rounded-xl flex items-center justify-center"
-            style={{ backgroundColor: "#FFFFFF" }}
-          >
-            <Users size={22} style={{ color: COLORS.secondary }} />
-          </div>
-          <div>
-            <p
-              className="text-[11px] font-semibold uppercase tracking-wide"
-              style={{ color: COLORS.textGray }}
+        {/* 2) Comprehensive Expertise */}
+        <div className="flex gap-4 sm:gap-5">
+          {/* Icon bubble */}
+          <div className="mt-1">
+            <div
+              className="w-10 h-10 rounded-2xl flex items-center justify-center"
+              style={{
+                backgroundColor: COLORS.lightBackground,
+                border: `1px solid ${COLORS.borderSoft}`,
+              }}
             >
-              Ideal For
-            </p>
+              <Users size={20} style={{ color: COLORS.secondary }} />
+            </div>
+          </div>
+
+        {/* Content */}
+          <div className="flex-1 border-b border-gray-200 pb-6 sm:pb-7">
             <p
-              className="text-sm font-bold"
+              className="text-sm sm:text-base font-semibold mb-2"
               style={{ color: COLORS.primaryDark }}
             >
-              Students &amp; parents with 1–2 key questions
+              Comprehensive Expertise — For All Levels
+            </p>
+
+            <p
+              className="text-sm sm:text-base leading-relaxed mb-2"
+              style={{ color: COLORS.textGray }}
+            >
+              Our advisory team includes:
+            </p>
+
+            <ul
+              className="list-disc list-inside space-y-1 text-sm sm:text-base mb-3"
+              style={{ color: COLORS.textGray }}
+            >
+              <li>Educationists</li>
+              <li>Academicians</li>
+              <li>Industry experts</li>
+              <li>Career coaches</li>
+              <li>Psychologists</li>
+              <li>Certified counselors</li>
+            </ul>
+
+            <p
+              className="text-sm sm:text-base leading-relaxed"
+              style={{ color: COLORS.textGray }}
+            >
+              We cover academic and professional issues from Matric to Post-Graduation, and for Working Professionals, providing clarity across every field and specialization.
             </p>
           </div>
         </div>
 
-        <div
-          className="flex items-center gap-3 p-4 rounded-2xl"
-          style={{ backgroundColor: COLORS.lightBackground }}
-        >
-          <div
-            className="w-10 h-10 rounded-xl flex items-center justify-center"
-            style={{ backgroundColor: "#FFFFFF" }}
-          >
-            <Zap size={22} style={{ color: COLORS.primary }} />
-          </div>
-          <div>
-            <p
-              className="text-[11px] font-semibold uppercase tracking-wide"
-              style={{ color: COLORS.textGray }}
+        {/* 3) Personalized, Practical Solutions */}
+        <div className="flex gap-4 sm:gap-5">
+          {/* Icon bubble */}
+          <div className="mt-1">
+            <div
+              className="w-10 h-10 rounded-2xl flex items-center justify-center"
+              style={{
+                backgroundColor: COLORS.lightBackground,
+                border: `1px solid ${COLORS.borderSoft}`,
+              }}
             >
-              Response Time
-            </p>
+              <CheckCircle2 size={20} style={{ color: COLORS.secondary }} />
+            </div>
+          </div>
+
+          {/* Content */}
+          <div className="flex-1 border-b border-gray-200 pb-6 sm:pb-7">
             <p
-              className="text-sm font-bold"
+              className="text-sm sm:text-base font-semibold mb-2"
               style={{ color: COLORS.primaryDark }}
             >
-              Usually within 24–48 hours
+              Personalized, Practical Solutions
+            </p>
+
+            <p
+              className="text-sm sm:text-base leading-relaxed"
+              style={{ color: COLORS.textGray }}
+            >
+              Every individual, case, and situation is different — so our responses are tailored specifically to your unique needs, ensuring the advice you receive is accurate, relevant, and immediately actionable.
+            </p>
+          </div>
+        </div>
+
+        {/* 4) Easy & User-Friendly Platform */}
+        <div className="flex gap-4 sm:gap-5">
+          {/* Icon bubble */}
+          <div className="mt-1">
+            <div
+              className="w-10 h-10 rounded-2xl flex items-center justify-center"
+              style={{
+                backgroundColor: COLORS.lightBackground,
+                border: `1px solid ${COLORS.borderSoft}`,
+              }}
+            >
+              <MonitorSmartphone size={20} style={{ color: COLORS.secondary }} />
+            </div>
+          </div>
+
+          {/* Content */}
+          <div className="flex-1">
+            <p
+              className="text-sm sm:text-base font-semibold mb-2"
+              style={{ color: COLORS.primaryDark }}
+            >
+              Easy & User-Friendly Platform
+            </p>
+
+            <p
+              className="text-sm sm:text-base leading-relaxed"
+              style={{ color: COLORS.textGray }}
+            >
+              The TaleemiGuide interface is designed for simplicity.
+              <br />
+              You can connect with experts, upload documents, and receive guidance quickly and conveniently — anytime, anywhere.
             </p>
           </div>
         </div>
       </div>
-
-      {/* Main copy */}
-      <p
-        className="text-base sm:text-lg leading-relaxed mb-3"
-        style={{ color: COLORS.textGray }}
-      >
-        <strong>Taleemi Advice</strong> is our rapid query resolution service.
-        It’s perfect when you have a single, specific question that needs a
-        quick, expert answer — without booking a full consultation. Ideal for
-        quick checks on eligibility, university deadlines, career definitions,
-        or general academic queries.
-      </p>
-
-      <p
-        className="text-base sm:text-lg font-semibold"
-        style={{ color: COLORS.primaryDark }}
-      >
-        Get expert advice quickly and efficiently, straight to your inbox or
-        phone.
-      </p>
     </div>
   </section>
 );
 
-// ===================================================================
-// 2) WHY CHOOSE TALEEMI ADVICE (USPs)
-// ===================================================================
-const USPSection = () => (
-  <section className="py-10 border-b border-gray-200 mb-10">
-    <h2
-      className="text-2xl sm:text-3xl font-extrabold mb-8"
-      style={{ color: COLORS.primaryDark }}
-    >
-      Why Choose Taleemi Advice?
-    </h2>
+// --------------------------------------------------------------------
+// 3) TALEEMI ADVICE FORM (REUSABLE COMPONENT)
+// --------------------------------------------------------------------
+const TaleemiAdviceFormSection = () => <TaleemiAdviseForm />;
 
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {[
-        {
-          title: "Speed",
-          icon: Zap,
-          desc: "Get clear, actionable answers within a short time window — without long booking delays.",
-          tag: "Fast response",
-        },
-        {
-          title: "Accuracy",
-          icon: CheckCircle,
-          desc: "Responses are drafted by experienced academic and career counselors, not generic automated replies.",
-          tag: "Expert-backed",
-        },
-        {
-          title: "Simplicity",
-          icon: MessageSquare,
-          desc: "Submit your question in simple text form; we guide you only on what’s necessary to answer it well.",
-          tag: "Easy to use",
-        },
-      ].map((usp, i) => {
-        const Icon = usp.icon;
-        return (
-          <div
-            key={i}
-            className="rounded-3xl p-7 relative overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
-            style={{
-              backgroundColor: "#FFFFFF",
-              border: `1px solid ${COLORS.borderSoft}`,
-              boxShadow: "0 12px 30px rgba(15,23,42,0.06)",
-            }}
-          >
-            {/* Accent blob */}
-            <div
-              className="absolute -top-10 -right-10 w-24 h-24 rounded-full opacity-20"
-              style={{
-                background:
-                  "radial-gradient(circle, rgba(249,115,22,0.45), transparent 70%)",
-              }}
-            />
-
-            {/* Icon Badge */}
-            <div
-              className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-md mb-4"
-              style={{
-                backgroundColor: COLORS.lightBackground,
-                border: `1px solid ${COLORS.secondary}30`,
-              }}
-            >
-              <Icon size={26} style={{ color: COLORS.secondary }} />
-            </div>
-
-            <h3
-              className="text-lg sm:text-xl font-bold mb-1"
-              style={{ color: COLORS.primaryDark }}
-            >
-              {usp.title}
-            </h3>
-
-            <span
-              className="inline-block text-[11px] font-semibold px-2.5 py-1 rounded-full mb-3"
-              style={{
-                backgroundColor: `${COLORS.secondary}15`,
-                color: COLORS.secondary,
-              }}
-            >
-              {usp.tag}
-            </span>
-
-            <p className="text-sm" style={{ color: COLORS.textGray }}>
-              {usp.desc}
-            </p>
-          </div>
-        );
-      })}
-    </div>
-  </section>
-);
-
-// ===================================================================
-// 3) PROCESS SECTION (3-step flow)
-// ===================================================================
-const ProcessSection = () => (
-  <section className="py-10 border-b border-gray-200 mb-10">
-    <h2
-      className="text-2xl sm:text-3xl font-extrabold mb-8"
-      style={{ color: COLORS.primaryDark }}
-    >
-      The Simple 3-Step Process
-    </h2>
-
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {[
-        {
-          num: 1,
-          title: "Ask Your Question",
-          desc: "Submit your query along with any relevant marks, grades or academic details.",
-          icon: BookOpen,
-        },
-        {
-          num: 2,
-          title: "Expert Review",
-          desc: "A dedicated counselor analyzes your situation and researches a precise, context-aware answer.",
-          icon: Users,
-        },
-        {
-          num: 3,
-          title: "Receive Response",
-          desc: "Get a detailed answer via your selected contact method (email, WhatsApp, or platform inbox).",
-          icon: Smartphone,
-        },
-      ].map((step, i) => {
-        const Icon = step.icon;
-        return (
-          <div
-            key={i}
-            className="p-6 rounded-3xl text-center"
-            style={{
-              backgroundColor: "#FFFFFF",
-              border: `1px solid ${COLORS.borderSoft}`,
-              boxShadow: "0 10px 24px rgba(0,0,0,0.05)",
-            }}
-          >
-            <div
-              className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 text-sm font-bold"
-              style={{
-                backgroundColor: COLORS.primary,
-                color: "white",
-              }}
-            >
-              {step.num}
-            </div>
-
-            <div
-              className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-3"
-              style={{
-                backgroundColor: COLORS.lightBackground,
-                border: `1px solid ${COLORS.secondary}30`,
-              }}
-            >
-              <Icon size={22} style={{ color: COLORS.secondary }} />
-            </div>
-
-            <h4
-              className="text-lg font-bold mb-2"
-              style={{ color: COLORS.primaryDark }}
-            >
-              {step.title}
-            </h4>
-            <p className="text-sm" style={{ color: COLORS.textGray }}>
-              {step.desc}
-            </p>
-          </div>
-        );
-      })}
-    </div>
-  </section>
-);
-
-// ===================================================================
-// 4) NEXT STEP SECTION (CTA → Online Session)
-// ===================================================================
+// --------------------------------------------------------------------
+// 4) NEXT STEP IN THE JOURNEY
+// --------------------------------------------------------------------
 const NextStepSection = () => (
-  <section className="pt-4 pb-14">
-    <div
-      className="p-8 rounded-3xl text-center relative overflow-hidden"
-      style={{
-        background:
-          "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 60%, #FFFFFF 100%)",
-        border: "1px solid rgba(0,0,0,0.04)",
-        boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
-      }}
-    >
+  <section className="py-10">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div
-        aria-hidden="true"
-        className="absolute -right-24 -top-24 w-52 h-52 rounded-full opacity-20"
+        className="p-6 sm:p-8 rounded-3xl relative overflow-hidden"
         style={{
           background:
-            "radial-gradient(circle, rgba(30,58,138,0.15), transparent 70%)",
-        }}
-      />
-
-      <h2
-        className="text-2xl sm:text-3xl font-extrabold mb-4"
-        style={{ color: COLORS.primaryDark }}
-      >
-        Your Next Step in the Journey
-      </h2>
-
-      <p
-        className="text-sm sm:text-base md:text-lg leading-relaxed max-w-3xl mx-auto mb-6"
-        style={{ color: COLORS.textGray }}
-      >
-        If you feel your situation is complex, or you want to discuss multiple
-        questions in detail, your next step is to{" "}
-        <strong>book an Online Session</strong> with our expert counselors.
-      </p>
-
-      <NavLink
-        to="/service/online-session"
-        className="inline-flex items-center px-8 py-3 text-base font-semibold rounded-xl shadow-md transition-transform duration-200 hover:scale-[1.03]"
-        style={{
-          backgroundColor: COLORS.secondary,
-          color: "white",
+            "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 60%, #FFFFFF 100%)",
+          border: "1px solid rgba(0,0,0,0.04)",
+          boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
         }}
       >
-        Book an Online Session
-        <ArrowRight size={20} className="ml-2" />
-      </NavLink>
+        <div
+          aria-hidden="true"
+          className="absolute -right-24 -top-24 w-52 h-52 rounded-full opacity-20"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(30,58,138,0.15), transparent 70%)",
+          }}
+        />
+
+        <div className="relative">
+          <h2
+            className="text-2xl sm:text-3xl font-extrabold mb-3"
+            style={{ color: COLORS.primaryDark }}
+          >
+            Next Step in the Journey
+          </h2>
+
+          <p
+            className="text-sm sm:text-base md:text-lg leading-relaxed mb-5 max-w-3xl"
+            style={{ color: COLORS.textGray }}
+          >
+            If you want personalized guidance or need to discuss your case in
+            detail, your next step is to Book an Online Session with our expert
+            counselors.
+          </p>
+
+          <NavLink
+            to="/service/online-session"
+            className="inline-flex items-center px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-lg font-semibold rounded-xl shadow-md transition-transform duration-200 hover:scale-[1.03]"
+            style={{
+              backgroundColor: COLORS.secondary,
+              color: "white",
+            }}
+          >
+            Book Online Session
+            <MessageCircle size={18} className="ml-2" />
+          </NavLink>
+        </div>
+      </div>
     </div>
   </section>
 );
 
-// ===================================================================
-// MAIN PAGE COMPONENT
-// ===================================================================
-export default function TaleemiAdvicePage() {
+// --------------------------------------------------------------------
+// MAIN COMPONENT
+// --------------------------------------------------------------------
+export default function TaleemiAdvice() {
   return (
-    <ServiceLayout title="Taleemi Advice" subtitle="Quick Advisory">
+    <ServiceLayout>
       <HeroSection />
-      <USPSection />
-      <ProcessSection />
+      <WhatMakesUniqueSection />
+      <TaleemiAdviceFormSection />
       <NextStepSection />
     </ServiceLayout>
   );

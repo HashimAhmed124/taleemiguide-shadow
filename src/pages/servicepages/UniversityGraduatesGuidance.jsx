@@ -1,26 +1,13 @@
-// UniversityGraduatesGuidance.jsx — Enriched & Unified
-
-import React from "react";
+import React, { useRef } from "react";
 import { NavLink } from "react-router-dom";
-import {
-  GraduationCap,
-  BookOpen,
-  Users,
-  MessageCircle,
-  Clock,
-  FileText,
-  CheckCircle,
-  Briefcase,
-  Zap,
-  ClipboardList,
-  ArrowRight,
-} from "lucide-react";
+import { BookOpenCheck, Users, HeartHandshake, ArrowRight } from "lucide-react";
 import ServiceLayout from "../../components/ServiceLayout";
+import universityGraduatesHero from "../../assets/service-images/University-Graduates.jpg";
 
-// --- UNIFIED COLOR PALETTE ---
+// --- BRAND COLORS ----------------------------------------------------
 const COLORS = {
   primary: "#1E3A8A",
-  primaryDark: "#0F172A",
+  primaryDark: "#11253e",
   secondary: "#F97316",
   textGray: "#4B5563",
   grayText: "#4B5563",
@@ -29,560 +16,619 @@ const COLORS = {
   borderSoft: "#E5E7EB",
 };
 
-// ===================================================================
-// 1) HERO / INTRO SECTION
-// ===================================================================
+const baseCardStyle = {
+  backgroundColor: "#FFFFFF",
+  border: "1px solid #E0E7FF",
+  boxShadow: "0 12px 30px rgba(15,23,42,0.08)",
+};
+
+// --------------------------------------------------------------------
+// 1) HERO SECTION
+// --------------------------------------------------------------------
 const HeroSection = () => (
-  <section className="pb-10 border-b border-gray-200 mb-10">
-    <div
-      className="p-6 sm:p-8 rounded-3xl"
-      style={{
-        backgroundColor: COLORS.surface,
-        border: `1px solid ${COLORS.borderSoft}`,
-        boxShadow: "0 8px 24px rgba(0,0,0,0.05)",
-      }}
-    >
-      {/* Top mini strip */}
-      <div className="grid gap-4 md:grid-cols-3 mb-6">
-        <div
-          className="flex items-center gap-3 p-4 rounded-2xl"
-          style={{ backgroundColor: COLORS.lightBackground }}
-        >
-          <div
-            className="w-10 h-10 rounded-xl flex items-center justify-center"
-            style={{ backgroundColor: "#FFFFFF" }}
+  <section className="py-10 border-b border-gray-200">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="grid md:grid-cols-2 gap-8 items-start">
+        {/* LEFT: TEXT */}
+        <div>
+          <p
+            className="text-sm sm:text-base leading-relaxed mb-4"
+            style={{ color: COLORS.textGray }}
           >
-            <GraduationCap size={22} style={{ color: COLORS.primary }} />
+            The journey through college and university is transformative —
+            filled with opportunities, responsibilities, and challenges.
+            Whether you are pursuing an Associate Degree, BS, MS/MPhil, or PhD,
+            academic pressure, course requirements, administrative hurdles, and
+            personal challenges often overlap. That’s exactly where
+            TaleemiGuide helps — enabling students to move beyond confusion and
+            excel in their higher education path.
+          </p>
+
+          <p
+            className="text-sm sm:text-base leading-relaxed"
+            style={{ color: COLORS.textGray }}
+          >
+            Our team quickly understands your case, identifies the exact issue,
+            and provides the precise guidance you need to move forward with
+            clarity and confidence.
+          </p>
+        </div>
+
+        {/* RIGHT: IMAGE */}
+        <div className="flex md:justify-end">
+          <div
+            className="overflow-hidden rounded-3xl border border-gray-200 bg-slate-50 w-full max-w-md"
+            style={{
+              boxShadow: "0 16px 40px rgba(15,23,42,0.08)",
+            }}
+          >
+            <div className="w-full h-64 sm:h-72 md:h-80 lg:h-96">
+              <img
+                src={universityGraduatesHero}
+                alt="University students receiving guidance"
+                className="w-full h-full object-contain"
+              />
+            </div>
           </div>
-          <div>
-            <p
-              className="text-[11px] font-semibold uppercase tracking-wide"
-              style={{ color: COLORS.textGray }}
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+// --------------------------------------------------------------------
+// 2) COMMON CHALLENGES SECTION
+// --------------------------------------------------------------------
+const CommonChallengesSection = () => (
+  <section className="py-10 border-b border-gray-200">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mb-6">
+        <h2
+          className="text-2xl sm:text-3xl font-extrabold mb-3"
+          style={{ color: COLORS.primaryDark }}
+        >
+          Common Challenges Faced by University Students in Pakistan
+        </h2>
+      </div>
+
+      <div
+        className="rounded-3xl p-6 sm:p-7"
+        style={{
+          backgroundColor: COLORS.surface,
+          border: `1px solid ${COLORS.borderSoft}`,
+          boxShadow: "0 10px 28px rgba(15,23,42,0.06)",
+        }}
+      >
+        <p
+          className="text-sm sm:text-base leading-relaxed mb-3"
+          style={{ color: COLORS.textGray }}
+        >
+          Students encounter a wide range of academic, administrative, and
+          research-related issues, including:
+        </p>
+
+        <div className="grid sm:grid-cols-2 gap-4 mb-4">
+          <ul
+            className="list-disc list-inside space-y-1 text-sm sm:text-base"
+            style={{ color: COLORS.textGray }}
+          >
+            <li>Course and Major Selection</li>
+            <li>Switching between Programs</li>
+            <li>Migration</li>
+            <li>Maximum study period issues</li>
+            <li>Degree completion requirements</li>
+            <li>Lateral entry into BS programs</li>
+          </ul>
+
+          <ul
+            className="list-disc list-inside space-y-1 text-sm sm:text-base"
+            style={{ color: COLORS.textGray }}
+          >
+            <li>Certification Programs in lieu of Degrees</li>
+            <li>CGPA vs Division concerns</li>
+            <li>Improvement or repetition policies</li>
+            <li>Research supervision matters</li>
+            <li>Research publications</li>
+            <li>Thesis/Project-related issues</li>
+          </ul>
+        </div>
+
+        <p
+          className="text-sm sm:text-base leading-relaxed"
+          style={{ color: COLORS.textGray }}
+        >
+          Without proper guidance, students often waste valuable time, lose
+          opportunities, and face unnecessary academic stress. TaleemiGuide
+          provides a One-Window Guidance for all such problems.
+        </p>
+      </div>
+    </div>
+  </section>
+);
+
+// --------------------------------------------------------------------
+// 3) HOW TALEEMIGUIDE SUPPORTS
+// --------------------------------------------------------------------
+const HowSupportsSection = () => (
+  <section className="py-10 border-b border-gray-200">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mb-6">
+        <h2
+          className="text-2xl sm:text-3xl font-extrabold mb-3"
+          style={{ color: COLORS.primaryDark }}
+        >
+          How TaleemiGuide Supports
+        </h2>
+        <p
+          className="text-sm sm:text-base leading-relaxed max-w-3xl"
+          style={{ color: COLORS.textGray }}
+        >
+          Our approach is comprehensive and student-centered, focusing not only
+          on academic solutions but also on personal and emotional support.
+        </p>
+      </div>
+
+      {/* 3-STEP VERTICAL FLOW */}
+      <div className="space-y-6">
+        {/* Academic Advisement */}
+        <div
+          className="flex gap-4 items-start rounded-2xl p-5 sm:p-6"
+          style={baseCardStyle}
+        >
+          <div className="flex flex-col items-center flex-none pt-1">
+            <div
+              className="w-10 h-10 rounded-xl flex items-center justify-center"
+              style={{
+                backgroundColor: COLORS.lightBackground,
+                border: `1px solid ${COLORS.borderSoft}`,
+              }}
             >
-              Stage
-            </p>
+              <BookOpenCheck size={20} style={{ color: COLORS.secondary }} />
+            </div>
+          </div>
+          <div className="space-y-2">
             <p
-              className="text-sm font-bold"
+              className="text-sm sm:text-base font-semibold"
               style={{ color: COLORS.primaryDark }}
             >
-              Final Year &amp; Graduates
+              1️⃣ Academic Advisement
+            </p>
+            <p
+              className="text-sm sm:text-base leading-relaxed"
+              style={{ color: COLORS.textGray }}
+            >
+              We offer expert academic guidance to all undergraduate and
+              graduate students. TaleemiGuide works like 1122 for academic
+              emergencies — accessible, fast, and reliable.
             </p>
           </div>
         </div>
 
+        {/* Career Counseling */}
         <div
-          className="flex items-center gap-3 p-4 rounded-2xl"
-          style={{ backgroundColor: COLORS.lightBackground }}
+          className="flex gap-4 items-start rounded-2xl p-5 sm:p-6"
+          style={baseCardStyle}
         >
-          <div
-            className="w-10 h-10 rounded-xl flex items-center justify-center"
-            style={{ backgroundColor: "#FFFFFF" }}
-          >
-            <Briefcase size={22} style={{ color: COLORS.secondary }} />
-          </div>
-          <div>
-            <p
-              className="text-[11px] font-semibold uppercase tracking-wide"
-              style={{ color: COLORS.textGray }}
+          <div className="flex flex-col items-center flex-none pt-1">
+            <div
+              className="w-10 h-10 rounded-xl flex items-center justify-center"
+              style={{
+                backgroundColor: COLORS.lightBackground,
+                border: `1px solid ${COLORS.borderSoft}`,
+              }}
             >
-              Focus
-            </p>
+              <Users size={20} style={{ color: COLORS.secondary }} />
+            </div>
+          </div>
+          <div className="space-y-2">
             <p
-              className="text-sm font-bold"
+              className="text-sm sm:text-base font-semibold"
               style={{ color: COLORS.primaryDark }}
             >
-              Career Launch &amp; Higher Studies
+              2️⃣ Career Counseling
+            </p>
+            <p
+              className="text-sm sm:text-base leading-relaxed"
+              style={{ color: COLORS.textGray }}
+            >
+              We guide students in exploring career options, understanding the
+              pros and cons of various specializations, identifying suitable
+              MS/MPhil or PhD pathways, preparing for internships and job
+              placements, and strengthening their interview readiness — all in
+              one place.
             </p>
           </div>
         </div>
 
+        {/* EQ Support */}
         <div
-          className="flex items-center gap-3 p-4 rounded-2xl"
-          style={{ backgroundColor: COLORS.lightBackground }}
+          className="flex gap-4 items-start rounded-2xl p-5 sm:p-6"
+          style={baseCardStyle}
         >
-          <div
-            className="w-10 h-10 rounded-xl flex items-center justify-center"
-            style={{ backgroundColor: "#FFFFFF" }}
-          >
-            <Users size={22} style={{ color: COLORS.primary }} />
-          </div>
-          <div>
-            <p
-              className="text-[11px] font-semibold uppercase tracking-wide"
-              style={{ color: COLORS.textGray }}
+          <div className="flex flex-col items-center flex-none pt-1">
+            <div
+              className="w-10 h-10 rounded-xl flex items-center justify-center"
+              style={{
+                backgroundColor: COLORS.lightBackground,
+                border: `1px solid ${COLORS.borderSoft}`,
+              }}
             >
-              Ideal For
-            </p>
+              <HeartHandshake size={20} style={{ color: COLORS.secondary }} />
+            </div>
+          </div>
+          <div className="space-y-2">
             <p
-              className="text-sm font-bold"
+              className="text-sm sm:text-base font-semibold"
               style={{ color: COLORS.primaryDark }}
             >
-              Fresh Graduates &amp; Final-Year Students
+              3️⃣ Emotional Intelligence (EQ) Support
+            </p>
+            <p
+              className="text-sm sm:text-base leading-relaxed"
+              style={{ color: COLORS.textGray }}
+            >
+              A strong EQ is vital for success in university and professional
+              life, and our counselors help students build self-awareness,
+              manage stress, strengthen motivation and resilience, maintain
+              work-life balance, and develop confident problem-solving skills —
+              with a safe space to discuss concerns and receive practical
+              solutions.
             </p>
           </div>
         </div>
       </div>
+    </div>
+  </section>
+);
 
-      {/* Main copy */}
-      <p
-        className="text-base sm:text-lg leading-relaxed mb-3"
-        style={{ color: COLORS.textGray }}
+// --------------------------------------------------------------------
+// 4) OUR EXPERT TEAM
+// --------------------------------------------------------------------
+const ExpertTeamSection = () => (
+  <section className="py-10 border-b border-gray-200">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mb-6">
+        <h2
+          className="text-2xl sm:text-3xl font-extrabold mb-3"
+          style={{ color: COLORS.primaryDark }}
+        >
+          Our Expert Team
+        </h2>
+      </div>
+
+      <div
+        className="rounded-3xl p-6 sm:p-7"
+        style={{
+          backgroundColor: COLORS.surface,
+          border: `1px solid ${COLORS.borderSoft}`,
+          boxShadow: "0 10px 25px rgba(15,23,42,0.06)",
+        }}
       >
-        Navigating the transition from university to a career, or planning
-        further education (MS/MPhil/PhD), is complex. Our guidance service for
-        university graduates focuses on post-bachelor degree challenges,
-        including{" "}
-        <strong>
-          job search strategies, higher studies planning, and resolving academic
-          issues
-        </strong>
-        .
-      </p>
+        <p
+          className="text-sm sm:text-base leading-relaxed mb-3"
+          style={{ color: COLORS.textGray }}
+        >
+          TaleemiGuide’s team includes:
+        </p>
 
-      <p
-        className="text-base sm:text-lg font-semibold"
-        style={{ color: COLORS.primaryDark }}
-      >
-        We provide the targeted support graduates need to make their first
-        professional move successful.
-      </p>
+        <ul
+          className="list-disc list-inside space-y-1 text-sm sm:text-base mb-4"
+          style={{ color: COLORS.textGray }}
+        >
+          <li>Educationists</li>
+          <li>Academicians</li>
+          <li>Industry professionals</li>
+          <li>Career advisors</li>
+          <li>Psychologists</li>
+          <li>Certified counselors</li>
+        </ul>
+
+        <p
+          className="text-sm sm:text-base leading-relaxed font-semibold"
+          style={{ color: COLORS.primaryDark }}
+        >
+          Their combined experience ensures that every student gets accurate,
+          practical, and reliable guidance.
+        </p>
+      </div>
     </div>
   </section>
 );
 
-// ===================================================================
-// 2) “WHERE ARE YOU RIGHT NOW?” SECTION
-// ===================================================================
-const SituationSection = () => (
-  <section className="py-10 border-b border-gray-200 mb-10">
-    <h2
-      className="text-2xl sm:text-3xl font-extrabold mb-2"
-      style={{ color: COLORS.primaryDark }}
-    >
-      Where Are You Right Now?
-    </h2>
-    <p
-      className="text-sm sm:text-base mb-8 max-w-2xl"
-      style={{ color: COLORS.textGray }}
-    >
-      Most of the graduates we work with fall into one of these situations. This
-      helps us shape the guidance to your reality, not just your degree title.
-    </p>
-
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {[
-        {
-          title: "Final-Year Student",
-          icon: Clock,
-          desc: "You are still completing your last semester or final year and want to plan jobs or higher studies in advance.",
-          bullets: [
-            "Confused about MS vs job directly",
-            "Unsure which skills to build before graduating",
-          ],
-        },
-        {
-          title: "Fresh Graduate (0–2 years)",
-          icon: Briefcase,
-          desc: "You’ve graduated recently and are looking for your first role or considering a switch after a short job.",
-          bullets: [
-            "CV/LinkedIn not getting responses",
-            "Not sure which roles fit your degree",
-          ],
-        },
-        {
-          title: "Stuck or Unsure",
-          icon: MessageCircle,
-          desc: "You may have a gap after graduation or feel stuck in an unrelated job and want to realign your path.",
-          bullets: [
-            "Mismatch between degree & job",
-            "Thinking of a major career shift",
-          ],
-        },
-      ].map((item, i) => {
-        const Icon = item.icon;
-        return (
-          <div
-            key={i}
-            className="p-6 rounded-3xl h-full"
-            style={{
-              backgroundColor: "#FFFFFF",
-              border: `1px solid ${COLORS.borderSoft}`,
-              boxShadow: "0 10px 26px rgba(0,0,0,0.06)",
-            }}
-          >
-            <Icon
-              size={26}
-              className="mb-3"
-              style={{ color: COLORS.secondary }}
-            />
-            <h3
-              className="text-lg sm:text-xl font-bold mb-2"
-              style={{ color: COLORS.primaryDark }}
-            >
-              {item.title}
-            </h3>
-            <p
-              className="text-sm mb-3"
-              style={{ color: COLORS.textGray }}
-            >
-              {item.desc}
-            </p>
-            <ul
-              className="space-y-1 text-sm"
-              style={{ color: COLORS.textGray }}
-            >
-              {item.bullets.map((b, idx) => (
-                <li key={idx}>• {b}</li>
-              ))}
-            </ul>
-          </div>
-        );
-      })}
-    </div>
-  </section>
-);
-
-// ===================================================================
-// 3) CHALLENGES SECTION
-// ===================================================================
-const ChallengesSection = () => (
-  <section className="py-10 border-b border-gray-200 mb-10">
-    <h2
-      className="text-2xl sm:text-3xl font-extrabold mb-8"
-      style={{ color: COLORS.primaryDark }}
-    >
-      Common Challenges for Graduates
-    </h2>
-
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {[
-        {
-          title: "Job Market Entry",
-          icon: Briefcase,
-          details: [
-            "Writing a professional CV/Resume",
-            "Interview preparation and mock sessions",
-            "Salary expectations and negotiation",
-          ],
-        },
-        {
-          title: "Higher Education Planning",
-          icon: GraduationCap,
-          details: [
-            "Selecting the right specialization for MS/MPhil",
-            "SOP and Research Proposal writing assistance",
-            "Admission criteria for foreign universities",
-          ],
-        },
-        {
-          title: "Academic Hurdles",
-          icon: ClipboardList,
-          details: [
-            "CGPA vs Division concerns",
-            "Improvement or repetition policies",
-            "Errors in transcripts or degree titles",
-          ],
-        },
-        {
-          title: "Career Confusion",
-          icon: Users,
-          details: [
-            "Qualification mismatch (degree vs job interest)",
-            "Deciding between entrepreneurship and employment",
-            "Navigating family pressure post-graduation",
-          ],
-        },
-      ].map((group, index) => {
-        const Icon = group.icon;
-        return (
-          <div
-            key={index}
-            className="p-6 sm:p-7 rounded-3xl h-full"
-            style={{
-              backgroundColor: "#FFFFFF",
-              border: `1px solid ${COLORS.borderSoft}`,
-              boxShadow: "0 10px 28px rgba(0,0,0,0.06)",
-            }}
-          >
-            <Icon
-              size={30}
-              className="mb-4"
-              style={{ color: COLORS.primary }}
-            />
-            <h3
-              className="text-xl font-bold mb-3"
-              style={{ color: COLORS.primaryDark }}
-            >
-              {group.title}
-            </h3>
-            <ul
-              className="space-y-2 text-sm"
-              style={{ color: COLORS.textGray }}
-            >
-              {group.details.map((detail, i) => (
-                <li key={i} className="flex items-start">
-                  <CheckCircle
-                    size={14}
-                    className="flex-shrink-0 mt-1 mr-2"
-                    style={{ color: COLORS.secondary }}
-                  />
-                  <span>{detail}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        );
-      })}
-    </div>
-  </section>
-);
-
-// ===================================================================
-// 4) “WAYS WE CAN HELP YOU RIGHT NOW” (Options)
-// ===================================================================
-const SupportOptionsSection = () => (
-  <section className="py-10 border-b border-gray-200 mb-10">
-    <h2
-      className="text-2xl sm:text-3xl font-extrabold mb-2"
-      style={{ color: COLORS.primaryDark }}
-    >
-      Ways We Can Help You Right Now
-    </h2>
-    <p
-      className="text-sm sm:text-base mb-8 max-w-2xl"
-      style={{ color: COLORS.textGray }}
-    >
-      Choose the support that matches your immediate priority. You can always
-      combine more than one option as you move forward.
-    </p>
-
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-      {[
-        {
-          title: "Career Roadmap Session",
-          icon: Users,
-          desc: "One-on-one session to map out your next 2–5 years, including jobs, skills, and higher studies options.",
-          link: "/service/online-session",
-          cta: "Book Session",
-        },
-        {
-          title: "CV & Profile Review",
-          icon: FileText,
-          desc: "Detailed feedback on your CV/Resume and LinkedIn profile to increase interview callbacks.",
-          link: "/service/taleemi-advice",
-          cta: "Request Review",
-        },
-        {
-          title: "Higher Studies Planning",
-          icon: BookOpen,
-          desc: "Shortlist MS/MPhil/PhD options, understand requirements, and discuss timelines and funding possibilities.",
-          link: "/service/university-program-finder",
-          cta: "Explore Programs",
-        },
-        {
-          title: "Quick Taleemi Advice",
-          icon: MessageCircle,
-          desc: "Ask a focused question about jobs, degrees, gaps, or switching careers and get a clear response.",
-          link: "/service/taleemi-advice",
-          cta: "Ask a Question",
-        },
-      ].map((opt, i) => {
-        const Icon = opt.icon;
-        return (
-          <div
-            key={i}
-            className="rounded-3xl p-6 flex flex-col h-full relative overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
-            style={{
-              backgroundColor: "#FFFFFF",
-              border: "1px solid #E0E7FF",
-              boxShadow: "0 12px 30px rgba(15,23,42,0.08)",
-            }}
-          >
-            <div
-              className="absolute -top-10 -right-10 w-24 h-24 rounded-full opacity-20"
-              style={{
-                background:
-                  "radial-gradient(circle, rgba(249,115,22,0.4), transparent 70%)",
-              }}
-            />
-
-            <div
-              className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-md mb-4"
-              style={{
-                backgroundColor: COLORS.lightBackground,
-                border: `1px solid ${COLORS.secondary}30`,
-              }}
-            >
-              <Icon size={24} style={{ color: COLORS.secondary }} />
-            </div>
-
-            <h3
-              className="text-base sm:text-lg font-bold mb-2"
-              style={{ color: COLORS.primaryDark }}
-            >
-              {opt.title}
-            </h3>
-
-            <p
-              className="text-sm mb-4 flex-1"
-              style={{ color: COLORS.textGray }}
-            >
-              {opt.desc}
-            </p>
-
-            <NavLink
-              to={opt.link}
-              className="inline-flex items-center justify-center mt-auto px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 hover:scale-[1.03] shadow-md"
-              style={{
-                backgroundColor: COLORS.secondary,
-                color: "white",
-              }}
-            >
-              {opt.cta}
-              <ArrowRight size={16} className="ml-2" />
-            </NavLink>
-          </div>
-        );
-      })}
-    </div>
-  </section>
-);
-
-// ===================================================================
-// 5) EXPERT PROCESS SECTION
-// ===================================================================
-const ExpertProcessSection = () => (
-  <section className="py-10 border-b border-gray-200 mb-10">
-    <h2
-      className="text-2xl sm:text-3xl font-extrabold mb-8"
-      style={{ color: COLORS.primaryDark }}
-    >
-      Our 3-Step Expert Process
-    </h2>
-
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-      {[
-        {
-          title: "Profile Analysis",
-          icon: FileText,
-          desc: "Detailed review of your degree, grades, internships, and desired career path.",
-        },
-        {
-          title: "Personalized Strategy",
-          icon: Zap,
-          desc: "A tailored plan for job applications, further studies, or addressing academic issues.",
-        },
-        {
-          title: "Ongoing Support",
-          icon: MessageCircle,
-          desc: "Follow-up advice and query resolution via Taleemi Advice or a quick online session.",
-        },
-      ].map((service, index) => {
-        const Icon = service.icon;
-        return (
-          <div
-            key={index}
-            className="p-6 sm:p-7 rounded-3xl h-full transition duration-300 hover:shadow-xl"
-            style={{
-              backgroundColor: "#FFFFFF",
-              border: `1px solid ${COLORS.borderSoft}`,
-              boxShadow: "0 10px 26px rgba(0,0,0,0.06)",
-            }}
-          >
-            <div
-              className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4"
-              style={{
-                backgroundColor: COLORS.lightBackground,
-                border: `1px solid ${COLORS.secondary}30`,
-              }}
-            >
-              <Icon size={30} style={{ color: COLORS.secondary }} />
-            </div>
-            <h3
-              className="text-lg sm:text-xl font-bold mb-2"
-              style={{ color: COLORS.primaryDark }}
-            >
-              {service.title}
-            </h3>
-            <p className="text-sm" style={{ color: COLORS.textGray }}>
-              {service.desc}
-            </p>
-          </div>
-        );
-      })}
-    </div>
-  </section>
-);
-
-// ===================================================================
-// 6) NEXT STEP SECTION (CTA, unified style)
-// ===================================================================
-const NextStepSection = () => (
-  <section className="pt-4 pb-14">
-    <div
-      className="p-8 rounded-3xl text-center relative overflow-hidden"
+// --------------------------------------------------------------------
+// 5) TALEEMI ADVICE FORM SECTION (GIVEN CODE, JUST WRAPPED)
+// --------------------------------------------------------------------
+const TaleemiAdviceFormSection = ({ sectionRef }) => {
+  return (
+    <section
+      ref={sectionRef}
+      className="py-16 md:py-24 border-b border-gray-200"
       style={{
-        background:
-          "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 60%, #FFFFFF 100%)",
-        border: "1px solid rgba(0,0,0,0.04)",
-        boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
+        background: `linear-gradient(to bottom right, ${COLORS.lightBackground} 0%, white 100%)`,
       }}
     >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto space-y-10">
+          {/* Title & Description Header */}
+          <div className="text-center space-y-3">
+            <h2
+              className="text-2xl md:text-3xl lg:text-4xl font-extrabold"
+              style={{ color: COLORS.primary }}
+            >
+              Need Quick Help? (Seek Taleemi Advice)
+            </h2>
+
+            <p
+              className="text-center max-w-2xl mx-auto text-base leading-relaxed"
+              style={{ color: COLORS.textGray }}
+            >
+              <span
+                className="font-semibold"
+                style={{ color: COLORS.primary }}
+              >
+                Taleemi Advice
+              </span>{" "}
+              is your academic emergency service. Whether you're choosing
+              subjects, facing confusion, stuck in academic challenges, or
+              planning a career transition — get expert guidance in time.
+            </p>
+          </div>
+
+          {/* Form Container Card */}
+          <div
+            className="relative rounded-3xl p-8 md:p-12"
+            style={{
+              backgroundColor: "#FFFFFF",
+              border: "1px solid #BFDBFE",
+              boxShadow: "0 18px 40px rgba(15,23,42,0.12)",
+            }}
+          >
+            {/* Form Title */}
+            <h3
+              className="text-xl md:text-2xl font-semibold mb-8 text-center"
+              style={{ color: COLORS.primary }}
+            >
+              Submit Your Query
+            </h3>
+
+            <form className="space-y-6">
+              {/* Name, Email, Phone */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {["Name", "Email", "Phone"].map((placeholder, i) => (
+                  <div key={i} className="relative">
+                    <input
+                      type={
+                        placeholder === "Email"
+                          ? "email"
+                          : placeholder === "Phone"
+                          ? "tel"
+                          : "text"
+                      }
+                      placeholder=" "
+                      className="w-full px-4 pt-5 pb-2 rounded-xl border border-gray-300 focus:outline-none focus:border-2 focus:ring-0 transition peer bg-white hover:border-gray-400 duration-300"
+                      style={{
+                        borderColor: "#E5E7EB",
+                      }}
+                    />
+                    {/* Floating Label */}
+                    <label
+                      className="absolute left-4 top-2 text-xs transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-xs"
+                      style={{ color: COLORS.textGray }}
+                    >
+                      {placeholder}
+                    </label>
+                  </div>
+                ))}
+              </div>
+
+              {/* Dropdown */}
+              <div className="relative">
+                <select
+                  className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-2 focus:ring-0 transition bg-white appearance-none hover:border-gray-400 duration-300"
+                  style={{
+                    borderColor: "#E5E7EB",
+                    paddingTop: "1rem",
+                    paddingBottom: "0.5rem",
+                  }}
+                >
+                  <option disabled defaultValue="">
+                    Select your category
+                  </option>
+                 <option>BA/BSc</option>
+                <option>Associate Degree</option>
+                <option>BS & Equivalent</option>
+                </select>
+              </div>
+
+              {/* Query Textarea */}
+              <div className="relative">
+                <textarea
+                  rows="4"
+                  placeholder=" "
+                  className="w-full px-4 pt-5 pb-2 rounded-xl border border-gray-300 focus:outline-none focus:border-2 focus:ring-0 transition peer bg-white hover:border-gray-400 duration-300"
+                  style={{
+                    borderColor: "#E5E7EB",
+                  }}
+                ></textarea>
+                {/* Floating Label */}
+                <label
+                  className="absolute left-4 top-2 text-xs transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-xs"
+                  style={{ color: COLORS.textGray }}
+                >
+                  Enter your query
+                </label>
+              </div>
+
+              {/* File Upload */}
+              <div>
+                <label
+                  className="block mb-2 font-medium text-sm"
+                  style={{ color: COLORS.primary }}
+                >
+                  Supporting Documents (Optional)
+                </label>
+                <div className="flex flex-wrap items-center gap-4">
+                  <label
+                    htmlFor="file-upload"
+                    className="cursor-pointer px-5 py-2 rounded-lg transition transform hover:scale-[1.02] duration-300 font-medium"
+                    style={{
+                      backgroundColor: COLORS.secondary,
+                      color: "white",
+                      boxShadow:
+                        "0 4px 6px -1px rgba(249, 115, 22, 0.5), 0 2px 4px -2px rgba(249, 115, 22, 0.5)",
+                    }}
+                  >
+                    Choose Files
+                  </label>
+                  <span
+                    className="text-sm"
+                    style={{ color: COLORS.textGray }}
+                  >
+                    No file chosen
+                  </span>
+                  <input
+                    id="file-upload"
+                    type="file"
+                    className="hidden"
+                    multiple
+                  />
+                </div>
+              </div>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className="w-full py-3 rounded-xl font-semibold shadow-lg transition-all duration-300 transform hover:scale-[1.01]"
+                style={{
+                  backgroundColor: COLORS.primary,
+                  color: "white",
+                  boxShadow:
+                    "0 10px 15px -3px rgba(30, 58, 138, 0.5), 0 4px 6px -4px rgba(30, 58, 138, 0.5)",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.backgroundColor = COLORS.secondary)
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.backgroundColor = COLORS.primary)
+                }
+              >
+                Click Here to Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// --------------------------------------------------------------------
+// 6) ONLINE SESSION SECTION
+// --------------------------------------------------------------------
+const OnlineSessionSection = () => (
+  <section className="py-10 border-b border-gray-200">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div
-        aria-hidden="true"
-        className="absolute -right-24 -top-24 w-52 h-52 rounded-full opacity-20"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(30,58,138,0.15), transparent 70%)",
-        }}
-      />
-
-      <h2
-        className="text-2xl sm:text-3xl font-extrabold mb-4"
-        style={{ color: COLORS.primaryDark }}
+        className="rounded-3xl p-6 sm:p-7"
+        style={baseCardStyle}
       >
-        Your Next Step in the Journey
-      </h2>
+        <p
+          className="text-sm sm:text-base leading-relaxed mb-4"
+          style={{ color: COLORS.textGray }}
+        >
+          Most academic issues are resolved through the portal. However, if you
+          want deeper discussion or personalized conversation, you may book an
+          online counseling session with our experts.
+        </p>
 
-      <p
-        className="text-sm sm:text-base md:text-lg leading-relaxed max-w-3xl mx-auto mb-6"
-        style={{ color: COLORS.textGray }}
-      >
-        As graduates step into the professional world, new challenges emerge
-        around growth, switching roles, or changing careers. TaleemiGuide
-        continues supporting you through our{" "}
-        <strong>Working Professionals Guidance</strong> service.
-      </p>
-
-      <NavLink
-        to="/service/working-professional-guidance"
-        className="inline-flex items-center px-8 py-3 text-base font-semibold rounded-xl shadow-md transition-transform duration-200 hover:scale-[1.03]"
-        style={{
-          backgroundColor: COLORS.secondary,
-          color: "white",
-        }}
-      >
-        Explore Guidance for Working Professionals
-        <ArrowRight size={20} className="ml-2" />
-      </NavLink>
+        <NavLink
+          to="/service/online-session"
+          className="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold rounded-xl shadow-md transition-transform duration-200 hover:scale-[1.03]"
+          style={{
+            backgroundColor: COLORS.secondary,
+            color: "white",
+          }}
+        >
+          Book Online Session
+          <ArrowRight size={18} className="ml-2" />
+        </NavLink>
+      </div>
     </div>
   </section>
 );
 
-// ===================================================================
-// MAIN PAGE COMPONENT
-// ===================================================================
+// --------------------------------------------------------------------
+// 7) NEXT STEP IN THE JOURNEY
+// --------------------------------------------------------------------
+const NextStepSection = () => (
+  <section className="py-10">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        className="p-6 sm:p-8 rounded-3xl relative overflow-hidden"
+        style={{
+          background:
+            "linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 60%, #FFFFFF 100%)",
+          border: "1px solid rgba(0,0,0,0.04)",
+          boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
+        }}
+      >
+        <div
+          aria-hidden="true"
+          className="absolute -right-24 -top-24 w-52 h-52 rounded-full opacity-20"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(30,58,138,0.15), transparent 70%)",
+          }}
+        />
+
+        <div className="relative">
+          <h2
+            className="text-2xl sm:text-3xl font-extrabold mb-3"
+            style={{ color: COLORS.primaryDark }}
+          >
+            Next Step in the Journey
+          </h2>
+
+          <p
+            className="text-sm sm:text-base md:text-lg leading-relaxed mb-5 max-w-3xl"
+            style={{ color: COLORS.textGray }}
+          >
+            As students graduate and enter the professional world, new
+            challenges emerge — and TaleemiGuide continues helping through our
+            next service: Working Professionals.
+          </p>
+
+          <NavLink
+            to="/service/working-professional-guidance"
+            className="inline-flex items-center px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-lg font-semibold rounded-xl shadow-md transition-transform duration-200 hover:scale-[1.03]"
+            style={{
+              backgroundColor: COLORS.secondary,
+              color: "white",
+            }}
+          >
+            Go to Working Professionals Guidance
+            <ArrowRight size={18} className="ml-2" />
+          </NavLink>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+// --------------------------------------------------------------------
+// MAIN COMPONENT
+// --------------------------------------------------------------------
 export default function UniversityGraduatesGuidance() {
+  const adviceSectionRef = useRef(null);
+
   return (
-    <ServiceLayout
-      title="University Graduates Guidance"
-      subtitle="Career Launch & Higher Studies"
-    >
+    <ServiceLayout>
       <HeroSection />
-      <SituationSection />
-      <ChallengesSection />
-      <SupportOptionsSection />
-      <ExpertProcessSection />
+      <CommonChallengesSection />
+      <HowSupportsSection />
+      <ExpertTeamSection />
+      <TaleemiAdviceFormSection sectionRef={adviceSectionRef} />
+      <OnlineSessionSection />
       <NextStepSection />
     </ServiceLayout>
   );

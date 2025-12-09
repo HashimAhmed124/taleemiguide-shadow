@@ -1,11 +1,8 @@
-// Class-10-Guidance.jsx
-
 import React, { useState, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { User, Briefcase, MessageCircle, ArrowRight, X } from "lucide-react";
 import ServiceLayout from "../../components/ServiceLayout";
 import class10Hero from "../../assets/service-images/10-grade.jpg";
-// TODO: update this to your actual roadmap image
 import class10Roadmap from "../../assets/service-images/10-grade.jpg";
 
 // --- BRAND COLORS ----------------------------------------------------
@@ -22,7 +19,7 @@ const COLORS = {
 
 const ROADMAP_LINK = "/roadmap/class-10";
 
-// Small helper: unified card style
+// unified card style
 const baseCardStyle = {
   backgroundColor: "#FFFFFF",
   border: "1px solid #E0E7FF",
@@ -163,7 +160,6 @@ const HeroIntroSection = () => {
 const HowTaleemiGuideHelpsSection = ({ onOpenRoadmap }) => (
   <section className="py-10 border-b border-gray-200">
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-      {/* Main copy – single column in a subtle card for consistency */}
       <div
         className="rounded-2xl p-5 sm:p-6 lg:p-7"
         style={{
@@ -271,7 +267,7 @@ const OptionsSection = ({ onSeekAdviceClick }) => (
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* OPTION 1 — Taleemi Advice (Scroll to form) */}
+        {/* OPTION 1 — Taleemi Advice  */}
         <div
           className="rounded-3xl p-7 flex flex-col h-full relative overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
           style={baseCardStyle}
