@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import ServiceLayout from "../../components/ServiceLayout";
-import onlineSessionHero from "../../assets/service-images/online-session.jpg"; 
+import onlineSessionHero from "../../assets/service-images/Online-Session.jpg"; 
 
 const COLORS = {
   primary: "#1E3A8A",
