@@ -1,12 +1,10 @@
-// components/Footer.jsx
-
 import React, { useRef } from "react";
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { motion, useInView } from "framer-motion";
 
 export default function Footer() {
   const ref = useRef(null);
-  // Keeps the useInView logic to animate the main footer section
+  
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   return (
