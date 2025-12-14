@@ -10,7 +10,7 @@ import {
   Compass,
 } from "lucide-react";
 import ServiceLayout from "../../components/ServiceLayout";
-import programFinderHero from "../../assets/service-images/degree-finder.png";
+import programFinderHero from "../../assets/service-images/Degree-finder.png";
 
 // --- BRAND COLORS ----------------------------------------------------
 const COLORS = {

@@ -1,6 +1,6 @@
 // App.jsx
 
-import { Routes, Route, useNavigate } from "react-router-dom"; // 👈 CRITICAL: Add useNavigate
+import { Routes, Route, useNavigate } from "react-router-dom"; // 👈 CRITICAL:
 import Navbar from "./components/Navbar";
 import Hero from "./components/hompage/Hero";
 import ForWhom from "./components/hompage/forWhom";
